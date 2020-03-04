@@ -67,8 +67,6 @@ router.post("/add", function(req, res) {
     });
 });
 
-//-----------------------------LOGIN--------------------
-
 //login
 router.post("/login", (req, res) => {
   console.log('222')

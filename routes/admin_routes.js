@@ -8,7 +8,7 @@ const router = express.Router();
 const JWT_KEY = keys.JWT_KEY;
 
 //Retrieve all admins
-router.get("/admin", (req, res) => {
+router.get("/", (req, res) => {
     adminModel.find((err, admin) => {
         if (err) {
             console.log(err);
@@ -19,7 +19,7 @@ router.get("/admin", (req, res) => {
 });
 
 //Retrieve admin  by ID
-router.get("/admin/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     let id = req.params.id;
     adminModel.findById(id, (err, admin) => {
         res.json(admin);
@@ -27,7 +27,7 @@ router.get("/admin/:id", (req, res) => {
 });
 
 //Add new admin
-router.post("/admin/add", (req, res) => {
+router.post("/add", (req, res) => {
     adminModel.find({
         adminID: req.body.adminID
     })
@@ -67,7 +67,7 @@ router.post("/admin/add", (req, res) => {
 });
 
 //login
-router.post("/admin/login", (req, res) => {
+router.post("/login", (req, res) => {
     console.log(req.body.adminID)
     adminModel.find({adminID: req.body.adminID})
         .exec()
@@ -110,7 +110,7 @@ router.post("/admin/login", (req, res) => {
 });
 
 //update
-router.post("/admin/update/:id", (req, res) => {
+router.post("/update/:id", (req, res) => {
     adminModel.findById(req.params.id, (err, admin) => {
         if (!admin) {
             res.status(404).send("data is not found");
@@ -131,7 +131,7 @@ router.post("/admin/update/:id", (req, res) => {
     });
 });
 
-router.delete("/admin/delete/:id", (req, res) => {
+router.delete("/delete/:id", (req, res) => {
     adminModel.findOneAndDelete({_id: req.params.id}, (err, admin) => {
         if (err) {
             res.json(err);
