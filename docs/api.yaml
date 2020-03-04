@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  description: "This is the REST API definition for school management app by Group B - MSC IT Batch 15 ICBT"
+  version: "1.0.0"
+  title: "School Management"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3000"
+basePath: "/api"
+tags:
+  - name: "admin"
+    description: "Operations about admin"
+schemes:
+  - "https"
+  - "http"
+paths:
+
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: ""
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
