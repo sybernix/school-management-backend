@@ -15,11 +15,47 @@ schemes:
   - "https"
   - "http"
 paths:
+  /admin/login:
+    post:
+      tags:
+        - "user"
+      summary: "Logs admin into the system"
+      description: ""
+      operationId: "loginUser"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "adminID"
+          in: "body"
+          description: "The user name for login"
+          required: true
+        - name: "password"
+          in: "body"
+          description: "The password for login in clear text"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+        400:
+          description: "Invalid username/password supplied"
 
 securityDefinitions:
   petstore_auth:
     type: "oauth2"
-    authorizationUrl: ""
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
     flow: "implicit"
     scopes:
       write:pets: "modify pets in your account"
@@ -29,3 +65,31 @@ securityDefinitions:
     name: "api_key"
     in: "header"
 definitions:
+  Admin:
+    type: "object"
+    required:
+      - adminID
+      - userType
+    properties:
+      adminID:
+        type: "string"
+      name:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      userType:
+        type: "string"
+    xml:
+      name: "User"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
