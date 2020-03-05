@@ -1,5 +1,5 @@
 const express = require("express");
-const adminModel = require("../schemas/admin_schema");
+const adminSchema = require("../schemas/admin_schema");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/key.json");
@@ -9,7 +9,7 @@ const JWT_KEY = keys.JWT_KEY;
 
 //Retrieve all admins
 router.get("/", (req, res) => {
-    adminModel.find((err, admin) => {
+    adminSchema.find((err, admin) => {
         if (err) {
             console.log(err);
         } else {
@@ -21,14 +21,14 @@ router.get("/", (req, res) => {
 //Retrieve admin  by ID
 router.get("/:id", (req, res) => {
     let id = req.params.id;
-    adminModel.findById(id, (err, admin) => {
+    adminSchema.findById(id, (err, admin) => {
         res.json(admin);
     });
 });
 
 //Add new admin
 router.post("/add", (req, res) => {
-    adminModel.find({
+    adminSchema.find({
         adminID: req.body.adminID
     })
         .exec()
@@ -38,7 +38,7 @@ router.post("/add", (req, res) => {
                     message: "admin already exists"
                 });
             } else {
-                const adminmodel = new adminModel({
+                const adminmodel = new adminSchema({
                     _id: mongoose.Types.ObjectId(),
                     adminID: req.body.adminID,
                     name: req.body.name,
@@ -69,7 +69,7 @@ router.post("/add", (req, res) => {
 //login
 router.post("/login", (req, res) => {
     console.log(req.body.adminID)
-    adminModel.find({adminID: req.body.adminID})
+    adminSchema.find({adminID: req.body.adminID})
         .exec()
         .then(admin => {
             console.log(admin);
@@ -111,7 +111,7 @@ router.post("/login", (req, res) => {
 
 //update
 router.post("/update/:id", (req, res) => {
-    adminModel.findById(req.params.id, (err, admin) => {
+    adminSchema.findById(req.params.id, (err, admin) => {
         if (!admin) {
             res.status(404).send("data is not found");
         } else {
@@ -132,7 +132,7 @@ router.post("/update/:id", (req, res) => {
 });
 
 router.delete("/delete/:id", (req, res) => {
-    adminModel.findOneAndDelete({_id: req.params.id}, (err, admin) => {
+    adminSchema.findOneAndDelete({_id: req.params.id}, (err, admin) => {
         if (err) {
             res.json(err);
         } else {

@@ -1,5 +1,5 @@
 const express = require("express");
-const studentModel = require("../schemas/student_schema");
+const studentSchema = require("../schemas/student_schema");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/key.json");
@@ -10,7 +10,7 @@ const JWT_KEY = keys.JWT_KEY;
 //Get all student details
 router.get("/", function(req, res) {
   console.log('1111')
-  studentModel.find(function(err, student) {
+  studentSchema.find(function(err, student) {
     if (err) {
       console.log(err);
     } else {
@@ -21,14 +21,14 @@ router.get("/", function(req, res) {
 
 router.get("/:id", function(req, res) {
   let id = req.params.id;
-  studentModel.findById(id, function(err, students) {
+  studentSchema.findById(id, function(err, students) {
     res.json(students);
   });
 });
 
 //Add new student to db
 router.post("/add", function(req, res) {
-  studentModel.find({
+  studentSchema.find({
     studentID: req.body.studentID
   })
     .exec()
@@ -38,7 +38,7 @@ router.post("/add", function(req, res) {
           message: "Student already exists"
         });
       } else {
-        const studentModel = new studentModel({
+        const studentModel = new studentSchema({
           _id: mongoose.Types.ObjectId(),
           studentName: req.body.studentName,
           studentID: req.body.studentID,
@@ -113,7 +113,7 @@ router.post("/login", (req, res) => {
 
 //Update the student details
 router.post("/update/:id", function(req, res) {
-  studentModel.findById(req.params.id, function(err, studentmodel) {
+  studentSchema.findById(req.params.id, function(err, studentmodel) {
     if (!studentmodel) res.status(404).send("Data is not found");
     else studentmodel.studentName = req.body.studentName;
 
@@ -135,7 +135,7 @@ router.post("/update/:id", function(req, res) {
 
 // Delete the student
 router.delete("/delete/:id", function(req, res) {
-  studentModel.findOneAndDelete({ _id: req.params.id }, function(
+  studentSchema.findOneAndDelete({ _id: req.params.id }, function(
     err
   ) {
     if (err) res.json(err);

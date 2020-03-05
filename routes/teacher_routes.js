@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const teacherModel = require("../schemas/teacher_schema");
+const teacherSchema = require("../schemas/teacher_schema");
 
 router.get("/test", (req, res) => res.json({msg: "instructor Works"}));
 
 //login
 router.post("/login", (req, res) => {
     console.log(req.body.instructorID);
-    teacherModel.find({instructorID: req.body.instructorID})
+    teacherSchema.find({instructorID: req.body.instructorID})
         .exec()
         .then(inst => {
             console.log(inst);
@@ -47,7 +47,7 @@ router.post("/login", (req, res) => {
 
 //
 router.get("/all", (req, res) => {
-    teacherModel.find((err, instructor) => {
+    teacherSchema.find((err, instructor) => {
         if (err) {
             console.log(err);
         } else {
@@ -59,14 +59,14 @@ router.get("/all", (req, res) => {
 //Get Instructor By ID
 router.get("/edit/:id", (req, res) => {
     let id = req.params.id;
-    teacherModel.findById(id, (err, instructor) => {
+    teacherSchema.findById(id, (err, instructor) => {
         res.json(instructor);
     });
 });
 
 //add new Instructor
 router.post("/add", (req, res) => {
-    let instructormodel = new teacherModel(req.body);
+    let instructormodel = new teacherSchema(req.body);
 
     instructormodel
         .save()
@@ -80,7 +80,7 @@ router.post("/add", (req, res) => {
 
 //Update instructor
 router.post("/update/:id", (req, res) => {
-    teacherModel.findById(req.params.id, (err, instructor) => {
+    teacherSchema.findById(req.params.id, (err, instructor) => {
         if (!instructor) {
             res.status(404).send("data is not found");
         } else {
@@ -105,7 +105,7 @@ router.post("/update/:id", (req, res) => {
 
 //instructor Delete
 router.delete("/delete/:id", (req, res) => {
-    teacherModel.findOneAndDelete(
+    teacherSchema.findOneAndDelete(
         {_id: req.params.id},
         (err, instructor) => {
             if (err) {

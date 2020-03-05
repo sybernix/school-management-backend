@@ -24,16 +24,8 @@ const  schema = new mongoose.Schema({
   },
   nic: {
     type: String
-  // },
-  // course: {
-  //   type: String,
-  //   ref: "courses"
   }
 });
 
-// module.exports = mongoose.model("student", schemaStudent);
-
-const Studentmodel =  mongoose.model("studentNew",schema);
-
-module.exports = Studentmodel;
-
+const studentSchema =  mongoose.model("students",schema);
+module.exports = studentSchema;
