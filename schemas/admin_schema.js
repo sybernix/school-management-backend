@@ -12,12 +12,9 @@ const schema = new mongoose.Schema({
         type: String
     },
     password: {
-        type: String
-    },
-    userType: {
         type: String,
         required: true
-    }
+    },
 });
 
 const adminSchema = mongoose.model("admins", schema);
