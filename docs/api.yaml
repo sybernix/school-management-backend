@@ -14,11 +14,28 @@ tags:
 schemes:
   - "https"
   - "http"
+
 paths:
+  /admin/:
+    get:
+      tags:
+        - "admin"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findPetsByStatus"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Admin"
+
   /admin/login:
     post:
       tags:
-        - "user"
+        - "admin"
       summary: "Logs admin into the system"
       description: ""
       operationId: "loginUser"
@@ -51,7 +68,26 @@ securityDefinitions:
     type: "apiKey"
     name: "api_key"
     in: "header"
+
 definitions:
+
+  Admin:
+    type: "object"
+    required:
+      - adminID
+      - password
+    properties:
+      _id:
+        type: "string"
+      adminID:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      __v:
+        type: "integer"
+
   AdminLoginSchema:
     type: "object"
     required:
