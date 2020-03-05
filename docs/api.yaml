@@ -23,32 +23,19 @@ paths:
       description: ""
       operationId: "loginUser"
       produces:
-        - "application/xml"
         - "application/json"
       parameters:
-        - name: "adminID"
+        - name: "body"
           in: "body"
-          description: "The user name for login"
+          description: "adminID and password for login"
           required: true
-        - name: "password"
-          in: "body"
-          description: "The password for login in clear text"
-          required: true
-          type: "string"
+          schema:
+            $ref: "#/definitions/AdminLoginSchema"
       responses:
         200:
           description: "successful operation"
           schema:
             type: "string"
-          headers:
-            X-Rate-Limit:
-              type: "integer"
-              format: "int32"
-              description: "calls per hour allowed by the user"
-            X-Expires-After:
-              type: "string"
-              format: "date-time"
-              description: "date in UTC when token expires"
         400:
           description: "Invalid username/password supplied"
 
@@ -65,21 +52,15 @@ securityDefinitions:
     name: "api_key"
     in: "header"
 definitions:
-  Admin:
+  AdminLoginSchema:
     type: "object"
     required:
       - adminID
-      - userType
+      - password
     properties:
       adminID:
         type: "string"
-      name:
-        type: "string"
-      email:
-        type: "string"
       password:
-        type: "string"
-      userType:
         type: "string"
     xml:
       name: "User"
