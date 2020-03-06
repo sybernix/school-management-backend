@@ -20,8 +20,8 @@ paths:
     get:
       tags:
         - "admin"
-      description: "Multiple status values can be provided with comma separated strings"
-      operationId: "findPetsByStatus"
+      description: "Get a comma separated list of admin information jsons"
+      operationId: "getAllAdmins"
       produces:
         - "application/json"
       responses:
@@ -31,6 +31,26 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Admin"
+
+  /admin/{adminID}:
+    get:
+      tags:
+        - "admin"
+      description: "Get information about an admin using adminID as a json"
+      operationId: "getAdminByID"
+      produces:
+        - "application/json"
+      parameters:
+        - name: adminID
+          in: path
+          description: ID of admin to return
+          required: true
+          type: string
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Admin"
 
   /admin/login:
     post:
@@ -55,19 +75,6 @@ paths:
             type: "string"
         400:
           description: "Invalid username/password supplied"
-
-securityDefinitions:
-  petstore_auth:
-    type: "oauth2"
-    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
-    flow: "implicit"
-    scopes:
-      write:pets: "modify pets in your account"
-      read:pets: "read your pets"
-  api_key:
-    type: "apiKey"
-    name: "api_key"
-    in: "header"
 
 definitions:
 
