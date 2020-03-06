@@ -30,7 +30,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Admin"
+              $ref: "#/definitions/AdminSchema"
 
   /admin/{adminID}:
     get:
@@ -50,15 +50,14 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Admin"
+            $ref: "#/definitions/AdminSchema"
 
   /admin/login:
     post:
       tags:
         - "admin"
-      summary: "Logs admin into the system"
-      description: ""
-      operationId: "loginUser"
+      description: "Logs admin into the system"
+      operationId: "loginAdmin"
       produces:
         - "application/json"
       parameters:
@@ -67,7 +66,7 @@ paths:
           description: "adminID and password for login"
           required: true
           schema:
-            $ref: "#/definitions/AdminLoginSchema"
+            $ref: "#/definitions/AdminSchema"
       responses:
         200:
           description: "successful operation"
@@ -76,9 +75,29 @@ paths:
         400:
           description: "Invalid username/password supplied"
 
-definitions:
+  /admin/add:
+    post:
+      tags:
+        - "admin"
+      description: "add new admin into the system"
+      operationId: "addAdmin"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "admin description json"
+          required: true
+          schema:
+            $ref: "#/definitions/AdminLoginSchema"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
 
-  Admin:
+definitions:
+  AdminSchema:
     type: "object"
     required:
       - adminID

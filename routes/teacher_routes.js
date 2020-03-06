@@ -45,8 +45,8 @@ router.post("/login", (req, res) => {
     })
 });
 
-//
-router.get("/all", (req, res) => {
+//Get all teachers
+router.get("/", (req, res) => {
     teacherSchema.find((err, instructor) => {
         if (err) {
             console.log(err);
@@ -57,7 +57,7 @@ router.get("/all", (req, res) => {
 });
 
 //Get Instructor By ID
-router.get("/edit/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     let id = req.params.id;
     teacherSchema.findById(id, (err, instructor) => {
         res.json(instructor);
