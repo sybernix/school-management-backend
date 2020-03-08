@@ -2,6 +2,7 @@ const express = require("express");
 const adminSchema = require("../schemas/admin_schema");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const keys = require("../config/key.json");
 
 const router = express.Router();
@@ -38,13 +39,13 @@ router.post("/add", (req, res) => {
                     message: "admin already exists"
                 });
             } else {
+                const  hash = bcrypt.hashSync(req.body.password, 8);
                 const adminmodel = new adminSchema({
                     _id: mongoose.Types.ObjectId(),
                     adminID: req.body.adminID,
                     name: req.body.name,
                     email: req.body.email,
-                    password: req.body.password,
-                    userType: "admin"
+                    passwordHash: hash
                 });
 
                 adminmodel
@@ -68,30 +69,28 @@ router.post("/add", (req, res) => {
 
 //login
 router.post("/login", (req, res) => {
-    console.log(req.body.adminID)
     adminSchema.find({adminID: req.body.adminID})
         .exec()
         .then(admin => {
-            console.log(admin);
             if (admin.length < 1) {
                 return res.status(401).json({
                     message: "Authorization Failed!"
                 });
             }
-            if (admin) {
+            console.log("s from login " + admin.valueOf());
+            if (admin && bcrypt.compareSync(req.body.password, admin.passwordHash)) { //todo: send 300 character token with 1 month expiry time
                 //correct password
                 const token = jwt.sign(
                     {
                         id: admin[0]._id,
-                        adminID: admin[0].adminID,
-                        userType: admin[0].userType
+                        adminID: admin[0].adminID
                     },
                     JWT_KEY,
                     {
                         expiresIn: "1h"
                     }
                 );
-                console.log(admin);
+                // console.log(admin);
                 return res.status(200).json({
                     message: "Authorization Success",
                     token: token

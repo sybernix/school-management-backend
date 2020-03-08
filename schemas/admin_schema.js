@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
     email: {
         type: String
     },
-    password: {
+    passwordHash: {
         type: String,
         required: true
     },
