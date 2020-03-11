@@ -77,8 +77,7 @@ router.post("/login", (req, res) => {
                     message: "Authorization Failed!"
                 });
             }
-            console.log("s from login " + admin.valueOf());
-            if (admin && bcrypt.compareSync(req.body.password, admin.passwordHash)) { //todo: send 300 character token with 1 month expiry time
+            if (admin && bcrypt.compareSync(req.body.password, admin[0].passwordHash)) {
                 //correct password
                 const token = jwt.sign(
                     {
