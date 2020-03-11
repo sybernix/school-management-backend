@@ -9,7 +9,7 @@ const JWT_KEY = keys.JWT_KEY;
 
 //Get all student details
 router.get("/", function(req, res) {
-  console.log('1111')
+  console.log('1111');
   studentSchema.find(function(err, student) {
     if (err) {
       console.log(err);
@@ -73,27 +73,26 @@ router.post("/login", (req, res) => {
   console.log(req.body.studentID);
   Studentmodel.find({ studentID: req.body.studentID })
     .exec()
-    .then(student => {
-      console.log(student);
-      if (student.length < 1) {
+    .then(studentList => {
+      console.log(studentList);
+      if (studentList.length < 1) {
         return res.status(401).json({
           message: "Authorization Failed!"
         });
       }
-      if (student) {
+      if (studentList && bcrypt.compareSync(req.body.password, studentList[0].passwordHash)) {
         //correct password
         const token = jwt.sign(
           {
-            id: student[0]._id,
-            studentID: student[0].studentID,
-            userType: student[0].userType
+            id: studentList[0]._id,
+            studentID: studentList[0].studentID
           },
           JWT_KEY,
           {
             expiresIn: "1h"
           }
         );
-        console.log(student);
+        console.log(studentList);
         return res.status(200).json({
           message: "Authorization Success",
           token: token

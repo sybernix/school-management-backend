@@ -9,19 +9,19 @@ router.post("/login", (req, res) => {
     console.log(req.body.instructorID);
     teacherSchema.find({instructorID: req.body.instructorID})
         .exec()
-        .then(inst => {
-            console.log(inst);
-            if (inst.length < 1) {
+        .then(teacherList => {
+            console.log(teacherList);
+            if (teacherList.length < 1) {
                 return res.status(401).json({
                     message: 'Authorization Failed!'
                 });
             }
-            if (inst) {
+            if (teacherList && bcrypt.compareSync(req.body.password, teacherList[0].passwordHash)) {
                 //correct password
                 const token = jwt.sign({
-                        id: inst[0]._id,
-                        instructorID: inst[0].instructorID,
-                        userType: inst[0].userType
+                        id: teacherList[0]._id,
+                        instructorID: teacherList[0].instructorID,
+                        userType: teacherList[0].userType
                     },
                     JWT_KEY,
                     {

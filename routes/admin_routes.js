@@ -71,18 +71,18 @@ router.post("/add", (req, res) => {
 router.post("/login", (req, res) => {
     adminSchema.find({adminID: req.body.adminID})
         .exec()
-        .then(admin => {
-            if (admin.length < 1) {
+        .then(adminList => {
+            if (adminList.length < 1) {
                 return res.status(401).json({
                     message: "Authorization Failed!"
                 });
             }
-            if (admin && bcrypt.compareSync(req.body.password, admin[0].passwordHash)) {
+            if (adminList && bcrypt.compareSync(req.body.password, adminList[0].passwordHash)) {
                 //correct password
                 const token = jwt.sign(
                     {
-                        id: admin[0]._id,
-                        adminID: admin[0].adminID
+                        id: adminList[0]._id,
+                        adminID: adminList[0].adminID
                     },
                     JWT_KEY,
                     {
