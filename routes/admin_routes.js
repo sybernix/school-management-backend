@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const keys = require("../config/key.json");
-var utils = require("../utils");
+const utils = require("../utils");
 
 const router = express.Router();
 const JWT_KEY = keys.JWT_KEY;
