@@ -11,7 +11,6 @@ const JWT_KEY = keys.JWT_KEY;
 
 //Retrieve all admins
 router.get("/", utils.extractToken, (req, res) => {
-    console.log(req.token);
     jwt.verify(req.token, JWT_KEY, (err, authData) => {
         if(err) {
             res.sendStatus(403);
@@ -31,55 +30,66 @@ router.get("/", utils.extractToken, (req, res) => {
 });
 
 //Retrieve admin  by ID
-router.get("/:id", (req, res) => {
-    let id = req.params.id;
-    adminSchema.findById(id, (err, admin) => {
-        res.json(admin);
+router.get("/:id", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+        if(err) {
+            res.sendStatus(403);
+        } else {
+            let id = req.params.id;
+            adminSchema.findById(id, (err, admin) => {
+                res.json(admin);
+            });
+        }
     });
 });
 
 //Add new admin
-router.post("/add", (req, res) => {
-    adminSchema.find({
-        adminID: req.body.adminID
-    })
-        .exec()
-        .then(admin => {
-            if (admin.length >= 1) {
-                res.status(409).json({
-                    message: "admin already exists"
-                });
-            } else {
-                const  hash = bcrypt.hashSync(req.body.password, 8);
-                const adminmodel = new adminSchema({
-                    _id: mongoose.Types.ObjectId(),
-                    adminID: req.body.adminID,
-                    name: req.body.name,
-                    email: req.body.email,
-                    passwordHash: hash
-                });
-
-                adminmodel
-                    .save()
-                    .then(result => {
-                        console.log(result);
-                        res.status(201).json({
-                            message: "admin added",
-                            createdAdmin: result
+router.post("/add", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+        if(err) {
+            res.sendStatus(403);
+        } else {
+            adminSchema.find({
+                adminID: req.body.adminID
+            })
+                .exec()
+                .then(admin => {
+                    if (admin.length >= 1) {
+                        res.status(409).json({
+                            message: "admin already exists"
                         });
-                    })
-                    .catch(err => {
-                        console.log(err.message);
-                        res.status(500).json({
-                            error: err
+                    } else {
+                        const  hash = bcrypt.hashSync(req.body.password, 8);
+                        const adminmodel = new adminSchema({
+                            _id: mongoose.Types.ObjectId(),
+                            adminID: req.body.adminID,
+                            name: req.body.name,
+                            email: req.body.email,
+                            passwordHash: hash
                         });
-                    });
-            }
-        });
+                        adminmodel
+                            .save()
+                            .then(result => {
+                                console.log(result);
+                                res.status(201).json({
+                                    message: "admin added",
+                                    createdAdmin: result
+                                });
+                            })
+                            .catch(err => {
+                                console.log(err.message);
+                                res.status(500).json({
+                                    error: err
+                                });
+                            });
+                    }
+                });
+        }
+    });
 });
 
 //login
-router.post("/login", (req, res) => {
+router.post("/login", utils.extractToken, (req, res) => {
     adminSchema.find({adminID: req.body.adminID})
         .exec()
         .then(adminList => {
@@ -119,33 +129,45 @@ router.post("/login", (req, res) => {
 });
 
 //update
-router.post("/update/:id", (req, res) => {
-    adminSchema.findById(req.params.id, (err, admin) => {
-        if (!admin) {
-            res.status(404).send("data is not found");
+router.post("/update/:id", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+        if(err) {
+            res.sendStatus(403);
         } else {
-            (admin.adminID = req.body.adminID), (admin.name = req.body.name);
-            admin.mail = req.body.email;
-            admin.password = req.body.password;
+            adminSchema.findById(req.params.id, (err, admin) => {
+                if (!admin) {
+                    res.status(404).send("data is not found");
+                } else {
+                    (admin.adminID = req.body.adminID), (admin.name = req.body.name);
+                    admin.mail = req.body.email;
+                    admin.password = req.body.password;
 
-            admin
-                .save()
-                .then(admin => {
-                    res.json("admin updated");
-                })
-                .catch(err => {
-                    res.status(400).send("updated not succesful");
-                });
+                    admin
+                        .save()
+                        .then(admin => {
+                            res.json("admin updated");
+                        })
+                        .catch(err => {
+                            res.status(400).send("updated not succesful");
+                        });
+                }
+            });
         }
     });
 });
 
-router.delete("/delete/:id", (req, res) => {
-    adminSchema.findOneAndDelete({_id: req.params.id}, (err, admin) => {
-        if (err) {
-            res.json(err);
+router.delete("/delete/:id", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+        if(err) {
+            res.sendStatus(403);
         } else {
-            res.json("deleted successfully");
+            adminSchema.findOneAndDelete({_id: req.params.id}, (err, admin) => {
+                if (err) {
+                    res.json(err);
+                } else {
+                    res.json("deleted successfully");
+                }
+            });
         }
     });
 });
