@@ -4,17 +4,28 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const keys = require("../config/key.json");
+var utils = require("../utils");
 
 const router = express.Router();
 const JWT_KEY = keys.JWT_KEY;
 
 //Retrieve all admins
-router.get("/", (req, res) => {
-    adminSchema.find((err, admin) => {
-        if (err) {
-            console.log(err);
+router.get("/", utils.extractToken, (req, res) => {
+    console.log(req.token);
+    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+        if(err) {
+            res.sendStatus(403);
         } else {
-            res.json(admin);
+            adminSchema.find((err, admin) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.json({
+                        message: admin,
+                        authData
+                    });
+                }
+            });
         }
     });
 });
