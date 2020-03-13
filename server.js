@@ -8,7 +8,7 @@ const studentRoutes = require("./routes/student_routes");
 const teacherRoutes = require("./routes/teacher_routes");
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const configs = require('config/config');
+const configs = require('./config/config');
 
 mongoose
     .connect(
@@ -38,6 +38,6 @@ io.on('connection', async (socket) => {
     require('./sockets/chat/joinPrivateRoom')(io, socket);
 });
 
-app.listen(PORT, function () {
+app.listen(configs.BACKEND_PORT, function () {
     console.log("Student management system backend server is running on port : " + configs.BACKEND_PORT);
 });

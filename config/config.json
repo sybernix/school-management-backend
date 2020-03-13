@@ -1,6 +1,5 @@
 {
     "JWT_KEY" : "somesupersecretkey",
     "BACKEND_PORT" : 4000,
-    "MONGO_URI" : "mongodb://localhost:27017/school_database",
-    "SOCKET_BASE_URL" : "localhost:5000"
+    "MONGO_URI" : "mongodb://localhost:27017/school_database"
 }

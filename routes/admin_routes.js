@@ -89,7 +89,7 @@ router.post("/add", utils.extractToken, (req, res) => {
 });
 
 //login
-router.post("/login", utils.extractToken, (req, res) => {
+router.post("/login", (req, res) => {
     adminSchema.find({adminID: req.body.adminID})
         .exec()
         .then(adminList => {
