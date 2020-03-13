@@ -1,4 +1,4 @@
-const User = require('../../schemas/chat_user_schema');
+const User = require('../schemas/chat_user_schema');
 
 module.exports = (io, socket) => {
 	socket.on('join user', async (user) => {

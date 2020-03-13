@@ -1,5 +1,5 @@
-const User = require('../../schemas/chat_user_schema');
-const Room = require('../../schemas/chat_room_schema');
+const User = require('../schemas/chat_user_schema');
+const Room = require('../schemas/chat_room_schema');
 
 module.exports = (io, socket) => {
 	socket.on('send private message', async (msg) => {
