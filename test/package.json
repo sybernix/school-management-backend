@@ -1,0 +1,14 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "Used to test the school management app backend",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "niruhanv@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "winston": "^3.2.1"
+  }
+}
