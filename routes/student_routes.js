@@ -2,14 +2,14 @@ const express = require("express");
 const studentSchema = require("../schemas/student_schema");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const keys = require("../config/key.json");
-const utils = require("../utils");
+const configs = require("../config/config.json");
+const utils = require("../utils/extract_token");
 
 const router = express.Router();
-const JWT_KEY = keys.JWT_KEY;
+const JWT_KEY = configs.JWT_KEY;
 
 //Get all student details
-router.get("/", function (req, res) {
+router.get("/", utils.extractToken, (req, res) => {
     jwt.verify(req.token, JWT_KEY, (err, authData) => {
         if (err) {
             res.sendStatus(403);
@@ -25,7 +25,7 @@ router.get("/", function (req, res) {
     });
 });
 
-router.get("/:id", function (req, res) {
+router.get("/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, JWT_KEY, (err, authData) => {
         if (err) {
             res.sendStatus(403);
@@ -39,7 +39,7 @@ router.get("/:id", function (req, res) {
 });
 
 //Add new student to db
-router.post("/add", function (req, res) {
+router.post("/add", utils.extractToken, (req, res) => {
     jwt.verify(req.token, JWT_KEY, (err, authData) => {
         if (err) {
             res.sendStatus(403);
@@ -128,7 +128,7 @@ router.post("/login", (req, res) => {
 });
 
 //Update the student details
-router.post("/update/:id", function (req, res) {
+router.post("/update/:id", utils.extractToken, (req, res)  => {
     jwt.verify(req.token, JWT_KEY, (err, authData) => {
         if (err) {
             res.sendStatus(403);
@@ -156,7 +156,7 @@ router.post("/update/:id", function (req, res) {
 });
 
 // Delete the student
-router.delete("/delete/:id", function (req, res) {
+router.delete("/delete/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, JWT_KEY, (err, authData) => {
         if (err) {
             res.sendStatus(403);

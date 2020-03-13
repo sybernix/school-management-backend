@@ -7,12 +7,12 @@ module.exports = (io, socket) => {
 		const receiverUser = await User.findById(msg.receiverId);
 
 		const messageToReceiver = {
-			emmiterSocketId: socket.id,
-			emmiterId: emitterUser._id,
+			emitterSocketId: socket.id,
+			emitterId: emitterUser._id,
 			receiverId: receiverUser._id,
 			nickname: emitterUser.nickname,
 			message: msg.message,
-		}
+		};
 
 		const alreadyInRoom = await Room.find({
 			users: {

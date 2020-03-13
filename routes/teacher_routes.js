@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const teacherSchema = require("../schemas/teacher_schema");
-const utils = require("../utils");
+const utils = require("../utils/extract_token");
+const configs = require("../config/config.json");
+const JWT_KEY = configs.JWT_KEY;
 
 //login
 router.post("/login", (req, res) => {
@@ -45,7 +47,7 @@ router.post("/login", (req, res) => {
 });
 
 //Get all teachers
-router.get("/", (req, res) => {
+router.get("/",  utils.extractToken, (req, res) => {
     jwt.verify(req.token, JWT_KEY, (err, authData) => {
         if(err) {
             res.sendStatus(403);
@@ -62,7 +64,7 @@ router.get("/", (req, res) => {
 });
 
 //Get Instructor By ID
-router.get("/:id", (req, res) => {
+router.get("/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, JWT_KEY, (err, authData) => {
         if(err) {
             res.sendStatus(403);
@@ -76,7 +78,7 @@ router.get("/:id", (req, res) => {
 });
 
 //add new Instructor
-router.post("/add", (req, res) => {
+router.post("/add", utils.extractToken, (req, res) => {
     jwt.verify(req.token, JWT_KEY, (err, authData) => {
         if(err) {
             res.sendStatus(403);
@@ -95,7 +97,7 @@ router.post("/add", (req, res) => {
 });
 
 //Update instructor
-router.post("/update/:id", (req, res) => {
+router.post("/update/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, JWT_KEY, (err, authData) => {
         if(err) {
             res.sendStatus(403);
@@ -126,7 +128,7 @@ router.post("/update/:id", (req, res) => {
 });
 
 //instructor Delete
-router.delete("/delete/:id", (req, res) => {
+router.delete("/delete/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, JWT_KEY, (err, authData) => {
         if(err) {
             res.sendStatus(403);

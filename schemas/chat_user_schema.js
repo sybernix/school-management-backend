@@ -1,9 +1,8 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var Schema = mongoose.Schema;
-
-var chatUserSchema = new Schema({
-    socketId:  { type: String, required: true },
+const chatUserSchema = new Schema({
+    socketId: {type: String, required: true},
     nickname: String,
 });
 

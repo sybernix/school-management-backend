@@ -3,11 +3,11 @@ const adminSchema = require("../schemas/admin_schema");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const keys = require("../config/key.json");
-const utils = require("../utils");
+const configs = require("../config/config.json");
+const utils = require("../utils/extract_token");
 
 const router = express.Router();
-const JWT_KEY = keys.JWT_KEY;
+const JWT_KEY = configs.JWT_KEY;
 
 //Retrieve all admins
 router.get("/", utils.extractToken, (req, res) => {
