@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const adminRoutes = require("./routes/admin_routes");
 const studentRoutes = require("./routes/student_routes");
 const teacherRoutes = require("./routes/teacher_routes");
-// const server = require('http').Server(app);
 const io = require("socket.io");
 const configs = require('./config/config');
 const socketEvents = require("./utils/socket_events");

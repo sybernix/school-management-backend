@@ -46,8 +46,8 @@ const destroySocket = socket => {
     });
 };
 
-describe("test suit: Echo & Bello", () => {
-    test("test: ECHO", async () => {
+describe("test suit: Add user, chat", () => {
+    test("test: Add User", async () => {
         try {
             // create socket for communication
             const socketClient = await initSocket();
@@ -55,7 +55,7 @@ describe("test suit: Echo & Bello", () => {
             // create new promise for server response
             const serverResponse = new Promise((resolve, reject) => {
                 // define a handler for the test event
-                socketClient.on(socketEvents.res_ECHO, data4Client => {
+                socketClient.on(socketEvents.JOIN_USER, data4Client => {
                     //process data received from server
                     const { message } = data4Client;
                     logger.info("Server says: " + message);

@@ -1,5 +1,6 @@
 const User = require('../schemas/chat_user_schema');
 const Room = require('../schemas/chat_room_schema');
+const socketEvents = require("../utils/socket_events");
 
 module.exports = (io, socket) => {
 	socket.on('join private room', async (data) => {
@@ -26,4 +27,4 @@ module.exports = (io, socket) => {
 			socket.join(newRoom._id);
 		}
 	});
-}
+};
