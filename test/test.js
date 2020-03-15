@@ -82,16 +82,17 @@ describe("test suit: Add user, chat", () => {
             // console.log("Server response message : " + message);
 
             // define data 4 server
-            const dataToServer = { message: "CLIENT ECHO" };
+            const newMessage = { sender: "niruhan", receiver: "thissa", message: "Hi"};
+            // const dataToServer = { message: "CLIENT ECHO" };
 
             // emit event with data to server
-            logger.info("Emitting ECHO event");
-            socketClient.emit(socketEvents.JOIN_USER, dataToServer);
+            logger.info("Emitting new message event");
+            socketClient.emit(socketEvents.CHAT_MESSAGE, newMessage);
 
             // wait for server to respond
-            const { status, message } = await serverResponse;
-            expect(status).toBe(200);
-            expect(message).toBe("SERVER ECHO");
+            // const { status, message } = await serverResponse;
+            // expect(status).toBe(200);
+            // expect(message).toBe("SERVER ECHO");
         } catch (error) {
             logger.error(error);
         }

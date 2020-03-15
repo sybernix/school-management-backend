@@ -11,16 +11,17 @@ module.exports = (io, socket) => {
 		await onlineUser.save();
 		console.log("Saved new chat user");
 
+		// todo: check logic below
 		// get online users
 		const onlineUsers = await User.find({})
 			.where('_id').ne(onlineUser._id);
 
 		// send to current request socket client
-		socket.emit('user joined', {
+		socket.emit(socketEvents.USER_JOINED, {
 			onlineUsers,
 		});
 
 		// sending to all clients except sender
-		socket.broadcast.emit('new online user', onlineUser);
+		socket.broadcast.emit(socketEvents.NEW_ONLINE_USER, onlineUser);
 	});
 };
