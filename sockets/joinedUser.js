@@ -1,27 +1,23 @@
-const User = require('../schemas/chat_user_schema');
 const socketEvents = require("../utils/socket_events");
+const MongoClient = require('mongodb').MongoClient;
+const configs = require("../config/config.json");
 
 module.exports = (io, socket) => {
 	socket.on(socketEvents.JOIN_USER, async (user) => {
 		console.log("Reached joined  user socket");
 		console.log("Client Socket ID : " + socket.id);
 		console.log(user);
-		// add user to db
-		const onlineUser = new User({ socketId: socket.id, nickname: user.nickname });
-		await onlineUser.save();
-		console.log("Saved new chat user");
 
-		// todo: check logic below
-		// get online users
-		const onlineUsers = await User.find({})
-			.where('_id').ne(onlineUser._id);
-
-		// send to current request socket client
-		socket.emit(socketEvents.USER_JOINED, {
-			onlineUsers,
+		MongoClient.connect(configs.MONGO_URI, function(err, db) {
+			if (err) throw err;
+			const dbo = db.db(configs.MONGO_DB_NAME);
+			const query = {receiver: user.userId};
+			dbo.collection(configs.CHAT_MESSAGES_COLLECTION_NAME).find(query).toArray(function(err, result) {
+				if (err) throw err;
+				// console.log(result);
+				socket.emit();
+				db.close();
+			});
 		});
-
-		// sending to all clients except sender
-		socket.broadcast.emit(socketEvents.NEW_ONLINE_USER, onlineUser);
 	});
 };

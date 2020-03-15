@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const configs = require("../config/config.json");
 
 const schema = new mongoose.Schema({
     name: {
@@ -25,6 +26,6 @@ const schema = new mongoose.Schema({
     }
 });
 
-const teacherSchema = mongoose.model("teachers", schema);
+const teacherSchema = mongoose.model(configs.TEACHER_COLLECTION_NAME, schema);
 module.exports = teacherSchema;
 

@@ -47,52 +47,39 @@ const destroySocket = socket => {
 };
 
 describe("test suit: Add user, chat", () => {
-    test("test: Add User", async () => {
+    test("test: Send a new message", async () => {
         try {
             console.log("Test started");
             // create socket for communication
             const socketClient = await initSocket();
             console.log("socket init done");
 
-            // create new promise for server response
-            // const serverResponse = new Promise((resolve, reject) => {
-            //     console.log("entered promise");
-            //     // define a handler for the test event
-            //     socketClient.on(socketEvents.JOIN_USER, data4Client => {
-            //         console.log("entered on event join user client side");
-            //         //process data received from server
-            //         const { message } = data4Client;
-            //         logger.info("Server says: " + message);
-            //
-            //         // destroy socket after server responds
-            //         destroySocket(socketClient);
-            //
-            //         // return data for testing
-            //         resolve(data4Client);
-            //     });
-            //
-            //     // if response takes longer than 5 seconds throw error
-            //     setTimeout(() => {
-            //         reject(new Error("Failed to get response, connection timed out..."));
-            //     }, 5000);
-            // });
-
-            // const { status, message } = await serverResponse;
-            // console.log("Server response status : " + status);
-            // console.log("Server response message : " + message);
-
             // define data 4 server
             const newMessage = { sender: "niruhan", receiver: "thissa", message: "Hi"};
-            // const dataToServer = { message: "CLIENT ECHO" };
 
             // emit event with data to server
             logger.info("Emitting new message event");
             socketClient.emit(socketEvents.CHAT_MESSAGE, newMessage);
 
-            // wait for server to respond
-            // const { status, message } = await serverResponse;
-            // expect(status).toBe(200);
-            // expect(message).toBe("SERVER ECHO");
+        } catch (error) {
+            logger.error(error);
+        }
+    });
+
+    test("test: New user joins", async () => {
+        try {
+            console.log("Test started");
+            // create socket for communication
+            const socketClient = await initSocket();
+            console.log("socket init done");
+
+            // define data 4 server
+            const newUser = { userId: "thissa"};
+
+            // emit event with data to server
+            logger.info("Emitting new message event");
+            socketClient.emit(socketEvents.JOIN_USER, newUser);
+
         } catch (error) {
             logger.error(error);
         }

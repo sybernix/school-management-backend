@@ -18,7 +18,7 @@ const socketServer = io(server);
 
 mongoose
     .connect(
-        configs.MONGO_URI,
+        configs.MONGO_URI + "/" + configs.MONGO_DB_NAME,
         {useNewUrlParser: true}
     )
     .then(() => {
@@ -43,5 +43,3 @@ socketServer.on(socketEvents.CONNECT, async (socket) => {
     require('./sockets/privateMessage')(io, socket);
     require('./sockets/joinPrivateRoom')(io, socket);
 });
-
-

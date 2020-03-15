@@ -12,7 +12,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^2.3.0",
-    "winston": "^2.4.4"
+    "winston": "^2.4.4",
+    "mongodb": "latest"
   },
   "devDependencies": {
     "jest": "^24.9.0",
