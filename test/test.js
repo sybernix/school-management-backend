@@ -49,36 +49,44 @@ const destroySocket = socket => {
 describe("test suit: Add user, chat", () => {
     test("test: Add User", async () => {
         try {
+            console.log("Test started");
             // create socket for communication
             const socketClient = await initSocket();
+            console.log("socket init done");
 
             // create new promise for server response
-            const serverResponse = new Promise((resolve, reject) => {
-                // define a handler for the test event
-                socketClient.on(socketEvents.JOIN_USER, data4Client => {
-                    //process data received from server
-                    const { message } = data4Client;
-                    logger.info("Server says: " + message);
+            // const serverResponse = new Promise((resolve, reject) => {
+            //     console.log("entered promise");
+            //     // define a handler for the test event
+            //     socketClient.on(socketEvents.JOIN_USER, data4Client => {
+            //         console.log("entered on event join user client side");
+            //         //process data received from server
+            //         const { message } = data4Client;
+            //         logger.info("Server says: " + message);
+            //
+            //         // destroy socket after server responds
+            //         destroySocket(socketClient);
+            //
+            //         // return data for testing
+            //         resolve(data4Client);
+            //     });
+            //
+            //     // if response takes longer than 5 seconds throw error
+            //     setTimeout(() => {
+            //         reject(new Error("Failed to get response, connection timed out..."));
+            //     }, 5000);
+            // });
 
-                    // destroy socket after server responds
-                    destroySocket(socketClient);
-
-                    // return data for testing
-                    resolve(data4Client);
-                });
-
-                // if response takes longer than 5 seconds throw error
-                setTimeout(() => {
-                    reject(new Error("Failed to get response, connection timed out..."));
-                }, 5000);
-            });
+            // const { status, message } = await serverResponse;
+            // console.log("Server response status : " + status);
+            // console.log("Server response message : " + message);
 
             // define data 4 server
-            const data4Server = { message: "CLIENT ECHO" };
+            const dataToServer = { message: "CLIENT ECHO" };
 
             // emit event with data to server
             logger.info("Emitting ECHO event");
-            socketClient.emit(socketEvents.com_ECHO, data4Server);
+            socketClient.emit(socketEvents.JOIN_USER, dataToServer);
 
             // wait for server to respond
             const { status, message } = await serverResponse;
@@ -88,32 +96,4 @@ describe("test suit: Add user, chat", () => {
             logger.error(error);
         }
     });
-
-    // test("test BELLO", async () => {
-    //     try {
-    //         const socketClient = await initSocket();
-    //         const serverResponse = new Promise((resolve, reject) => {
-    //             socketClient.on(socketEvents.res_BELLO, data4Client => {
-    //                 const { message } = data4Client;
-    //                 logger.info("Server says: " + message);
-    //                 destroySocket(socketClient);
-    //                 resolve(data4Client);
-    //             });
-    //
-    //             setTimeout(() => {
-    //                 reject(new Error("Failed to get reponse, connection timed out..."));
-    //             }, 5000);
-    //         });
-    //
-    //         const data4Server = { message: "CLIENT BELLO" };
-    //         logger.info("Emitting BELLO event");
-    //         socketClient.emit(socketEvents.com_BELLO, data4Server);
-    //
-    //         const { status, message } = await serverResponse;
-    //         expect(status).toBe(200);
-    //         expect(message).toBe("SERVER BELLO");
-    //     } catch (error) {
-    //         logger.error(error);
-    //     }
-    // });
 });
