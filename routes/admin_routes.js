@@ -88,6 +88,45 @@ router.post("/add", utils.extractToken, (req, res) => {
     });
 });
 
+//Add new admin
+router.post("/addNoLogin", (req, res) => {
+            adminSchema.find({
+                adminID: req.body.adminID
+            })
+                .exec()
+                .then(admin => {
+                    if (admin.length >= 1) {
+                        res.status(409).json({
+                            message: "admin already exists"
+                        });
+                    } else {
+                        const  hash = bcrypt.hashSync(req.body.password, 8);
+                        const adminmodel = new adminSchema({
+                            _id: mongoose.Types.ObjectId(),
+                            adminID: req.body.adminID,
+                            name: req.body.name,
+                            email: req.body.email,
+                            passwordHash: hash
+                        });
+                        adminmodel
+                            .save()
+                            .then(result => {
+                                console.log(result);
+                                res.status(201).json({
+                                    message: "admin added",
+                                    createdAdmin: result
+                                });
+                            })
+                            .catch(err => {
+                                console.log(err.message);
+                                res.status(500).json({
+                                    error: err
+                                });
+                            });
+                    }
+                });
+});
+
 //login
 router.post("/login", (req, res) => {
     adminSchema.find({adminID: req.body.adminID})
