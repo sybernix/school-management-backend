@@ -66,6 +66,29 @@ describe("test suit: Add user, chat", () => {
         }
     });
 
+    test("test: Send multiple messages", async () => {
+        try {
+            console.log("Test started");
+            // create socket for communication
+            const socketClient = await initSocket();
+            console.log("socket init done");
+
+            // define data 4 server
+            const newMessage = { sender: "lankitha", receiver: "thissa", message: "Hi2"};
+            const newMessage2 = { sender: "preshan", receiver: "lankitha", message: "Hi3"};
+            const newMessage3 = { sender: "niruhan", receiver: "preshan", message: "Hi4"};
+
+            // emit event with data to server
+            logger.info("Emitting new message event");
+            socketClient.emit(socketEvents.CHAT_MESSAGE, newMessage);
+            socketClient.emit(socketEvents.CHAT_MESSAGE, newMessage2);
+            socketClient.emit(socketEvents.CHAT_MESSAGE, newMessage3);
+
+        } catch (error) {
+            logger.error(error);
+        }
+    });
+
     test("test: New user joins", async () => {
         try {
             console.log("Test started");
@@ -85,7 +108,7 @@ describe("test suit: Add user, chat", () => {
                 // define a handler for the test event
                 socketClient.on("received messages", result => {
                     //process data received from server
-                    console.log(result[0]);
+                    console.log(result);
                     // const { message } = result;
                     logger.info("Server says: " + result[0].toString);
 
