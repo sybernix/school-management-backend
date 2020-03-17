@@ -40,6 +40,4 @@ socketServer.on(socketEvents.CONNECT, async (socket) => {
     require('./sockets/joinedUser')(io, socket);
     require('./sockets/chatMessage')(io, socket);
     require('./sockets/disconnect')(io, socket);
-    require('./sockets/privateMessage')(io, socket);
-    require('./sockets/joinPrivateRoom')(io, socket);
 });

@@ -14,8 +14,9 @@ module.exports = (io, socket) => {
 			const query = {receiver: user.userId};
 			dbo.collection(configs.CHAT_MESSAGES_COLLECTION_NAME).find(query).toArray(function(err, result) {
 				if (err) throw err;
-				// console.log(result);
-				socket.emit();
+				socket.emit("received messages", result);
+				console.log(result);
+				// io.in(socket.id).emit("received messages", result);
 				db.close();
 			});
 		});

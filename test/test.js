@@ -80,6 +80,33 @@ describe("test suit: Add user, chat", () => {
             logger.info("Emitting new message event");
             socketClient.emit(socketEvents.JOIN_USER, newUser);
 
+            // create new promise for server response
+            const serverResponse = new Promise((resolve, reject) => {
+                // define a handler for the test event
+                socketClient.on("received messages", result => {
+                    //process data received from server
+                    console.log(result[0]);
+                    // const { message } = result;
+                    logger.info("Server says: " + result[0].toString);
+
+                    // destroy socket after server responds
+                    destroySocket(socketClient);
+
+                    // return data for testing
+                    resolve(result);
+                });
+
+                // if response takes longer than 5 seconds throw error
+                setTimeout(() => {
+                    reject(new Error("Failed to get reponse, connection timed out..."));
+                }, 5000);
+            });
+
+            // wait for server to respond
+            const { status, message } = await serverResponse;
+            // expect(status).toBe(200);
+            // expect(message).toBe("SERVER ECHO");
+
         } catch (error) {
             logger.error(error);
         }
