@@ -20,4 +20,3 @@ const schema = new mongoose.Schema({
 
 const adminSchema = mongoose.model(configs.ADMIN_COLLECTION_NAME, schema);
 module.exports = adminSchema;
-
