@@ -6,11 +6,10 @@ const configs = require("../config/config.json");
 const utils = require("../utils/extract_token");
 
 const router = express.Router();
-const JWT_KEY = configs.JWT_KEY;
 
 //Get all student details
 router.get("/", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {
@@ -26,7 +25,7 @@ router.get("/", utils.extractToken, (req, res) => {
 });
 
 router.get("/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {
@@ -40,7 +39,7 @@ router.get("/:id", utils.extractToken, (req, res) => {
 
 //Add new student to db
 router.post("/add", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {
@@ -126,7 +125,7 @@ router.post("/login", (req, res) => {
                         id: studentList[0]._id,
                         studentID: studentList[0].studentID
                     },
-                    JWT_KEY,
+                    configs.JWT_KEY_STUDENT,
                     {
                         expiresIn: "1h"
                     }
@@ -151,7 +150,7 @@ router.post("/login", (req, res) => {
 
 //Update the student details
 router.post("/update/:id", utils.extractToken, (req, res)  => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {
@@ -179,7 +178,7 @@ router.post("/update/:id", utils.extractToken, (req, res)  => {
 
 // Delete the student
 router.delete("/delete/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {

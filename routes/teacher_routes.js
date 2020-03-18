@@ -3,7 +3,6 @@ const router = express.Router();
 const teacherSchema = require("../schemas/teacher_schema");
 const utils = require("../utils/extract_token");
 const configs = require("../config/config.json");
-const JWT_KEY = configs.JWT_KEY;
 
 //login
 router.post("/login", (req, res) => {
@@ -24,7 +23,7 @@ router.post("/login", (req, res) => {
                         instructorID: teacherList[0].instructorID,
                         userType: teacherList[0].userType
                     },
-                    JWT_KEY,
+                    configs.JWT_KEY_TEACHER,
                     {
                         expiresIn: "1h"
                     }
@@ -48,7 +47,7 @@ router.post("/login", (req, res) => {
 
 //Get all teachers
 router.get("/",  utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
@@ -65,7 +64,7 @@ router.get("/",  utils.extractToken, (req, res) => {
 
 //Get Instructor By ID
 router.get("/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
@@ -79,7 +78,7 @@ router.get("/:id", utils.extractToken, (req, res) => {
 
 //add new Instructor
 router.post("/add", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
@@ -98,7 +97,7 @@ router.post("/add", utils.extractToken, (req, res) => {
 
 //Update instructor
 router.post("/update/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
@@ -129,7 +128,7 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
 
 //instructor Delete
 router.delete("/delete/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {

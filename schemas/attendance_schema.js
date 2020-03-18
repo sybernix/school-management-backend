@@ -16,4 +16,3 @@ const schema = new mongoose.Schema({
 
 const attendanceSchema = mongoose.model(configs.ATTENDANCE_COLLECTION_NAME, schema);
 module.exports = attendanceSchema;
-

@@ -7,11 +7,10 @@ const configs = require("../config/config.json");
 const utils = require("../utils/extract_token");
 
 const router = express.Router();
-const JWT_KEY = configs.JWT_KEY;
 
 //Retrieve all admins
 router.get("/", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
@@ -31,7 +30,7 @@ router.get("/", utils.extractToken, (req, res) => {
 
 //Retrieve admin  by ID
 router.get("/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
@@ -45,7 +44,7 @@ router.get("/:id", utils.extractToken, (req, res) => {
 
 //Add new admin
 router.post("/add", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
@@ -144,7 +143,7 @@ router.post("/login", (req, res) => {
                         id: adminList[0]._id,
                         adminID: adminList[0].adminID
                     },
-                    JWT_KEY,
+                    configs.JWT_KEY_ADMIN,
                     {
                         expiresIn: "1h"
                     }
@@ -169,7 +168,7 @@ router.post("/login", (req, res) => {
 
 //update
 router.post("/update/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
@@ -196,7 +195,7 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
 });
 
 router.delete("/delete/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
