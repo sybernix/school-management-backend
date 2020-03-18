@@ -54,16 +54,38 @@ router.post("/add", utils.extractToken, (req, res) => {
                             message: "Student already exists"
                         });
                     } else {
-                        const studentModel = new studentSchema({ //todo : extend as per schema
+                        const studentModel = new studentSchema({
                             _id: mongoose.Types.ObjectId(),
                             studentName: req.body.studentName,
                             studentID: req.body.studentID,
                             email: req.body.email,
                             password: req.body.password,
-                            nic: req.body.nic,
-                            userType: "student"
+                            dateOfBirth: req.body.dateOfBirth,
+                            dateOfAdmission: req.body.dateOfAdmission,
+                            admissionNumber: req.body.admissionNumber,
+                            classAdmitted: req.body.classAdmitted,
+                            presentClass: req.body.presentClass,
+                            house: req.body.house,
+                            modeOfTransport: req.body.modeOfTransport,
+                            schoolAttendedBefore: req.body.schoolAttendedBefore,
+                            relativesInSchool: req.body.relativesInSchool,
+                            medicalRemarks: req.body.medicalRemarks,
+                            emergencyContacts: req.body.emergencyContacts,
+                            homeAddress: req.body.homeAddress,
+                            city: req.body.city,
+                            fatherName: req.body.fatherName,
+                            fatherOccupation: req.body.fatherOccupation,
+                            fatherTelephone: req.body.fatherTelephone,
+                            fatherEmail: req.body.fatherEmail,
+                            motherName: req.body.motherName,
+                            motherOccupation: req.body.motherOccupation,
+                            motherTelephone: req.body.motherTelephone,
+                            motherEmail: req.body.motherEmail,
+                            guardianName: req.body.guardianName,
+                            guardianOccupation: req.body.guardianOccupation,
+                            guardianTelephone: req.body.guardianTelephone,
+                            guardianEmail: req.body.guardianEmail
                         });
-
                         studentModel
                             .save()
                             .then(result => {
