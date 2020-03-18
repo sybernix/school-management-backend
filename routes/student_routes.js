@@ -54,7 +54,7 @@ router.post("/add", utils.extractToken, (req, res) => {
                             message: "Student already exists"
                         });
                     } else {
-                        const studentModel = new studentSchema({
+                        const studentModel = new studentSchema({ //todo : extend as per schema
                             _id: mongoose.Types.ObjectId(),
                             studentName: req.body.studentName,
                             studentID: req.body.studentID,
