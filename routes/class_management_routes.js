@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const configs = require("../config/config.json");
 const utils = require("../utils/extract_token");
 const router = express.Router();
+const MongoClient = require('mongodb').MongoClient;
 
 //Add attendance for a student for a day
 router.post("/attendance/add", utils.extractToken, (req, res) => {
@@ -36,3 +37,19 @@ router.post("/attendance/add", utils.extractToken, (req, res) => {
         }
     });
 });
+
+//Find attendance of a student for a day
+router.post("/attendance/lookup", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
+        if(err) {
+            res.sendStatus(403);
+        } else {
+
+            attendanceSchema.find({studentID: req.body.studentID, date: req.body.date}, (err, result) => {
+                res.json(result);
+            });
+        }
+    });
+});
+
+module.exports = router;
