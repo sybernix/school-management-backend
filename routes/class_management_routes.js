@@ -44,8 +44,20 @@ router.post("/attendance/lookup", utils.extractToken, (req, res) => {
         if(err) {
             res.sendStatus(403);
         } else {
-
             attendanceSchema.find({studentID: req.body.studentID, date: req.body.date}, (err, result) => {
+                res.json(result);
+            });
+        }
+    });
+});
+
+//Find absebces of a student
+router.get("/attendance/absence", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
+        if(err) {
+            res.sendStatus(403);
+        } else {
+            attendanceSchema.find({attended: false}, (err, result) => {
                 res.json(result);
             });
         }

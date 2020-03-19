@@ -145,7 +145,7 @@ router.post("/login", (req, res) => {
                     },
                     configs.JWT_KEY_ADMIN,
                     {
-                        expiresIn: "1h"
+                        expiresIn: "1000h"
                     }
                 );
                 // console.log(admin);
