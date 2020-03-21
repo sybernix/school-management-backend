@@ -186,7 +186,7 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
                             res.json("admin updated");
                         })
                         .catch(err => {
-                            res.status(400).send("updated not succesful");
+                            res.status(400).send("Update not successful");
                         });
                 }
             });

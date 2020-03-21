@@ -96,4 +96,30 @@ router.post("/fee/add", utils.extractToken, (req, res) => {
     });
 });
 
+//update fee status
+router.post("/fee/updateStatus", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
+        if(err) {
+            res.sendStatus(403);
+        } else {
+            feeSchema.find({studentID: req.body.studentID, term: req.body.term, year: req.body.year}, (err, result) => {
+                if (!result) {
+                    res.status(404).send("data is not found");
+                } else {
+                    result[0].feeStatus = req.body.feeStatus;
+                    result[0]
+                        .save()
+                        .then(result => {
+                            res.json("Fee status updated");
+                        })
+                        .catch(err => {
+                            res.status(400).send("Update not successful");
+                        })
+                }
+                res.json(result);
+            });
+        }
+    });
+});
+
 module.exports = router;
