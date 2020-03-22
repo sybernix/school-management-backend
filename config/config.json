@@ -10,6 +10,7 @@
     "CHAT_ONLINE_USERS_COLLECTION_NAME" : "chat_online_users",
     "STUDENT_COLLECTION_NAME": "students",
     "TEACHER_COLLECTION_NAME": "teachers",
+    "PARENT_COLLECTION_NAME": "parents",
     "ATTENDANCE_COLLECTION_NAME": "attendances",
     "FEE_COLLECTION_NAME": "fees"
 }
