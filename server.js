@@ -5,6 +5,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const adminRoutes = require("./routes/admin_routes");
 const studentRoutes = require("./routes/student_routes");
+const parentRoutes = require("./routes/parent_routes");
 const teacherRoutes = require("./routes/teacher_routes");
 const classRoutes = require("./routes/class_management_routes");
 const io = require("socket.io");
@@ -35,6 +36,7 @@ app.use(bodyParser.json());
 app.use("/admin", adminRoutes);
 app.use("/student", studentRoutes);
 app.use("/teacher", teacherRoutes);
+app.use("/parent", parentRoutes);
 app.use("/class", classRoutes);
 
 // Sockets

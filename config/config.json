@@ -2,6 +2,7 @@
     "JWT_KEY_ADMIN" : "adminKey",
     "JWT_KEY_TEACHER" : "teacherKey",
     "JWT_KEY_STUDENT" : "studentKey",
+    "JWT_KEY_PARENT" : "parentKey",
     "BACKEND_PORT" : 4000,
     "MONGO_URI" : "mongodb://localhost:27017",
     "MONGO_DB_NAME" : "school_database",
