@@ -6,8 +6,8 @@ const configs = require("../config/config.json");
 
 //login
 router.post("/login", (req, res) => {
-    console.log(req.body.instructorID);
-    teacherSchema.find({instructorID: req.body.instructorID})
+    console.log(req.body.teacherID);
+    teacherSchema.find({teacherID: req.body.teacherID})
         .exec()
         .then(teacherList => {
             console.log(teacherList);
@@ -20,7 +20,7 @@ router.post("/login", (req, res) => {
                 //correct password
                 const token = jwt.sign({
                         id: teacherList[0]._id,
-                        instructorID: teacherList[0].instructorID,
+                        teacherID: teacherList[0].teacherID,
                         userType: teacherList[0].userType
                     },
                     configs.JWT_KEY_TEACHER,
@@ -28,7 +28,6 @@ router.post("/login", (req, res) => {
                         expiresIn: "1h"
                     }
                 );
-                // console.log(instructorID);
                 return res.status(200).json({
                     message: 'Authorization Success',
                     token: token
@@ -51,32 +50,32 @@ router.get("/",  utils.extractToken, (req, res) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            teacherSchema.find((err, instructor) => {
+            teacherSchema.find((err, teacher) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    res.json(instructor);
+                    res.json(teacher);
                 }
             });
         }
     });
 });
 
-//Get Instructor By ID
+//Get teacher By ID
 router.get("/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
             let id = req.params.id;
-            teacherSchema.findById(id, (err, instructor) => {
-                res.json(instructor);
+            teacherSchema.findById(id, (err, teacher) => {
+                res.json(teacher);
             });
         }
     });
 });
 
-//add new Instructor
+//add new teacher
 router.post("/add", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
@@ -85,40 +84,40 @@ router.post("/add", utils.extractToken, (req, res) => {
             let instructormodel = new teacherSchema(req.body);
             instructormodel
                 .save()
-                .then(instructor => {
-                    res.status(200).json({teacher: "instructor added successfully"});
+                .then(teacher => {
+                    res.status(200).json({teacher: "New teacher added successfully"});
                 })
                 .catch(err => {
-                    res.status(400).send("adding new instructor failed");
+                    res.status(400).send("Adding new teacher failed");
                 });
         }
     });
 });
 
-//Update instructor
+//Update teacher
 router.post("/update/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            teacherSchema.findById(req.params.id, (err, instructor) => {
-                if (!instructor) {
-                    res.status(404).send("data is not found");
+            teacherSchema.findById(req.params.id, (err, teacher) => {
+                if (!teacher) {
+                    res.status(404).send("Data is not found");
                 } else {
-                    instructor.name = req.body.name;
-                    instructor.mail = req.body.mail;
-                    instructor.contactNumber = req.body.number;
-                    instructor.dept = req.body.dept;
-                    instructor.title = req.body.title;
-                    instructor.password = req.body.password;
+                    teacher.name = req.body.name;
+                    teacher.mail = req.body.mail;
+                    teacher.contactNumber = req.body.number;
+                    teacher.dept = req.body.dept;
+                    teacher.title = req.body.title;
+                    teacher.password = req.body.password;
 
-                    instructor
+                    teacher
                         .save()
-                        .then(instructor => {
-                            res.json("instructor updated");
+                        .then(teacher => {
+                            res.json("Teacher updated");
                         })
                         .catch(err => {
-                            res.status(400).send("updated not successfully");
+                            res.status(400).send("Updated not successful");
                         });
                 }
             });
@@ -126,7 +125,7 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
     });
 });
 
-//instructor Delete
+//teacher Delete
 router.delete("/delete/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
@@ -134,11 +133,11 @@ router.delete("/delete/:id", utils.extractToken, (req, res) => {
         } else {
             teacherSchema.findOneAndDelete(
                 {_id: req.params.id},
-                (err, instructor) => {
+                (err, teacher) => {
                     if (err) {
                         res.json(err);
                     } else {
-                        res.json("deleted successfully");
+                        res.json("Deleted successfully");
                     }
                 }
             );
