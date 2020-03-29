@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const userRoutes = require("./routes/user_routes");
 const adminRoutes = require("./routes/admin_routes");
 const studentRoutes = require("./routes/student_routes");
 const parentRoutes = require("./routes/parent_routes");
@@ -11,6 +12,7 @@ const classRoutes = require("./routes/class_management_routes");
 const io = require("socket.io");
 const configs = require('./config/config');
 const socketEvents = require("./utils/socket_events");
+const constants = require("./utils/constants");
 
 const server = app.listen(configs.BACKEND_PORT, function () {
     console.log("Student management system backend server is running on port : " + configs.BACKEND_PORT);
@@ -20,7 +22,7 @@ const socketServer = io(server);
 
 mongoose
     .connect(
-        configs.MONGO_URI + "/" + configs.MONGO_DB_NAME,
+        configs.MONGO_URI + "/" + constants.MONGO_DB_NAME,
         {useNewUrlParser: true}
     )
     .then(() => {
@@ -33,6 +35,7 @@ mongoose
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/user", userRoutes);
 app.use("/admin", adminRoutes);
 app.use("/student", studentRoutes);
 app.use("/teacher", teacherRoutes);

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const configs = require("../config/config.json");
+const constants = require("../utils/constants");
 
 const schema = new mongoose.Schema({
     parentID: {
@@ -18,5 +18,5 @@ const schema = new mongoose.Schema({
     },
 });
 
-const parentSchema = mongoose.model(configs.PARENT_COLLECTION_NAME, schema);
+const parentSchema = mongoose.model(constants.PARENT_COLLECTION_NAME, schema);
 module.exports = parentSchema;

@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const configs = require("../config/config.json");
 const utils = require("../utils/extract_token");
+const constants = require("../utils/constants");
 
 const router = express.Router();
 
@@ -69,7 +70,7 @@ router.post("/add", utils.extractToken, (req, res) => {
                         const authModel = new authSchema({
                             _id: mongoose.Types.ObjectId(),
                             userID: req.body.userID,
-                            userType: "admin",
+                            userType: constants.USER_TYPE_ADMIN,
                             passwordHash: hash
                         });
                         authModel.save().catch(err => {
@@ -148,46 +149,6 @@ router.post("/addNoLogin", (req, res) => {
                             });
                     }
                 });
-});
-
-//login
-router.post("/login", (req, res) => {
-    adminSchema.find({adminID: req.body.adminID})
-        .exec()
-        .then(adminList => {
-            if (adminList.length < 1) {
-                return res.status(401).json({
-                    message: "Authorization Failed!"
-                });
-            }
-            if (adminList && bcrypt.compareSync(req.body.password, adminList[0].passwordHash)) {
-                //correct password
-                const token = jwt.sign(
-                    {
-                        id: adminList[0]._id,
-                        adminID: adminList[0].adminID
-                    },
-                    configs.JWT_KEY_ADMIN,
-                    {
-                        expiresIn: "1000h"
-                    }
-                );
-                // console.log(admin);
-                return res.status(200).json({
-                    message: "Authorization Success",
-                    token: token
-                });
-            }
-            res.status(401).json({
-                message: "Authorization Failed!"
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
 });
 
 //update

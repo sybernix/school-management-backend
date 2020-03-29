@@ -7,46 +7,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const configs = require("../config/config.json");
-
-//login
-router.post("/login", (req, res) => {
-    console.log(req.body.teacherID);
-    teacherSchema.find({teacherID: req.body.teacherID})
-        .exec()
-        .then(teacherList => {
-            console.log(teacherList);
-            if (teacherList.length < 1) {
-                return res.status(401).json({
-                    message: 'Authorization Failed!'
-                });
-            }
-            if (teacherList && bcrypt.compareSync(req.body.password, teacherList[0].passwordHash)) {
-                //correct password
-                const token = jwt.sign({
-                        id: teacherList[0]._id,
-                        teacherID: teacherList[0].teacherID,
-                        userType: teacherList[0].userType
-                    },
-                    configs.JWT_KEY_TEACHER,
-                    {
-                        expiresIn: "1h"
-                    }
-                );
-                return res.status(200).json({
-                    message: 'Authorization Success',
-                    token: token
-                });
-            }
-            res.status(401).json({
-                message: 'Authorization Failed!'
-            });
-        }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
-    })
-});
+const constants = require("../utils/constants");
 
 //Get all teachers
 router.get("/",  utils.extractToken, (req, res) => {
@@ -97,7 +58,7 @@ router.post("/add", utils.extractToken, (req, res) => {
             const authModel = new authSchema({
                 _id: mongoose.Types.ObjectId(),
                 userID: req.body.userID,
-                userType: "teacher",
+                userType: constants.USER_TYPE_TEACHER,
                 passwordHash: hash
             });
             authModel.save().catch(err => {

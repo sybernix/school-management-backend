@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const configs = require("../config/config.json");
+const constants = require("../utils/constants");
 
 const schema = new mongoose.Schema({
     userID: {
@@ -16,5 +16,5 @@ const schema = new mongoose.Schema({
     }
 });
 
-const authSchema = mongoose.model(configs.AUTH_COLLECTION_NAME, schema);
+const authSchema = mongoose.model(constants.AUTH_COLLECTION_NAME, schema);
 module.exports = authSchema;

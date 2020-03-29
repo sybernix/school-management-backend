@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const configs = require("../config/config.json");
+const constants = require("../utils/constants");
 
 const schema = new mongoose.Schema({
     adminID: {
@@ -14,5 +14,5 @@ const schema = new mongoose.Schema({
     }
 });
 
-const adminSchema = mongoose.model(configs.ADMIN_COLLECTION_NAME, schema);
+const adminSchema = mongoose.model(constants.ADMIN_COLLECTION_NAME, schema);
 module.exports = adminSchema;

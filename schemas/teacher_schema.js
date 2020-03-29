@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const configs = require("../config/config.json");
+const constants = require("../utils/constants");
 
 const schema = new mongoose.Schema({
     name: {
@@ -23,6 +23,6 @@ const schema = new mongoose.Schema({
     }
 });
 
-const teacherSchema = mongoose.model(configs.TEACHER_COLLECTION_NAME, schema);
+const teacherSchema = mongoose.model(constants.TEACHER_COLLECTION_NAME, schema);
 module.exports = teacherSchema;
 

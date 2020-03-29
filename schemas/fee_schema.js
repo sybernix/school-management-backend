@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const configs = require("../config/config.json");
+const constants = require("../utils/constants");
 
 const schema = new mongoose.Schema({
     studentID: {
@@ -17,5 +17,5 @@ const schema = new mongoose.Schema({
     }
 });
 
-const feeSchema = mongoose.model(configs.FEE_COLLECTION_NAME, schema);
+const feeSchema = mongoose.model(constants.FEE_COLLECTION_NAME, schema);
 module.exports = feeSchema;

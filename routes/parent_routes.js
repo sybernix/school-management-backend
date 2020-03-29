@@ -7,45 +7,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const utils = require("../utils/extract_token");
 const configs = require("../config/config.json");
-
-//login
-router.post("/login", (req, res) => {
-    console.log(req.body.parentID);
-    parentSchema.find({parentID: req.body.parentID})
-        .exec()
-        .then(parentList => {
-            console.log(parentList);
-            if (parentList.length < 1) {
-                return res.status(401).json({
-                    message: 'Authorization Failed!'
-                });
-            }
-            if (parentList && bcrypt.compareSync(req.body.password, parentList[0].passwordHash)) {
-                //correct password
-                const token = jwt.sign({
-                        id: parentList[0]._id,
-                        parentID: parentList[0].parentID
-                    },
-                    configs.JWT_KEY_PARENT,
-                    {
-                        expiresIn: "1h"
-                    }
-                );
-                return res.status(200).json({
-                    message: 'Authorization Success',
-                    token: token
-                });
-            }
-            res.status(401).json({
-                message: 'Authorization Failed!'
-            });
-        }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
-    })
-});
+const constants = require("../utils/constants");
 
 //Get all parents
 router.get("/",  utils.extractToken, (req, res) => {
@@ -95,7 +57,7 @@ router.post("/add", utils.extractToken, (req, res) => {
             const authModel = new authSchema({
                 _id: mongoose.Types.ObjectId(),
                 userID: req.body.userID,
-                userType: "parent",
+                userType: constants.USER_TYPE_PARENT,
                 passwordHash: hash
             });
             authModel.save().catch(err => {

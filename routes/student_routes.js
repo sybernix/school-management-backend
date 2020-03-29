@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const configs = require("../config/config.json");
 const utils = require("../utils/extract_token");
+const constants = require("../utils/constants");
 
 const router = express.Router();
 
@@ -90,7 +91,7 @@ router.post("/add", utils.extractToken, (req, res) => {
                         const authModel = new authSchema({
                             _id: mongoose.Types.ObjectId(),
                             userID: req.body.userID,
-                            userType: "student",
+                            userType: constants.USER_TYPE_STUDENT,
                             passwordHash: hash
                         });
                         authModel.save().catch(err => {
@@ -118,48 +119,6 @@ router.post("/add", utils.extractToken, (req, res) => {
                 });
         }
     });
-});
-
-//login
-router.post("/login", (req, res) => {
-    console.log(req.body.studentID);
-    Studentmodel.find({studentID: req.body.studentID})
-        .exec()
-        .then(studentList => {
-            console.log(studentList);
-            if (studentList.length < 1) {
-                return res.status(401).json({
-                    message: "Authorization Failed!"
-                });
-            }
-            if (studentList && bcrypt.compareSync(req.body.password, studentList[0].passwordHash)) {
-                //correct password
-                const token = jwt.sign(
-                    {
-                        id: studentList[0]._id,
-                        studentID: studentList[0].studentID
-                    },
-                    configs.JWT_KEY_STUDENT,
-                    {
-                        expiresIn: "1h"
-                    }
-                );
-                console.log(studentList);
-                return res.status(200).json({
-                    message: "Authorization Success",
-                    token: token
-                });
-            }
-            res.status(401).json({
-                message: "Authorization Failed!"
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
 });
 
 //Update the student details
