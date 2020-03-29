@@ -20,9 +20,6 @@ const schema = new mongoose.Schema({
     },
     title: {
         type: String
-    },
-    password: {
-        type: String
     }
 });
 

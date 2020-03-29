@@ -85,14 +85,40 @@ router.post("/add", utils.extractToken, (req, res) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            let instructormodel = new teacherSchema(req.body);
+            let instructormodel = new teacherSchema({
+                teacherID: req.body.teacherID,
+                name: req.body.name,
+                email: req.body.email,
+                contactNumber: req.body.contactNumber,
+                department: req.body.department,
+                title: req.body.title
+            });
+            const  hash = bcrypt.hashSync(req.body.password, 8);
+            const authModel = new authSchema({
+                _id: mongoose.Types.ObjectId(),
+                userID: req.body.userID,
+                userType: "teacher",
+                passwordHash: hash
+            });
+            authModel.save().catch(err => {
+                console.log(err.message);
+                res.status(500).json({
+                    error: err
+                });
+            });
             instructormodel
                 .save()
-                .then(teacher => {
-                    res.status(200).json({teacher: "New teacher added successfully"});
+                .then(result => {
+                    res.status(200).json({
+                        message: "New teacher added successfully",
+                        createdTeacher: result
+                    });
                 })
                 .catch(err => {
-                    res.status(400).send("Adding new teacher failed");
+                    res.status(400).json({
+                        message: "Adding new teacher failed",
+                        error: err
+                    });
                 });
         }
     });
