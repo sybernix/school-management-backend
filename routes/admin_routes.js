@@ -122,9 +122,9 @@ router.post("/addNoLogin", (req, res) => {
                         });
                         const authModel = new authSchema({
                             _id: mongoose.Types.ObjectId(),
-                            userID: req.body.userID,
-                            name: req.body.name,
-                            passwordHash: hash
+                            userID: req.body.adminID,
+                            userType: constants.USER_TYPE_ADMIN,
+                            passwordHash: hash,
                         });
                         authModel.save().catch(err => {
                             console.log(err.message);
