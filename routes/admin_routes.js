@@ -69,7 +69,7 @@ router.post("/add", utils.extractToken, (req, res) => {
                         const authModel = new authSchema({
                             _id: mongoose.Types.ObjectId(),
                             userID: req.body.userID,
-                            name: req.body.name,
+                            userType: "admin",
                             passwordHash: hash
                         });
                         authModel.save().catch(err => {

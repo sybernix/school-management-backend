@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const parentSchema = require("../schemas/parent_schema");
+const authSchema = require("../schemas/auth_schema");
 const utils = require("../utils/extract_token");
 const configs = require("../config/config.json");
 
@@ -80,7 +81,26 @@ router.post("/add", utils.extractToken, (req, res) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            let parentModel = new parentSchema(req.body);
+            const  hash = bcrypt.hashSync(req.body.password, 8);
+            let parentModel = new parentSchema({
+                _id: mongoose.Types.ObjectId(),
+                parentID: req.body.parentID,
+                name: req.body.name,
+                email: req.body.email,
+                associatedStudent: req.body.associatedStudent
+            });
+            const authModel = new authSchema({
+                _id: mongoose.Types.ObjectId(),
+                userID: req.body.userID,
+                userType: "parent",
+                passwordHash: hash
+            });
+            authModel.save().catch(err => {
+                console.log(err.message);
+                res.status(500).json({
+                    error: err
+                });
+            });
             parentModel
                 .save()
                 .then(parent => {

@@ -12,7 +12,7 @@ const schema = new mongoose.Schema({
     email: {
         type: String
     },
-    passwordHash: {
+    associatedStudent: {
         type: String,
         required: true
     },
