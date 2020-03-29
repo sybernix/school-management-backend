@@ -13,5 +13,6 @@
     "TEACHER_COLLECTION_NAME": "teachers",
     "PARENT_COLLECTION_NAME": "parents",
     "ATTENDANCE_COLLECTION_NAME": "attendances",
-    "FEE_COLLECTION_NAME": "fees"
+    "FEE_COLLECTION_NAME": "fees",
+    "AUTH_COLLECTION_NAME": "auths"
 }
