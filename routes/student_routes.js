@@ -1,7 +1,9 @@
 const express = require("express");
 const studentSchema = require("../schemas/student_schema");
+const authSchema = require("../schemas/auth_schema");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const configs = require("../config/config.json");
 const utils = require("../utils/extract_token");
 
@@ -58,7 +60,6 @@ router.post("/add", utils.extractToken, (req, res) => {
                             studentName: req.body.studentName,
                             studentID: req.body.studentID,
                             email: req.body.email,
-                            password: req.body.password,
                             dateOfBirth: req.body.dateOfBirth,
                             dateOfAdmission: req.body.dateOfAdmission,
                             admissionNumber: req.body.admissionNumber,
@@ -84,6 +85,19 @@ router.post("/add", utils.extractToken, (req, res) => {
                             guardianOccupation: req.body.guardianOccupation,
                             guardianTelephone: req.body.guardianTelephone,
                             guardianEmail: req.body.guardianEmail
+                        });
+                        const  hash = bcrypt.hashSync(req.body.password, 8);
+                        const authModel = new authSchema({
+                            _id: mongoose.Types.ObjectId(),
+                            userID: req.body.userID,
+                            userType: "student",
+                            passwordHash: hash
+                        });
+                        authModel.save().catch(err => {
+                            console.log(err.message);
+                            res.status(500).json({
+                                error: err
+                            });
                         });
                         studentModel
                             .save()

@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const teacherSchema = require("../schemas/teacher_schema");
+const authSchema = require("../schemas/auth_schema");
 const utils = require("../utils/extract_token");
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 const configs = require("../config/config.json");
 
 //login

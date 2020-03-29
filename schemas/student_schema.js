@@ -12,10 +12,6 @@ const schema = new mongoose.Schema({
   email: {
     type: String
   },
-  password: {
-    type: String,
-    required : true
-  },
   dateOfBirth: {
     type: Date
   },

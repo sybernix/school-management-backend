@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const parentSchema = require("../schemas/parent_schema");
 const authSchema = require("../schemas/auth_schema");
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 const utils = require("../utils/extract_token");
 const configs = require("../config/config.json");
 
@@ -103,11 +106,17 @@ router.post("/add", utils.extractToken, (req, res) => {
             });
             parentModel
                 .save()
-                .then(parent => {
-                    res.status(200).json({teacher: "New parent added successfully"});
+                .then(result => {
+                    res.status(200).json({
+                        message: "New parent added successfully",
+                        createdParent: result
+                    });
                 })
                 .catch(err => {
-                    res.status(400).send("Adding new parent failed");
+                    res.status(400).json({
+                        message: "Adding new parent failed",
+                        error: err
+                    });
                 });
         }
     });
