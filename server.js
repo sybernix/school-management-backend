@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const userRoutes = require("./routes/user_routes");
+const loginRoute = require("./routes/login_route");
 const adminRoutes = require("./routes/admin_routes");
 const studentRoutes = require("./routes/student_routes");
 const parentRoutes = require("./routes/parent_routes");
@@ -35,7 +35,7 @@ mongoose
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/user", userRoutes);
+app.use("/login", loginRoute);
 app.use("/admin", adminRoutes);
 app.use("/student", studentRoutes);
 app.use("/teacher", teacherRoutes);

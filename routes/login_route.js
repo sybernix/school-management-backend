@@ -9,7 +9,7 @@ const constants = require("../utils/constants");
 const router = express.Router();
 
 //login
-router.post("/login", (req, res) => {
+router.post("/", (req, res) => {
     authSchema.find({userID: req.body.userID})
         .exec()
         .then(userList => {
