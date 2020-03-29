@@ -11,11 +11,7 @@ const schema = new mongoose.Schema({
     },
     email: {
         type: String
-    },
-    passwordHash: {
-        type: String,
-        required: true
-    },
+    }
 });
 
 const adminSchema = mongoose.model(configs.ADMIN_COLLECTION_NAME, schema);

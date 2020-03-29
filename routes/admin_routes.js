@@ -1,5 +1,6 @@
 const express = require("express");
 const adminSchema = require("../schemas/admin_schema");
+const authSchema = require("../schemas/auth_schema");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -59,14 +60,25 @@ router.post("/add", utils.extractToken, (req, res) => {
                         });
                     } else {
                         const  hash = bcrypt.hashSync(req.body.password, 8);
-                        const adminmodel = new adminSchema({
+                        const adminModel = new adminSchema({
                             _id: mongoose.Types.ObjectId(),
                             adminID: req.body.adminID,
                             name: req.body.name,
-                            email: req.body.email,
+                            email: req.body.email
+                        });
+                        const authModel = new authSchema({
+                            _id: mongoose.Types.ObjectId(),
+                            userID: req.body.userID,
+                            name: req.body.name,
                             passwordHash: hash
                         });
-                        adminmodel
+                        authModel.save().catch(err => {
+                            console.log(err.message);
+                            res.status(500).json({
+                                error: err
+                            });
+                        });
+                        adminModel
                             .save()
                             .then(result => {
                                 console.log(result);
@@ -81,6 +93,7 @@ router.post("/add", utils.extractToken, (req, res) => {
                                     error: err
                                 });
                             });
+
                     }
                 });
         }
@@ -104,8 +117,19 @@ router.post("/addNoLogin", (req, res) => {
                             _id: mongoose.Types.ObjectId(),
                             adminID: req.body.adminID,
                             name: req.body.name,
-                            email: req.body.email,
+                            email: req.body.email
+                        });
+                        const authModel = new authSchema({
+                            _id: mongoose.Types.ObjectId(),
+                            userID: req.body.userID,
+                            name: req.body.name,
                             passwordHash: hash
+                        });
+                        authModel.save().catch(err => {
+                            console.log(err.message);
+                            res.status(500).json({
+                                error: err
+                            });
                         });
                         adminmodel
                             .save()
