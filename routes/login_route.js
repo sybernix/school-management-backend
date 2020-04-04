@@ -33,7 +33,7 @@ router.post("/", (req, res) => {
                 const token = jwt.sign(
                     {
                         id: userList[0]._id,
-                        userType: constants.USER_TYPE_ADMIN,
+                        userType: userList[0].userType,
                         adminID: userList[0].adminID
                     },
                     JWT_KEY,
@@ -44,7 +44,8 @@ router.post("/", (req, res) => {
                     // console.log(admin);
                 return res.status(200).json({
                     message: "Authorization Success",
-                    token: token
+                    token: token,
+                    userType: userList[0].userType
                 });
             }
             res.status(401).json({
