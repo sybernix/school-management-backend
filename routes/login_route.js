@@ -1,10 +1,10 @@
 const express = require("express");
 const authSchema = require("../schemas/auth_schema");
-const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const configs = require("../config/config.json");
 const constants = require("../utils/constants");
+const utils = require("../utils/extract_token");
 
 const router = express.Router();
 
@@ -21,13 +21,13 @@ router.post("/", (req, res) => {
             if (userList && bcrypt.compareSync(req.body.password, userList[0].passwordHash)) {
                 //correct password
                 var JWT_KEY;
-                if (userList[0].userType.localeCompare(constants.USER_TYPE_ADMIN)) {
+                if (userList[0].userType == constants.USER_TYPE_ADMIN) {
                     JWT_KEY = configs.JWT_KEY_ADMIN;
-                } else if (userList[0].userType.localeCompare(constants.USER_TYPE_TEACHER)) {
+                } else if (userList[0].userType == constants.USER_TYPE_TEACHER) {
                     JWT_KEY = configs.JWT_KEY_TEACHER
-                } else if (userList[0].userType.localeCompare(constants.USER_TYPE_STUDENT)) {
+                } else if (userList[0].userType == constants.USER_TYPE_STUDENT) {
                     JWT_KEY = configs.JWT_KEY_STUDENT
-                } else if (userList[0].userType.localeCompare(constants.USER_TYPE_PARENT)) {
+                } else if (userList[0].userType == constants.USER_TYPE_PARENT) {
                     JWT_KEY = configs.JWT_KEY_PARENT
                 }
                 const token = jwt.sign(
@@ -57,6 +57,32 @@ router.post("/", (req, res) => {
                 error: err
             });
         });
+});
+
+// Verify whether the token is correct
+router.post("/verifyToken", utils.extractToken, (req, res) => {
+    var JWT_KEY = configs.JWT_KEY_ADMIN;
+    const userType = req.body.userType;
+    if (userType == constants.USER_TYPE_ADMIN) {
+        JWT_KEY = configs.JWT_KEY_ADMIN;
+    } else if (userType == constants.USER_TYPE_PARENT) {
+        JWT_KEY = configs.JWT_KEY_PARENT;
+    } else if (userType == constants.USER_TYPE_STUDENT) {
+        JWT_KEY = configs.JWT_KEY_STUDENT;
+    } else if (userType == constants.USER_TYPE_TEACHER) {
+        JWT_KEY = configs.JWT_KEY_TEACHER;
+    }
+    jwt.verify(req.token, JWT_KEY, (err, authData) => {
+        if(err) {
+            res.status(403).json({
+                message: err
+            });
+        } else {
+            res.json({
+                message: "JWT Token is Valid"
+            });
+        }
+    });
 });
 
 module.exports = router;
