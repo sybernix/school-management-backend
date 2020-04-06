@@ -13,5 +13,6 @@ module.exports = {
     PARENT_COLLECTION_NAME: "parents",
     ATTENDANCE_COLLECTION_NAME: "attendances",
     FEE_COLLECTION_NAME: "fees",
-    AUTH_COLLECTION_NAME: "auths"
+    AUTH_COLLECTION_NAME: "auths",
+    TOKEN_COLLECTION_NAME: "tokens"
 };

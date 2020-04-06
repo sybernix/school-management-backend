@@ -16,5 +16,5 @@ const schema = new mongoose.Schema({
     }
 });
 
-const tokenSchema = mongoose.model(constants.AUTH_COLLECTION_NAME, schema);
+const tokenSchema = mongoose.model(constants.TOKEN_COLLECTION_NAME, schema);
 module.exports = tokenSchema;
