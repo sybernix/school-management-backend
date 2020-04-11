@@ -9,10 +9,16 @@ const studentRoutes = require("./routes/student_routes");
 const parentRoutes = require("./routes/parent_routes");
 const teacherRoutes = require("./routes/teacher_routes");
 const classRoutes = require("./routes/class_management_routes");
+const homeworkRoutes = require("./routes/homework_routes");
 const io = require("socket.io");
 const configs = require('./config/config');
 const socketEvents = require("./utils/socket_events");
 const constants = require("./utils/constants");
+const busboy = require('connect-busboy'); //middleware for form/file upload
+const path = require('path'); //used for file path
+
+app.use(busboy());
+app.use(express.static(path.join(__dirname, 'public')));
 
 const server = app.listen(configs.BACKEND_PORT, function () {
     console.log("Student management system backend server is running on port : " + configs.BACKEND_PORT);
@@ -41,6 +47,7 @@ app.use("/student", studentRoutes);
 app.use("/teacher", teacherRoutes);
 app.use("/parent", parentRoutes);
 app.use("/class", classRoutes);
+app.use("/homework", homeworkRoutes);
 
 // Sockets
 socketServer.on(socketEvents.CONNECT, async (socket) => {

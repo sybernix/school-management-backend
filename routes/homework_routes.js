@@ -2,8 +2,6 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const configs = require("../config/config.json");
 const utils = require("../utils/extract_token");
-const busboy = require('connect-busboy'); //middleware for form/file upload
-const path = require('path');     //used for file path
 const fs = require('fs-extra');       //File System - for file manipulation
 
 const router = express.Router();
