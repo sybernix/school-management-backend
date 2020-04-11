@@ -7,6 +7,7 @@ const configs = require("../config/config.json");
 const constants = require("../utils/constants");
 const utils = require("../utils/extract_token");
 const mongoose = require("mongoose");
+const MongoID = require("MongoID");
 
 const router = express.Router();
 
@@ -44,12 +45,12 @@ router.post("/", (req, res) => {
                     }
                 );
                 const tokenModel = new tokenSchema({
-                    _id: mongoose.Types.ObjectId(),
+                    _id: new MongoID(req.body.userID),
                     userID: req.body.userID,
                     userType: userList[0].userType,
                     token: token
                 });
-                tokenModel.save().catch(err => {
+                tokenModel.save().catch(err => { // todo checkfor previous  tokens for the same userID and delete. implement async to expire saved tokens
                     console.log("Error in saving token during login: " + err.message);
                 });
                     // console.log(admin);
