@@ -7,9 +7,9 @@ const fs = require('fs-extra');       //File System - for file manipulation
 
 const router = express.Router();
 
-//Add attendance for a student for a day
+//Upload homework route
 router.post("/upload", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
@@ -18,7 +18,7 @@ router.post("/upload", utils.extractToken, (req, res) => {
             req.busboy.on('file', function (fieldName, file, fileName) {
                 console.log("Uploading: " + fileName);
                 //Path where homework will be uploaded
-                fileStream = fs.createWriteStream(constants.HOMEWORK_DIRECTORY_PATH+ fileName);
+                fileStream = fs.createWriteStream(constants.HOMEWORK_DIRECTORY_PATH + fileName);
                 file.pipe(fileStream);
                 fileStream.on('close', function () {
                     console.log("Upload Finished of " + fileName);
@@ -27,6 +27,17 @@ router.post("/upload", utils.extractToken, (req, res) => {
                     });
                 });
             });
+        }
+    });
+});
+
+router.get("/download/:file(*)", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
+        if(err) {
+            res.sendStatus(403);
+        } else {
+            const file = req.params.file;
+            res.download(constants.HOMEWORK_DIRECTORY_PATH + file);
         }
     });
 });
