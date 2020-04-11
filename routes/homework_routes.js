@@ -17,13 +17,14 @@ router.post("/upload", utils.extractToken, (req, res) => {
             req.pipe(req.busboy);
             req.busboy.on('file', function (fieldName, file, fileName) {
                 console.log("Uploading: " + fileName);
-
                 //Path where homework will be uploaded
                 fileStream = fs.createWriteStream(constants.HOMEWORK_DIRECTORY_PATH+ fileName);
                 file.pipe(fileStream);
                 fileStream.on('close', function () {
                     console.log("Upload Finished of " + fileName);
-                    res.redirect('back');           //where to go next
+                    return res.status(200).json({
+                        message: "Homework upload Success"
+                    });
                 });
             });
         }

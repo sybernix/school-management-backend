@@ -7,7 +7,6 @@ const configs = require("../config/config.json");
 const constants = require("../utils/constants");
 const utils = require("../utils/extract_token");
 const mongoose = require("mongoose");
-const MongoID = require("MongoID");
 
 const router = express.Router();
 
@@ -45,7 +44,7 @@ router.post("/", (req, res) => {
                     }
                 );
                 const tokenModel = new tokenSchema({
-                    _id: new MongoID(req.body.userID),
+                    _id: new mongoose.Types.ObjectId(),
                     userID: req.body.userID,
                     userType: userList[0].userType,
                     token: token
