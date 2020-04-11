@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "fs-extra": "^9.0.0",
+    "json-simple": "^0.9.6",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.5",
     "nodemailer": "^6.2.1",
