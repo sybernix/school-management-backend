@@ -14,5 +14,6 @@ module.exports = {
     ATTENDANCE_COLLECTION_NAME: "attendances",
     FEE_COLLECTION_NAME: "fees",
     AUTH_COLLECTION_NAME: "auths",
-    TOKEN_COLLECTION_NAME: "tokens"
+    TOKEN_COLLECTION_NAME: "tokens",
+    HOMEWORK_DIRECTORY_PATH: "./uploads/homework/"
 };
