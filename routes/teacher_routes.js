@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const teacherSchema = require("../schemas/teacher_schema");
 const authSchema = require("../schemas/auth_schema");
+const meetingSchema = require("../schemas/meeting_schema");
 const utils = require("../utils/extract_token");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
@@ -15,13 +16,13 @@ router.get("/",  utils.extractToken, (req, res) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            teacherSchema.find((err, teacher) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.json(teacher);
-                }
-            });
+            teacherSchema.find({
+                parentID: req.body.parentID
+            })
+                .exec()
+                .then(meetings => {
+                        res.status(200).body(meetings);
+                    });
         }
     });
 });
@@ -132,6 +133,35 @@ router.delete("/delete/:id", utils.extractToken, (req, res) => {
                     }
                 }
             );
+        }
+    });
+});
+
+// teacher schedules a parent meeting
+router.post("/scheduleMeeting", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
+        if(err) {
+            res.sendStatus(403);
+        } else {
+            const meetingModel = new meetingSchema({
+                _id: mongoose.Types.ObjectId(),
+                teacherID: req.body.teacherID,
+                parentIDs: req.body.parentIDs,
+                date: req.body.date,
+            });
+            meetingModel.save()
+                .then(result => {
+                    res.status(200).json({
+                        message: "Parent-Teacher meeting added successfully",
+                        createdMeeting: result
+                    });
+                })
+                .catch(err => {
+                console.log(err.message);
+                res.status(500).json({
+                    error: err
+                });
+            });
         }
     });
 });
