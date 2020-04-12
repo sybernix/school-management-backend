@@ -141,10 +141,13 @@ router.get("/meeting", utils.extractToken, (req, res) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            let parentID = req.params.parentID;
-            meetingSchema.findById(id, (err, parent) => {
-                res.json(parent);
-            });
+            meetingSchema.find({
+                parentID: req.body.parentID
+            })
+                .exec()
+                .then(meetings => {
+                    res.status(200).body(meetings);
+                });
         }
     });
 });

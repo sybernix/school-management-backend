@@ -16,13 +16,13 @@ router.get("/",  utils.extractToken, (req, res) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            teacherSchema.find({
-                parentID: req.body.parentID
-            })
-                .exec()
-                .then(meetings => {
-                        res.status(200).body(meetings);
-                    });
+            teacherSchema.find((err, teacher) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.json(teacher);
+                }
+            });
         }
     });
 });
