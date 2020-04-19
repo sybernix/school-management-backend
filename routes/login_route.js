@@ -12,7 +12,7 @@ const router = express.Router();
 
 //login
 router.post("/", (req, res) => {
-    authSchema.find({userID: req.body.id})
+    authSchema.find({id: req.body.id})
         .exec()
         .then(userList => {
             if (userList.length < 1) {
@@ -44,11 +44,11 @@ router.post("/", (req, res) => {
                 );
                 const tokenModel = new tokenSchema({
                     _id: new mongoose.Types.ObjectId(),
-                    userID: req.body.id,
+                    id: req.body.id,
                     userType: userList[0].userType,
                     token: token
                 });
-                tokenModel.save().catch(err => { // todo checkfor previous  tokens for the same userID and delete. implement async to expire saved tokens
+                tokenModel.save().catch(err => { // todo check for previous  tokens for the same userID and delete. implement async to expire saved tokens
                     console.log("Error in saving token during login: " + err.message);
                 });
                     // console.log(admin);
@@ -83,7 +83,7 @@ router.post("/verifyToken", utils.extractToken, (req, res) => {
             res.json({
                 message: "JWT Token is Valid",
                 userType: tokenList[0].userType,
-                userID: tokenList[0].userID
+                id: tokenList[0].id
             });
         })
         .catch(err => {

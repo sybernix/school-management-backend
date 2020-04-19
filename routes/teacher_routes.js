@@ -11,8 +11,8 @@ const configs = require("../config/config.json");
 const constants = require("../utils/constants");
 
 //Get all teachers
-router.post("/",  utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
+router.post("/retrieve",  utils.extractToken, (req, res) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
@@ -28,13 +28,13 @@ router.post("/",  utils.extractToken, (req, res) => {
 });
 
 //Get teacher By ID
-router.post("/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
+router.post("/retrieve/:id", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
             let id = req.params.id;
-            teacherSchema.find({teacherID: id})
+            teacherSchema.find({id: id})
                 .exec()
                 .then(teacherList => {
                     if (teacherList.length < 1) {
@@ -52,22 +52,35 @@ router.post("/:id", utils.extractToken, (req, res) => {
 
 //add new teacher
 router.post("/add", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            let instructormodel = new teacherSchema({
-                teacherID: req.body.teacherID,
-                name: req.body.name,
-                email: req.body.email,
-                contactNumber: req.body.contactNumber,
-                department: req.body.department,
-                title: req.body.title
+            let teacherModel = new teacherSchema({
+                _id: mongoose.Types.ObjectId(),
+                id: req.body.id,
+                user_type: constants.USER_TYPE_ADMIN,
+                nic: req.body.nic,
+                passport: req.body.passport,
+                title_id: req.body.title_id,
+                first_name: req.body.first_name,
+                middle_name: req.body.middle_name,
+                last_name: req.body.last_name,
+                sex: req.body.sex,
+                dob: req.body.dob,
+                phone: req.body.phone,
+                access_level_id: req.body.access_level_id,
+                reg_no: req.body.reg_no,
+                reg_date: req.body.reg_date,
+                end_date: req.body.end_date,
+                teacher_grade_id: req.body.teacher_grade_id,
+                marital_status_id: req.body.marital_status_id,
+                is_active: req.body.is_active,
             });
             const  hash = bcrypt.hashSync(req.body.password, 8);
             const authModel = new authSchema({
                 _id: mongoose.Types.ObjectId(),
-                userID: req.body.userID,
+                id: req.body.id,
                 userType: constants.USER_TYPE_TEACHER,
                 passwordHash: hash
             });
@@ -77,7 +90,7 @@ router.post("/add", utils.extractToken, (req, res) => {
                     error: err
                 });
             });
-            instructormodel
+            teacherModel
                 .save()
                 .then(result => {
                     res.status(200).json({
@@ -128,7 +141,7 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
 
 //teacher Delete
 router.delete("/delete/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {

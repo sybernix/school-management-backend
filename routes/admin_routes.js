@@ -87,7 +87,7 @@ router.post("/add", /*utils.extractToken,*/ (req, res) => {
                             is_active: req.body.is_active,
                         });
                         const authModel = new authSchema({
-                            userID: req.body.id,
+                            id: req.body.id,
                             userType: constants.USER_TYPE_ADMIN,
                             passwordHash: hash
                         });

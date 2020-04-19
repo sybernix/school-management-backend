@@ -1,24 +1,24 @@
 const mongoose = require("mongoose");
 const constants = require("../utils/constants");
+const ContactSchema = require("./contact_schema");
 
-const schema = new mongoose.Schema({
-    name: {
+const schema = ContactSchema.add({
+    reg_no: {
         type: String
     },
-    teacherID: {
-        type: String,
-        required: true
+    reg_date: {
+        type: Date
     },
-    email: {
+    end_date: {
+        type: Date
+    },
+    is_active: {
         type: String
     },
-    contactNumber: {
-        type: Number
-    },
-    department: {
+    teacher_grade_id: {
         type: String
     },
-    title: {
+    marital_status_id: {
         type: String
     }
 });

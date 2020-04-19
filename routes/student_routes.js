@@ -11,8 +11,8 @@ const constants = require("../utils/constants");
 const router = express.Router();
 
 //Get all student details
-router.post("/", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
+router.post("/retrieve", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {
@@ -27,13 +27,13 @@ router.post("/", utils.extractToken, (req, res) => {
     });
 });
 
-router.post("/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
+router.post("/retrieve/:id", utils.extractToken, (req, res) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {
             let id = req.params.id;
-            studentSchema.find({studentID: id})
+            studentSchema.find({id: id})
                 .exec()
                 .then(studentList => {
                     if (studentList.length < 1) {
@@ -51,7 +51,7 @@ router.post("/:id", utils.extractToken, (req, res) => {
 
 //Add new student to db
 router.post("/add", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {
@@ -67,39 +67,27 @@ router.post("/add", utils.extractToken, (req, res) => {
                     } else {
                         const studentModel = new studentSchema({
                             _id: mongoose.Types.ObjectId(),
-                            studentName: req.body.studentName,
-                            studentID: req.body.studentID,
-                            email: req.body.email,
-                            dateOfBirth: req.body.dateOfBirth,
-                            dateOfAdmission: req.body.dateOfAdmission,
-                            admissionNumber: req.body.admissionNumber,
-                            classAdmitted: req.body.classAdmitted,
-                            presentClass: req.body.presentClass,
-                            house: req.body.house,
-                            modeOfTransport: req.body.modeOfTransport,
-                            schoolAttendedBefore: req.body.schoolAttendedBefore,
-                            relativesInSchool: req.body.relativesInSchool,
-                            medicalRemarks: req.body.medicalRemarks,
-                            emergencyContacts: req.body.emergencyContacts,
-                            homeAddress: req.body.homeAddress,
-                            city: req.body.city,
-                            fatherName: req.body.fatherName,
-                            fatherOccupation: req.body.fatherOccupation,
-                            fatherTelephone: req.body.fatherTelephone,
-                            fatherEmail: req.body.fatherEmail,
-                            motherName: req.body.motherName,
-                            motherOccupation: req.body.motherOccupation,
-                            motherTelephone: req.body.motherTelephone,
-                            motherEmail: req.body.motherEmail,
-                            guardianName: req.body.guardianName,
-                            guardianOccupation: req.body.guardianOccupation,
-                            guardianTelephone: req.body.guardianTelephone,
-                            guardianEmail: req.body.guardianEmail
+                            id: req.body.id,
+                            user_type: constants.USER_TYPE_ADMIN,
+                            nic: req.body.nic,
+                            passport: req.body.passport,
+                            title_id: req.body.title_id,
+                            first_name: req.body.first_name,
+                            middle_name: req.body.middle_name,
+                            last_name: req.body.last_name,
+                            sex: req.body.sex,
+                            dob: req.body.dob,
+                            phone: req.body.phone,
+                            access_level_id: req.body.access_level_id,
+                            reg_no: req.body.reg_no,
+                            reg_date: req.body.reg_date,
+                            end_date: req.body.end_date,
+                            is_active: req.body.is_active,
                         });
                         const  hash = bcrypt.hashSync(req.body.password, 8);
                         const authModel = new authSchema({
                             _id: mongoose.Types.ObjectId(),
-                            userID: req.body.userID,
+                            id: req.body.id,
                             userType: constants.USER_TYPE_STUDENT,
                             passwordHash: hash
                         });
@@ -132,7 +120,7 @@ router.post("/add", utils.extractToken, (req, res) => {
 
 //Update the student details
 router.post("/update/:id", utils.extractToken, (req, res)  => {
-    jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {
@@ -160,11 +148,11 @@ router.post("/update/:id", utils.extractToken, (req, res)  => {
 
 // Delete the student
 router.delete("/delete/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
+    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {
-            studentSchema.findOneAndDelete({_id: req.params.id}, function (
+            studentSchema.findOneAndDelete({id: req.params.id}, function (
                 err
             ) {
                 if (err) res.json(err);
