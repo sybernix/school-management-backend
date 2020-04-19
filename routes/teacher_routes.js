@@ -11,7 +11,7 @@ const configs = require("../config/config.json");
 const constants = require("../utils/constants");
 
 //Get all teachers
-router.get("/",  utils.extractToken, (req, res) => {
+router.post("/",  utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
             res.sendStatus(403);
@@ -28,15 +28,24 @@ router.get("/",  utils.extractToken, (req, res) => {
 });
 
 //Get teacher By ID
-router.get("/:id", utils.extractToken, (req, res) => {
+router.post("/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
             let id = req.params.id;
-            teacherSchema.findById(id, (err, teacher) => {
-                res.json(teacher);
-            });
+            teacherSchema.find({teacherID: id})
+                .exec()
+                .then(teacherList => {
+                    if (teacherList.length < 1) {
+                        return res.status(401).json({
+                            message: "Authorization Failed!"
+                        });
+                    }
+                    if (teacherList) {
+                        res.json(teacherList[0]);
+                    }
+                })
         }
     });
 });

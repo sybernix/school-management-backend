@@ -11,7 +11,7 @@ const constants = require("../utils/constants");
 const router = express.Router();
 
 //Get all student details
-router.get("/", utils.extractToken, (req, res) => {
+router.post("/", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
         if (err) {
             res.sendStatus(403);
@@ -27,15 +27,24 @@ router.get("/", utils.extractToken, (req, res) => {
     });
 });
 
-router.get("/:id", utils.extractToken, (req, res) => {
+router.post("/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_STUDENT, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {
             let id = req.params.id;
-            studentSchema.findById(id, function (err, students) {
-                res.json(students);
-            });
+            studentSchema.find({studentID: id})
+                .exec()
+                .then(studentList => {
+                    if (studentList.length < 1) {
+                        return res.status(401).json({
+                            message: "Authorization Failed!"
+                        });
+                    }
+                    if (studentList) {
+                        res.json(studentList[0]);
+                    }
+                })
         }
     });
 });

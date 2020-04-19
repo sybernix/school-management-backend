@@ -11,7 +11,7 @@ const constants = require("../utils/constants");
 const router = express.Router();
 
 //Retrieve all admins
-router.get("/", utils.extractToken, (req, res) => {
+router.post("/", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
@@ -31,15 +31,24 @@ router.get("/", utils.extractToken, (req, res) => {
 });
 
 //Retrieve admin  by ID
-router.get("/:id", utils.extractToken, (req, res) => {
+router.post("/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
             let id = req.params.id;
-            adminSchema.findById(id, (err, admin) => {
-                res.json(admin);
-            });
+            adminSchema.find({adminID: id})
+                .exec()
+                .then(adminList => {
+                    if (adminList.length < 1) {
+                        return res.status(401).json({
+                            message: "Authorization Failed!"
+                        });
+                    }
+                    if (adminList) {
+                        res.json(adminList[0]);
+                    }
+                })
         }
     });
 });

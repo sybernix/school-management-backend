@@ -11,7 +11,7 @@ const configs = require("../config/config.json");
 const constants = require("../utils/constants");
 
 //Get all parents
-router.get("/",  utils.extractToken, (req, res) => {
+router.post("/",  utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_PARENT, (err, authData) => {
         if(err) {
             res.sendStatus(403);
@@ -28,15 +28,24 @@ router.get("/",  utils.extractToken, (req, res) => {
 });
 
 //Get parent By ID
-router.get("/:id", utils.extractToken, (req, res) => {
+router.post("/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_PARENT, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
             let id = req.params.id;
-            parentSchema.findById(id, (err, parent) => {
-                res.json(parent);
-            });
+            parentSchema.find({parentID: id})
+                .exec()
+                .then(parentList => {
+                    if (parentList.length < 1) {
+                        return res.status(401).json({
+                            message: "Authorization Failed!"
+                        });
+                    }
+                    if (parentList) {
+                        res.json(parentList[0]);
+                    }
+                })
         }
     });
 });
