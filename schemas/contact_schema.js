@@ -12,6 +12,9 @@ const contactSchema = new mongoose.Schema({
     nic: {
         type: String
     },
+    email: {
+        type: String
+    },
     passport: {
         type: String
     },

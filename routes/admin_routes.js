@@ -76,6 +76,7 @@ router.post("/add", /*utils.extractToken,*/ (req, res) => {
                             id: req.body.id,
                             user_type: constants.USER_TYPE_ADMIN,
                             nic: req.body.nic,
+                            email: req.body.email,
                             passport: req.body.passport,
                             title_id: req.body.title_id,
                             first_name: req.body.first_name,
@@ -137,7 +138,7 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
                 } else {
                     admin.mail = req.body.email;
                     admin.password = req.body.password;
-                    admin.nic = req.body.nic;
+                    admin.email = req.body.email;
                     admin.passport = req.body.passport,
                     admin.title_id = req.body.title_id,
                     admin.first_name = req.body.first_name,
