@@ -136,13 +136,13 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
 });
 
 //parent Delete
-router.delete("/delete/:id", utils.extractToken, (req, res) => {
+router.post("/delete/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_PARENT, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
             parentSchema.findOneAndDelete(
-                {_id: req.params.id},
+                {id: req.params.id},
                 (err, parent) => {
                     if (err) {
                         res.json(err);

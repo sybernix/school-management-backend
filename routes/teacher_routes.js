@@ -114,7 +114,7 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            teacherSchema.findById(req.params.id, (err, teacher) => {
+            teacherSchema.find(req.params.id, (err, teacher) => {
                 if (!teacher) {
                     res.status(404).send("Data is not found");
                 } else {
@@ -146,7 +146,7 @@ router.delete("/delete/:id", utils.extractToken, (req, res) => {
             res.sendStatus(403);
         } else {
             teacherSchema.findOneAndDelete(
-                {_id: req.params.id},
+                {id: req.params.id},
                 (err, teacher) => {
                     if (err) {
                         res.json(err);

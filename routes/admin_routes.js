@@ -1,6 +1,7 @@
 const express = require("express");
 const adminSchema = require("../schemas/admin_schema");
 const authSchema = require("../schemas/auth_schema");
+const tokenSchema = require("../schemas/token_schema");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -91,6 +92,11 @@ router.post("/add", /*utils.extractToken,*/ (req, res) => {
                             userType: constants.USER_TYPE_ADMIN,
                             passwordHash: hash
                         });
+                        authSchema.findOneAndDelete({id: req.body.id}, (err, admin) => {
+                            if (err) {
+                                res.json(err);
+                            }
+                        });
                         authModel.save().catch(err => {
                             console.log(err.message);
                             res.status(500).json({
@@ -129,10 +135,19 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
                 if (!admin) {
                     res.status(404).send("data is not found");
                 } else {
-                    (admin.adminID = req.body.adminID), (admin.name = req.body.name);
                     admin.mail = req.body.email;
                     admin.password = req.body.password;
-
+                    admin.nic = req.body.nic;
+                    admin.passport = req.body.passport,
+                    admin.title_id = req.body.title_id,
+                    admin.first_name = req.body.first_name,
+                    admin.middle_name = req.body.middle_name,
+                    admin.last_name = req.body.last_name,
+                    admin.sex = req.body.sex,
+                    admin.dob = req.body.dob,
+                    admin.phone = req.body.phone,
+                    admin.access_level_id = req.body.access_level_id,
+                    admin.is_active = req.body.is_active,
                     admin
                         .save()
                         .then(admin => {
@@ -147,16 +162,28 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
     });
 });
 
-router.delete("/delete/:id", utils.extractToken, (req, res) => {
+router.post("/delete/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            adminSchema.findOneAndDelete({_id: req.params.id}, (err, admin) => {
+            adminSchema.findOneAndDelete({id: req.params.id}, (err, admin) => {
                 if (err) {
                     res.json(err);
                 } else {
-                    res.json("deleted successfully");
+                    authSchema.findOneAndDelete({id: req.params.id}, (err, admin) => {
+                        if (err) {
+                            res.json(err);
+                        } else {
+                            tokenSchema.findOneAndDelete({id: req.params.id}, (err, admin) => {
+                                if (err) {
+                                    res.json(err);
+                                } else {
+                                    res.json("deleted successfully");
+                                }
+                            });
+                        }
+                    });
                 }
             });
         }
