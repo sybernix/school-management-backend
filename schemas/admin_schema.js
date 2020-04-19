@@ -1,15 +1,10 @@
 const mongoose = require("mongoose");
 const constants = require("../utils/constants");
+const ContactSchema = require("./contact_schema");
 
-const schema = new mongoose.Schema({
-    adminID: {
-        type: String,
-        required: true
-    },
-    name: {
-        type: String
-    },
-    email: {
+
+const schema = ContactSchema.add({
+    is_active: {
         type: String
     }
 });

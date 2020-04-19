@@ -10,8 +10,8 @@ const constants = require("../utils/constants");
 
 const router = express.Router();
 
-//Retrieve all admins
-router.post("/", utils.extractToken, (req, res) => {
+// Retrieve all admins
+router.post("/retrieve/", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
@@ -30,14 +30,14 @@ router.post("/", utils.extractToken, (req, res) => {
     });
 });
 
-//Retrieve admin  by ID
-router.post("/:id", utils.extractToken, (req, res) => {
+// Retrieve admin  by ID
+router.post("/retrieve/:id", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
         } else {
             let id = req.params.id;
-            adminSchema.find({adminID: id})
+            adminSchema.find({id: id})
                 .exec()
                 .then(adminList => {
                     if (adminList.length < 1) {
@@ -54,13 +54,13 @@ router.post("/:id", utils.extractToken, (req, res) => {
 });
 
 //Add new admin
-router.post("/add", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+router.post("/add", /*utils.extractToken,*/ (req, res) => {
+    // jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
+    //     if(err) {
+    //         res.sendStatus(403);
+    //     } else {
             adminSchema.find({
-                adminID: req.body.adminID
+                id: req.body.id
             })
                 .exec()
                 .then(admin => {
@@ -72,13 +72,22 @@ router.post("/add", utils.extractToken, (req, res) => {
                         const  hash = bcrypt.hashSync(req.body.password, 8);
                         const adminModel = new adminSchema({
                             _id: mongoose.Types.ObjectId(),
-                            adminID: req.body.adminID,
-                            name: req.body.name,
-                            email: req.body.email
+                            id: req.body.id,
+                            user_type: constants.USER_TYPE_ADMIN,
+                            nic: req.body.nic,
+                            passport: req.body.passport,
+                            title_id: req.body.title_id,
+                            first_name: req.body.first_name,
+                            middle_name: req.body.middle_name,
+                            last_name: req.body.last_name,
+                            sex: req.body.sex,
+                            dob: req.body.dob,
+                            phone: req.body.phone,
+                            access_level_id: req.body.access_level_id,
+                            is_active: req.body.is_active,
                         });
                         const authModel = new authSchema({
-                            _id: mongoose.Types.ObjectId(),
-                            userID: req.body.userID,
+                            userID: req.body.id,
                             userType: constants.USER_TYPE_ADMIN,
                             passwordHash: hash
                         });
@@ -106,59 +115,9 @@ router.post("/add", utils.extractToken, (req, res) => {
 
                     }
                 });
-        }
+        // }
     });
-});
-
-//Add new admin
-router.post("/addNoLogin", (req, res) => {
-            adminSchema.find({
-                adminID: req.body.adminID
-            })
-                .exec()
-                .then(admin => {
-                    if (admin.length >= 1) {
-                        res.status(409).json({
-                            message: "admin already exists"
-                        });
-                    } else {
-                        const  hash = bcrypt.hashSync(req.body.password, 8);
-                        const adminmodel = new adminSchema({
-                            _id: mongoose.Types.ObjectId(),
-                            adminID: req.body.adminID,
-                            name: req.body.name,
-                            email: req.body.email
-                        });
-                        const authModel = new authSchema({
-                            _id: mongoose.Types.ObjectId(),
-                            userID: req.body.adminID,
-                            userType: constants.USER_TYPE_ADMIN,
-                            passwordHash: hash,
-                        });
-                        authModel.save().catch(err => {
-                            console.log(err.message);
-                            res.status(500).json({
-                                error: err
-                            });
-                        });
-                        adminmodel
-                            .save()
-                            .then(result => {
-                                console.log(result);
-                                res.status(201).json({
-                                    message: "admin added",
-                                    createdAdmin: result
-                                });
-                            })
-                            .catch(err => {
-                                console.log(err.message);
-                                res.status(500).json({
-                                    error: err
-                                });
-                            });
-                    }
-                });
-});
+// });
 
 //update
 router.post("/update/:id", utils.extractToken, (req, res) => {

@@ -12,7 +12,7 @@ const router = express.Router();
 
 //login
 router.post("/", (req, res) => {
-    authSchema.find({userID: req.body.userID})
+    authSchema.find({userID: req.body.id})
         .exec()
         .then(userList => {
             if (userList.length < 1) {
@@ -34,9 +34,8 @@ router.post("/", (req, res) => {
                 }
                 const token = jwt.sign(
                     {
-                        id: userList[0]._id,
                         userType: userList[0].userType,
-                        adminID: userList[0].adminID
+                        id: userList[0].id
                     },
                     JWT_KEY,
                     {
@@ -45,7 +44,7 @@ router.post("/", (req, res) => {
                 );
                 const tokenModel = new tokenSchema({
                     _id: new mongoose.Types.ObjectId(),
-                    userID: req.body.userID,
+                    userID: req.body.id,
                     userType: userList[0].userType,
                     token: token
                 });
