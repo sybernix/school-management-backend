@@ -14,6 +14,7 @@ module.exports = {
     ATTENDANCE_COLLECTION_NAME: "attendances",
     FEE_COLLECTION_NAME: "fees",
     AUTH_COLLECTION_NAME: "auths",
+    ACCESS_LEVEL_COLLECTION_NAME: "access_levels",
     TOKEN_COLLECTION_NAME: "tokens",
     MEETING_COLLECTION_NAME: "meetings",
     HOMEWORK_DIRECTORY_PATH: "./uploads/homework/"

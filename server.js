@@ -10,6 +10,7 @@ const parentRoutes = require("./routes/parent_routes");
 const teacherRoutes = require("./routes/teacher_routes");
 const classRoutes = require("./routes/class_management_routes");
 const homeworkRoutes = require("./routes/homework_routes");
+const accessLevelRoutes = require("./routes/access_level_routes");
 const io = require("socket.io");
 const configs = require('./config/config');
 const socketEvents = require("./utils/socket_events");
@@ -48,6 +49,7 @@ app.use("/teacher", teacherRoutes);
 app.use("/parent", parentRoutes);
 app.use("/class", classRoutes);
 app.use("/homework", homeworkRoutes);
+app.use("/accesslevel", accessLevelRoutes);
 
 // Sockets
 socketServer.on(socketEvents.CONNECT, async (socket) => {
