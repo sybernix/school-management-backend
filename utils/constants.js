@@ -16,6 +16,7 @@ module.exports = {
     AUTH_COLLECTION_NAME: "auths",
     ACCESS_LEVEL_COLLECTION_NAME: "access_levels",
     ED_QUALIFICATION_COLLECTION_NAME: "ed_qualification",
+    ED_SPECIALITY_COLLECTION_NAME: "ed_speciality",
     TOKEN_COLLECTION_NAME: "tokens",
     MEETING_COLLECTION_NAME: "meetings",
     HOMEWORK_DIRECTORY_PATH: "./uploads/homework/"

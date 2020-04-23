@@ -9,13 +9,12 @@ const configs = require("../config/config.json");
 const constants = require("../utils/constants");
 
 router.post("/retrieve", (req, res) => {
-    edQualificationSchema.find((err, resultList) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.json(resultList);
-        }
-    });
+    edQualificationSchema.find()
+        .skip(req.body.skip)
+        .limit(req.body.limit)
+        .then(results => {
+            res.json(results);
+        })
 });
 
 router.post("/retrieve/:id", (req, res) => {
