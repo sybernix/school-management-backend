@@ -6,10 +6,10 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    status: {
+    level: {
         type: String
     }
 });
 
-const compiledSchema = mongoose.model(constants.DF_MARITAL_STATUS_COLLECTION_NAME, schema);
+const compiledSchema = mongoose.model(constants.DF_TEACHER_GRADE_COLLECTION_NAME, schema);
 module.exports = compiledSchema;

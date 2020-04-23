@@ -6,10 +6,13 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    status: {
+    relation: {
         type: String
+    },
+    is_parent: {
+        type: Boolean
     }
 });
 
-const compiledSchema = mongoose.model(constants.DF_MARITAL_STATUS_COLLECTION_NAME, schema);
+const compiledSchema = mongoose.model(constants.DF_RELATION_TYPE_COLLECTION_NAME, schema);
 module.exports = compiledSchema;

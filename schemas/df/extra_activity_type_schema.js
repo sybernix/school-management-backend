@@ -11,5 +11,5 @@ const schema = new mongoose.Schema({
     }
 });
 
-const compiledSchema = mongoose.model(constants.EXTRA_ACTIVITY_TYPE_COLLECTION_NAME, schema);
+const compiledSchema = mongoose.model(constants.DF_EXTRA_ACTIVITY_TYPE_COLLECTION_NAME, schema);
 module.exports = compiledSchema;

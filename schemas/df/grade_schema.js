@@ -20,5 +20,5 @@ const schema = new mongoose.Schema({
     }
 });
 
-const compiledSchema = mongoose.model(constants.GRADE_COLLECTION_NAME, schema);
+const compiledSchema = mongoose.model(constants.DF_GRADE_COLLECTION_NAME, schema);
 module.exports = compiledSchema;

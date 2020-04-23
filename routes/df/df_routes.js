@@ -8,6 +8,13 @@ const extraActivityTypeRoutes = require("./extra_activity_type_routes");
 const gradeRoutes = require("./grade_routes");
 const instituteRoutes = require("./institute_routes");
 const maritalStatusRoutes = require("./marital_status_routes");
+const occupationRoutes = require("./occupation_routes");
+const occupationCategoryRoutes = require("./occupation_category_routes");
+const relationTypeRoutes = require("./relation_type_routes");
+const subjectRoutes = require("./subject_routes");
+const teacherGradeRoutes = require("./teacher_grade_routes");
+const titleRoutes = require("./title_routes");
+const userTypeRoutes = require("./user_type_routes");
 
 app.use("/accessLevel", accessLevelRoutes);
 app.use("/edQualification", edQualificationRoutes);
@@ -18,5 +25,12 @@ app.use("/extraActivityType", extraActivityTypeRoutes);
 app.use("/grade", gradeRoutes);
 app.use("/institute", instituteRoutes);
 app.use("/maritalStatus", maritalStatusRoutes);
+app.use("/occupation", occupationRoutes);
+app.use("/occupationCategory", occupationCategoryRoutes);
+app.use("/relationType", relationTypeRoutes);
+app.use("/subject", subjectRoutes);
+app.use("/teacherGrade", teacherGradeRoutes);
+app.use("/title", titleRoutes);
+app.use("/userType", userTypeRoutes);
 
 module.exports = app;

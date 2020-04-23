@@ -20,5 +20,5 @@ const schema = new mongoose.Schema({
     }
 });
 
-const accessLevelSchema = mongoose.model(constants.ACCESS_LEVEL_COLLECTION_NAME, schema);
+const accessLevelSchema = mongoose.model(constants.DF_ACCESS_LEVEL_COLLECTION_NAME, schema);
 module.exports = accessLevelSchema;

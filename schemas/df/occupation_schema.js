@@ -6,10 +6,13 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    status: {
+    occupation_category_id: {
+        type: String
+    },
+    occupation: {
         type: String
     }
 });
 
-const compiledSchema = mongoose.model(constants.DF_MARITAL_STATUS_COLLECTION_NAME, schema);
+const compiledSchema = mongoose.model(constants.DF_OCCUPATION_COLLECTION_NAME, schema);
 module.exports = compiledSchema;

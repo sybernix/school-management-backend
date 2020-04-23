@@ -14,5 +14,5 @@ const schema = new mongoose.Schema({
     }
 });
 
-const edQualificationSchema = mongoose.model(constants.ED_QUALIFICATION_COLLECTION_NAME, schema);
+const edQualificationSchema = mongoose.model(constants.DF_ED_QUALIFICATION_COLLECTION_NAME, schema);
 module.exports = edQualificationSchema;
