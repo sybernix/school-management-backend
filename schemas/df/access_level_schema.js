@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const constants = require("../utils/constants");
+const constants = require("../../utils/constants");
 
 const schema = new mongoose.Schema({
     id: {

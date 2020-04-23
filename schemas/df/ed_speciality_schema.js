@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
-const constants = require("../utils/constants");
+const constants = require("../../utils/constants");
 
 const schema = new mongoose.Schema({
     id: {
         type: String,
         required: true
     },
-    type: {
+    speciality: {
         type: String
     }
 });
 
-const compiledSchema = mongoose.model(constants.EXTRA_ACTIVITY_TYPE_COLLECTION_NAME, schema);
+const compiledSchema = mongoose.model(constants.ED_SPECIALITY_COLLECTION_NAME, schema);
 module.exports = compiledSchema;

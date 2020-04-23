@@ -10,11 +10,7 @@ const parentRoutes = require("./routes/parent_routes");
 const teacherRoutes = require("./routes/teacher_routes");
 const classRoutes = require("./routes/class_management_routes");
 const homeworkRoutes = require("./routes/homework_routes");
-const accessLevelRoutes = require("./routes/access_level_routes");
-const edQualificationRoutes = require("./routes/ed_qualification_routes");
-const edSpecialityRoutes = require("./routes/ed_speciality_routes");
-const extraActivityPositionRoutes = require("./routes/extra_activity_position_routes");
-const extraActivityTypeRoutes = require("./routes/extra_activity_type_routes");
+const dfRoutes = require("./routes/df/df_routes");
 const io = require("socket.io");
 const configs = require('./config/config');
 const socketEvents = require("./utils/socket_events");
@@ -53,11 +49,7 @@ app.use("/teacher", teacherRoutes);
 app.use("/parent", parentRoutes);
 app.use("/class", classRoutes);
 app.use("/homework", homeworkRoutes);
-app.use("/accesslevel", accessLevelRoutes);
-app.use("/edqualification", edQualificationRoutes);
-app.use("/edspeciality", edSpecialityRoutes);
-app.use("/extraactivityposition", extraActivityPositionRoutes);
-app.use("/extraactivitytype", extraActivityTypeRoutes);
+app.use("/df", dfRoutes);
 
 // Sockets
 socketServer.on(socketEvents.CONNECT, async (socket) => {
