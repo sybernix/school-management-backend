@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const teacherSchema = require("../schemas/teacher_schema");
-const authSchema = require("../schemas/auth_schema");
-const meetingSchema = require("../schemas/meeting_schema");
-const utils = require("../utils/extract_token");
+const teacherSchema = require("../../schemas/m/teacher_schema");
+const authSchema = require("../../schemas/auth_schema");
+const meetingSchema = require("../../schemas/meeting_schema");
+const utils = require("../../utils/extract_token");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const configs = require("../config/config.json");
-const constants = require("../utils/constants");
+const configs = require("../../config/config.json");
+const constants = require("../../utils/constants");
 
 //Get all teachers
 router.post("/retrieve",  utils.extractToken, (req, res) => {

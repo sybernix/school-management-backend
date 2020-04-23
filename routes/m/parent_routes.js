@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const parentSchema = require("../schemas/parent_schema");
-const authSchema = require("../schemas/auth_schema");
-const meetingSchema = require("../schemas/meeting_schema");
+const parentSchema = require("../../schemas/m/parent_schema");
+const authSchema = require("../../schemas/auth_schema");
+const meetingSchema = require("../../schemas/meeting_schema");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const utils = require("../utils/extract_token");
-const configs = require("../config/config.json");
-const constants = require("../utils/constants");
+const utils = require("../../utils/extract_token");
+const configs = require("../../config/config.json");
+const constants = require("../../utils/constants");
 
 //Get all parents
 router.post("/retrieve",  utils.extractToken, (req, res) => {

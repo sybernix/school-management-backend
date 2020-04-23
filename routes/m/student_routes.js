@@ -1,12 +1,12 @@
 const express = require("express");
-const studentSchema = require("../schemas/student_schema");
-const authSchema = require("../schemas/auth_schema");
+const studentSchema = require("../../schemas/m/student_schema");
+const authSchema = require("../../schemas/auth_schema");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const configs = require("../config/config.json");
-const utils = require("../utils/extract_token");
-const constants = require("../utils/constants");
+const configs = require("../../config/config.json");
+const utils = require("../../utils/extract_token");
+const constants = require("../../utils/constants");
 
 const router = express.Router();
 

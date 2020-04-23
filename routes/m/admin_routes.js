@@ -1,13 +1,13 @@
 const express = require("express");
-const adminSchema = require("../schemas/admin_schema");
-const authSchema = require("../schemas/auth_schema");
-const tokenSchema = require("../schemas/token_schema");
+const adminSchema = require("../../schemas/m/admin_schema");
+const authSchema = require("../../schemas/auth_schema");
+const tokenSchema = require("../../schemas/token_schema");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const configs = require("../config/config.json");
-const utils = require("../utils/extract_token");
-const constants = require("../utils/constants");
+const configs = require("../../config/config.json");
+const utils = require("../../utils/extract_token");
+const constants = require("../../utils/constants");
 
 const router = express.Router();
 

@@ -4,13 +4,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const loginRoute = require("./routes/login_route");
-const adminRoutes = require("./routes/admin_routes");
-const studentRoutes = require("./routes/student_routes");
-const parentRoutes = require("./routes/parent_routes");
-const teacherRoutes = require("./routes/teacher_routes");
 const classRoutes = require("./routes/class_management_routes");
 const homeworkRoutes = require("./routes/homework_routes");
 const dfRoutes = require("./routes/df/df_routes");
+const mRoutes = require("./routes/m/m_routes");
 const io = require("socket.io");
 const configs = require('./config/config');
 const socketEvents = require("./utils/socket_events");
@@ -43,13 +40,10 @@ mongoose
 app.use(cors());
 app.use(bodyParser.json());
 app.use("/login", loginRoute);
-app.use("/admin", adminRoutes);
-app.use("/student", studentRoutes);
-app.use("/teacher", teacherRoutes);
-app.use("/parent", parentRoutes);
 app.use("/class", classRoutes);
 app.use("/homework", homeworkRoutes);
 app.use("/df", dfRoutes);
+app.use("/m", mRoutes);
 
 // Sockets
 socketServer.on(socketEvents.CONNECT, async (socket) => {
