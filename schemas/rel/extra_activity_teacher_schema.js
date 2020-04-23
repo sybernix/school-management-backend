@@ -1,0 +1,24 @@
+const mongoose = require("mongoose");
+const constants = require("../../utils/constants");
+
+const schema = new mongoose.Schema({
+    id: {
+        type: String,
+        required: true
+    },
+    extra_activity_id: {
+        type: String
+    },
+    teacher_id: {
+        type: String
+    },
+    start_date: {
+        type: Date
+    },
+    end_date: {
+        type: Date
+    }
+});
+
+const compiledSchema = mongoose.model(constants.REL_EXTRA_ACTIVITY_TEACHER_COLLECTION_NAME, schema);
+module.exports = compiledSchema;

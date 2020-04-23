@@ -8,6 +8,7 @@ const classRoutes = require("./routes/class_management_routes");
 const homeworkRoutes = require("./routes/homework_routes");
 const dfRoutes = require("./routes/df/df_routes");
 const mRoutes = require("./routes/m/m_routes");
+const relRoutes = require("./routes/rel/rel_routes");
 const io = require("socket.io");
 const configs = require('./config/config');
 const socketEvents = require("./utils/socket_events");
@@ -44,6 +45,7 @@ app.use("/class", classRoutes);
 app.use("/homework", homeworkRoutes);
 app.use("/df", dfRoutes);
 app.use("/m", mRoutes);
+app.use("/rel", relRoutes);
 
 // Sockets
 socketServer.on(socketEvents.CONNECT, async (socket) => {

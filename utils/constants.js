@@ -43,5 +43,12 @@ module.exports = {
     M_ORGANIZATION_COLLECTION_NAME: "m_organizations",
 
     // REL tables
-
+    REL_EXTRA_ACTIVITY_TEACHER_COLLECTION_NAME: "rel_extra_activity_teacher",
+    REL_PARENT_STUDENT_COLLECTION_NAME: "rel_parent_student",
+    REL_STUDENT_ACTIVITY_COLLECTION_NAME: "rel_student_activity",
+    REL_STUDENT_ACTIVITY_POSITION_COLLECTION_NAME: "rel_student_activity_position",
+    REL_STUDENT_CLASS_COLLECTION_NAME: "rel_student_class",
+    REL_TEACHER_CLASS_COLLECTION_NAME: "rel_teacher_class",
+    REL_TEACHER_QUALIFICATION_COLLECTION_NAME: "rel_teacher_qualification",
+    REL_TEACHER_SUBJECT_CLASS_COLLECTION_NAME: "rel_teacher_subject_class",
 };
