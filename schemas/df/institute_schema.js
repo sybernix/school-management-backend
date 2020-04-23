@@ -6,19 +6,10 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    min_marks: {
-        type: Number
-    },
-    max_marks: {
-        type: Number
-    },
-    section_id: {
-        type: Number
-    },
-    grade: {
+    name: {
         type: String
     }
 });
 
-const compiledSchema = mongoose.model(constants.GRADE_COLLECTION_NAME, schema);
+const compiledSchema = mongoose.model(constants.INSTITUTE_COLLECTION_NAME, schema);
 module.exports = compiledSchema;

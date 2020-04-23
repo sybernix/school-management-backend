@@ -6,6 +6,8 @@ const edSpecialityRoutes = require("./ed_speciality_routes");
 const extraActivityPositionRoutes = require("./extra_activity_position_routes");
 const extraActivityTypeRoutes = require("./extra_activity_type_routes");
 const gradeRoutes = require("./grade_routes");
+const instituteRoutes = require("./institute_routes");
+const maritalStatusRoutes = require("./marital_status_routes");
 
 app.use("/accessLevel", accessLevelRoutes);
 app.use("/edQualification", edQualificationRoutes);
@@ -14,5 +16,7 @@ app.use("/extraActivityPosition", extraActivityPositionRoutes);
 app.use("/extraActivityType", extraActivityTypeRoutes);
 app.use("/extraActivityType", extraActivityTypeRoutes);
 app.use("/grade", gradeRoutes);
+app.use("/institute", instituteRoutes);
+app.use("/maritalStatus", maritalStatusRoutes);
 
 module.exports = app;

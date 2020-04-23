@@ -20,6 +20,8 @@ module.exports = {
     EXTRA_ACTIVITY_POSITION_COLLECTION_NAME: "extra_activity_position",
     EXTRA_ACTIVITY_TYPE_COLLECTION_NAME: "extra_activity_type",
     GRADE_COLLECTION_NAME: "grades",
+    INSTITUTE_COLLECTION_NAME: "institutes",
+    MARITAL_STATUS_COLLECTION_NAME: "marital_status",
     TOKEN_COLLECTION_NAME: "tokens",
     MEETING_COLLECTION_NAME: "meetings",
     HOMEWORK_DIRECTORY_PATH: "./uploads/homework/"
