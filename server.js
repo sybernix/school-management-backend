@@ -14,6 +14,7 @@ const accessLevelRoutes = require("./routes/access_level_routes");
 const edQualificationRoutes = require("./routes/ed_qualification_routes");
 const edSpecialityRoutes = require("./routes/ed_speciality_routes");
 const extraActivityPositionRoutes = require("./routes/extra_activity_position_routes");
+const extraActivityTypeRoutes = require("./routes/extra_activity_type_routes");
 const io = require("socket.io");
 const configs = require('./config/config');
 const socketEvents = require("./utils/socket_events");
@@ -56,6 +57,7 @@ app.use("/accesslevel", accessLevelRoutes);
 app.use("/edqualification", edQualificationRoutes);
 app.use("/edspeciality", edSpecialityRoutes);
 app.use("/extraactivityposition", extraActivityPositionRoutes);
+app.use("/extraactivitytype", extraActivityTypeRoutes);
 
 // Sockets
 socketServer.on(socketEvents.CONNECT, async (socket) => {

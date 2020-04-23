@@ -18,6 +18,7 @@ module.exports = {
     ED_QUALIFICATION_COLLECTION_NAME: "ed_qualification",
     ED_SPECIALITY_COLLECTION_NAME: "ed_speciality",
     EXTRA_ACTIVITY_POSITION_COLLECTION_NAME: "extra_activity_position",
+    EXTRA_ACTIVITY_TYPE_COLLECTION_NAME: "extra_activity_type",
     TOKEN_COLLECTION_NAME: "tokens",
     MEETING_COLLECTION_NAME: "meetings",
     HOMEWORK_DIRECTORY_PATH: "./uploads/homework/"
