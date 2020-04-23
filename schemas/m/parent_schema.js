@@ -14,5 +14,5 @@ const schema = ContactSchema.add({
     }
 });
 
-const parentSchema = mongoose.model(constants.PARENT_COLLECTION_NAME, schema);
+const parentSchema = mongoose.model(constants.M_PARENT_COLLECTION_NAME, schema);
 module.exports = parentSchema;

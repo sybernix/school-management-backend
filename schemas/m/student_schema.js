@@ -17,5 +17,5 @@ const schema = ContactSchema.add({
   }
 });
 
-const studentSchema =  mongoose.model(constants.STUDENT_COLLECTION_NAME, schema);
+const studentSchema =  mongoose.model(constants.M_STUDENT_COLLECTION_NAME, schema);
 module.exports = studentSchema;

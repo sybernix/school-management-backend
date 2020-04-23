@@ -23,6 +23,6 @@ const schema = ContactSchema.add({
     }
 });
 
-const teacherSchema = mongoose.model(constants.TEACHER_COLLECTION_NAME, schema);
+const teacherSchema = mongoose.model(constants.M_TEACHER_COLLECTION_NAME, schema);
 module.exports = teacherSchema;
 

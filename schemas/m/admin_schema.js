@@ -8,5 +8,5 @@ const schema = ContactSchema.add({
     }
 });
 
-const adminSchema = mongoose.model(constants.ADMIN_COLLECTION_NAME, schema);
+const adminSchema = mongoose.model(constants.M_ADMIN_COLLECTION_NAME, schema);
 module.exports = adminSchema;
