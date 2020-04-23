@@ -8,7 +8,6 @@ const utils = require("../utils/extract_token");
 const configs = require("../config/config.json");
 const constants = require("../utils/constants");
 
-//Get all access level
 router.post("/retrieve", (req, res) => {
     edQualificationSchema.find((err, resultList) => {
         if (err) {
@@ -19,7 +18,6 @@ router.post("/retrieve", (req, res) => {
     });
 });
 
-//Get access level By ID
 router.post("/retrieve/:id", (req, res) => {
     let id = req.params.id;
     edQualificationSchema.find({id: id})
@@ -36,7 +34,6 @@ router.post("/retrieve/:id", (req, res) => {
         })
 });
 
-//add new access level
 router.post("/add", (req, res) => {
     let edQualificationModel = new edQualificationSchema({
         _id: mongoose.Types.ObjectId(),
@@ -48,19 +45,34 @@ router.post("/add", (req, res) => {
         .save()
         .then(result => {
             res.status(200).json({
-                message: "New access level added successfully",
+                message: "Added successfully",
                 createdParent: result
             });
         })
         .catch(err => {
             res.status(400).json({
-                message: "Adding new access level failed",
+                message: "Adding new failed",
                 error: err
             });
         });
 });
 
-// Delete access level
+router.post("/update/:id", (req, res) => {
+    edQualificationSchema.update({id: req.params.id}, req.body)
+        .then(result => {
+            res.status(200).json({
+                message: "Updated successfully",
+                createdParent: result
+            });
+        })
+        .catch(err => {
+            res.status(400).json({
+                message: "Updating failed",
+                error: err
+            });
+        });
+});
+
 router.post("/delete/:id", (req, res) => {
     edQualificationSchema.findOneAndDelete(
         {id: req.params.id},
@@ -68,7 +80,7 @@ router.post("/delete/:id", (req, res) => {
             if (err) {
                 res.json(err);
             } else {
-                res.json("Access Level deleted successfully");
+                res.json("Deleted successfully");
             }
         }
     );

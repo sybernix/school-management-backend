@@ -62,6 +62,23 @@ router.post("/add", (req, res) => {
         });
 });
 
+// Update access level
+router.post("/update/:id", (req, res) => {
+    accessLevelSchema.update({id: req.params.id}, req.body)
+        .then(result => {
+            res.status(200).json({
+                message: "Access level updated successfully",
+                createdParent: result
+            });
+        })
+        .catch(err => {
+            res.status(400).json({
+                message: "Updating access level failed",
+                error: err
+            });
+        });
+});
+
 // Delete access level
 router.post("/delete/:id", (req, res) => {
     accessLevelSchema.findOneAndDelete(
