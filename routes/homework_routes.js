@@ -15,8 +15,8 @@ router.post("/upload", utils.extractToken, (req, res) => {
             res.sendStatus(403);
         } else {
             let fileStream;
-            req.pipe(req.busboy);
-            req.busboy.on('file', function (fieldName, file, fileName) {
+            req.pipe(req.busboy); //todo create section id and class id, subject id subdirectories
+            req.busboy.on('file', function (fieldName, file, fileName) { // todo give a generated name and send back in response/ root of the file
                 console.log("Uploading: " + fileName);
                 //Path where homework will be uploaded
                 fileStream = fs.createWriteStream(constants.HOMEWORK_DIRECTORY_PATH + fileName);
@@ -43,7 +43,7 @@ router.get("/download/:file(*)", utils.extractToken, (req, res) => {
     });
 });
 
-router.get("/getList", utils.extractToken, (req, res) => {
+router.get("/getList", utils.extractToken, (req, res) => { //todo classwise getlist. active or expired homework. store details in a homework table with the file id mapping
     jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
         if(err) {
             res.sendStatus(403);

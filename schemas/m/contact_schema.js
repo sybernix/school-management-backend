@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const contactSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        required: true
-    },
     user_type: {
         type: String,
         required: true

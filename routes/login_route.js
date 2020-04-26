@@ -12,30 +12,19 @@ const router = express.Router();
 
 //login
 router.post("/", (req, res) => {
-    authSchema.find({id: req.body.id})
-        .exec()
-        .then(userList => {
+    authSchema.find( { $or: [{'nic': req.body.username}, {'phone': req.body.username}, {'reg_no': req.body.username}]},
+        function(err, userList){
             if (userList.length < 1) {
                 return res.status(401).json({
                     message: "Authorization Failed!"
                 });
-            }
-            if (userList && bcrypt.compareSync(req.body.password, userList[0].passwordHash)) {
+            } else if (userList && bcrypt.compareSync(req.body.password, userList[0].password_hash)) {
                 //correct password
-                var JWT_KEY;
-                if (userList[0].userType == constants.USER_TYPE_ADMIN) {
-                    JWT_KEY = configs.JWT_KEY_ADMIN;
-                } else if (userList[0].userType == constants.USER_TYPE_TEACHER) {
-                    JWT_KEY = configs.JWT_KEY_TEACHER
-                } else if (userList[0].userType == constants.USER_TYPE_STUDENT) {
-                    JWT_KEY = configs.JWT_KEY_STUDENT
-                } else if (userList[0].userType == constants.USER_TYPE_PARENT) {
-                    JWT_KEY = configs.JWT_KEY_PARENT
-                }
+                const JWT_KEY = configs.JWT_KEY;
                 const token = jwt.sign(
                     {
-                        userType: userList[0].userType,
-                        id: userList[0].id
+                        user_type: userList[0].user_type,
+                        user_id: userList[0].user_id
                     },
                     JWT_KEY,
                     {
@@ -43,12 +32,11 @@ router.post("/", (req, res) => {
                     }
                 );
                 const tokenModel = new tokenSchema({
-                    _id: new mongoose.Types.ObjectId(),
-                    id: req.body.id,
-                    userType: userList[0].userType,
+                    user_id: userList[0].user_id,
+                    user_type: userList[0].user_type,
                     token: token
                 });
-                tokenSchema.findOneAndDelete({id: req.body.id}, (err, admin) => {
+                tokenSchema.findOneAndDelete({user_id: userList[0].user_id}, (err, admin) => {
                     if (err) {
                         res.json(err);
                     }
@@ -56,21 +44,16 @@ router.post("/", (req, res) => {
                 tokenModel.save().catch(err => { // todo check for previous  tokens for the same userID and delete. implement async to expire saved tokens
                     console.log("Error in saving token during login: " + err.message);
                 });
-                    // console.log(admin);
+                // console.log(admin);
                 return res.status(200).json({
                     message: "Authorization Success",
                     token: token,
-                    userType: userList[0].userType
+                    user_type: userList[0].user_type,
+                    user_id: userList[0].user_id
                 });
             }
             res.status(401).json({
                 message: "Authorization Failed!"
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
             });
         });
 });
@@ -87,8 +70,8 @@ router.post("/verifyToken", utils.extractToken, (req, res) => {
             }
             res.json({
                 message: "JWT Token is Valid",
-                userType: tokenList[0].userType,
-                id: tokenList[0].id
+                user_type: tokenList[0].user_type,
+                user_id: tokenList[0].user_id
             });
         })
         .catch(err => {

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const constants = require("../utils/constants");
 
 const schema = new mongoose.Schema({
-    id: {
+    user_id: {
         type: String,
         required: true
     },
@@ -10,7 +10,7 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    userType: {
+    user_type: {
         type: String,
         required: true
     }

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const constants = require("../utils/constants");
 
 const schema = new mongoose.Schema({
-    studentID: {
+    student_id: {
         type: String,
         required: true
     },
@@ -12,7 +12,7 @@ const schema = new mongoose.Schema({
     year: {
         type: Number
     },
-    feeStatus: {
+    fee_status: {
         type: String
     }
 });

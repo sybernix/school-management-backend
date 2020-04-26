@@ -6,7 +6,7 @@ const chatMessageSchema = new Schema({
     sender: {type: String, required: true},
     receiver: {type: String, required: true},
     message: {type: String, required: true},
-    sentTime: {type: String}
+    sent_time: {type: String}
 });
 
 module.exports = mongoose.model(constants.CHAT_MESSAGES_COLLECTION_NAME, chatMessageSchema);

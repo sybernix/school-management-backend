@@ -2,18 +2,17 @@ const mongoose = require("mongoose");
 const constants = require("../../utils/constants");
 
 const schema = new mongoose.Schema({
-    id: {
+    teacher_id: {
         type: String,
         required: true
     },
-    teacher_id: {
-        type: String
-    },
     ed_qualification_id: {
-        type: String
+        type: String,
+        required: true
     },
     ed_spacility_id: {
-        type: String
+        type: String,
+        required: true
     },
     Institute_id: {
         type: String

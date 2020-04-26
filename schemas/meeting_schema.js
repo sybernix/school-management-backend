@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 const constants = require("../utils/constants");
 
 const schema = new mongoose.Schema({
-    teacherID: {
+    teacher_id: {
         type: String,
         required: true
     },
-    parentIDs: [{
-        parentID: {
+    parent_ids: [{
+        parent_id: {
             type: String
         }
     }],

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const constants = require("../utils/constants");
 
 const chatUserSchema = new Schema({
-    socketId: {type: String, required: true},
+    socket_id: {type: String, required: true},
     nickname: String,
 });
 

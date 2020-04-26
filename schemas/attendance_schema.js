@@ -11,6 +11,9 @@ const schema = new mongoose.Schema({
     },
     attended: {
         type: Boolean
+    },
+    authorized_absence: {
+        type: Boolean
     }
 });
 

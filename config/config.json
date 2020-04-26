@@ -1,8 +1,5 @@
 {
-    "JWT_KEY_ADMIN" : "adminKey",
-    "JWT_KEY_TEACHER" : "teacherKey",
-    "JWT_KEY_STUDENT" : "studentKey",
-    "JWT_KEY_PARENT" : "parentKey",
+    "JWT_KEY" : "3QbZxtLU5EdM$e!9Uewu",
     "BACKEND_PORT" : 4000,
     "MONGO_URI" : "mongodb://localhost:27017",
     "JWT_TOKEN_EXPIRATION_TIME": "1000h"

@@ -52,7 +52,7 @@ router.post("/attendance/lookup", utils.extractToken, (req, res) => {
 });
 
 //Find absences of a student
-router.get("/attendance/absence", utils.extractToken, (req, res) => {
+router.get("/attendance/absence", utils.extractToken, (req, res) => { // todo
     jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);
@@ -121,5 +121,5 @@ router.post("/fee/updateStatus", utils.extractToken, (req, res) => {
         }
     });
 });
-
+//todo fee not paid reminder after 10 days of each term. have a term start end date table
 module.exports = router;

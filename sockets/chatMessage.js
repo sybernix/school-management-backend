@@ -14,3 +14,4 @@ module.exports = (io, socket) => {
         console.log("New message saved")
     });
 };
+// todo limit 20. stroring all the user ids in a temporary table and add all the users in there in a chat room
