@@ -10,11 +10,14 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    ed_spacility_id: {
+    ed_speciality_id: {
         type: String,
         required: true
     },
     Institute_id: {
+        type: String
+    },
+    institute: {
         type: String
     },
     reference_no: {

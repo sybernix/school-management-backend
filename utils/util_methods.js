@@ -14,5 +14,8 @@ module.exports = {
             // Forbidden
             res.sendStatus(403);
         }
+    },
+    verifyAccessLevel: function (token, accessLevelRequested) {
+
     }
 };

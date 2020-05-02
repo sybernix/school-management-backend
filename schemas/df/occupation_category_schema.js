@@ -8,6 +8,9 @@ const schema = new mongoose.Schema({
     },
     occupation_category: {
         type: String
+    },
+    is_active: {
+        type: String
     }
 });
 

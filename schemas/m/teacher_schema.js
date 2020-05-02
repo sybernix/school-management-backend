@@ -12,9 +12,6 @@ const schema = ContactSchema.add({
     end_date: {
         type: Date
     },
-    is_active: {
-        type: String
-    },
     teacher_grade_id: {
         type: String
     },

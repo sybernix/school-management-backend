@@ -12,11 +12,17 @@ const schema = new mongoose.Schema({
     max_marks: {
         type: Number
     },
-    section_id: {
-        type: Number
-    },
     grade: {
         type: String
+    },
+    subject_id: {
+        type: String
+    },
+    __subject: {
+        type: String
+    },
+    is_active: {
+        type: Boolean
     }
 });
 

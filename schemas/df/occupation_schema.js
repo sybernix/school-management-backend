@@ -11,6 +11,9 @@ const schema = new mongoose.Schema({
     },
     occupation: {
         type: String
+    },
+    is_active: {
+        type: String
     }
 });
 

@@ -7,6 +7,9 @@ const schema = new mongoose.Schema({
     },
     is_parent: {
         type: Boolean
+    },
+    is_active: {
+        type: String
     }
 });
 

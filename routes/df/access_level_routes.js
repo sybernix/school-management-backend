@@ -4,7 +4,7 @@ const accessLevelSchema = require("../../schemas/df/access_level_schema");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const utils = require("../../utils/extract_token");
+const utils = require("../../utils/util_methods");
 const configs = require("../../config/config.json");
 const constants = require("../../utils/constants");
 

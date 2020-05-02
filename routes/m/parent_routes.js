@@ -6,7 +6,7 @@ const meetingSchema = require("../../schemas/meeting_schema");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const utils = require("../../utils/extract_token");
+const utils = require("../../utils/util_methods");
 const configs = require("../../config/config.json");
 const constants = require("../../utils/constants");
 
@@ -74,7 +74,6 @@ router.post("/add", utils.extractToken, (req, res) => {
                 access_level_id: req.body.access_level_id,
                 occupation_id: req.body.occupation_id,
                 marital_status_id: req.body.marital_status_id,
-                is_active: req.body.is_active,
             });
             const authModel = new authSchema({
                 user_id: newObjectID,

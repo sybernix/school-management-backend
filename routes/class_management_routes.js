@@ -4,7 +4,7 @@ const feeSchema = require("../schemas/fee_schema");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const configs = require("../config/config.json");
-const utils = require("../utils/extract_token");
+const utils = require("../utils/util_methods");
 const router = express.Router();
 
 //Add attendance for a student for a day

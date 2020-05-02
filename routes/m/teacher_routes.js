@@ -3,7 +3,7 @@ const router = express.Router();
 const teacherSchema = require("../../schemas/m/teacher_schema");
 const authSchema = require("../../schemas/auth_schema");
 const meetingSchema = require("../../schemas/meeting_schema");
-const utils = require("../../utils/extract_token");
+const utils = require("../../utils/util_methods");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
@@ -77,7 +77,6 @@ router.post("/add", utils.extractToken, (req, res) => {
                 end_date: req.body.end_date,
                 teacher_grade_id: req.body.teacher_grade_id,
                 marital_status_id: req.body.marital_status_id,
-                is_active: req.body.is_active,
             });
             const authModel = new authSchema({
                 user_id: newObjectID,

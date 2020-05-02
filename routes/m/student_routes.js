@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const configs = require("../../config/config.json");
-const utils = require("../../utils/extract_token");
+const utils = require("../../utils/util_methods");
 const constants = require("../../utils/constants");
 
 const router = express.Router();
@@ -84,7 +84,6 @@ router.post("/add", utils.extractToken, (req, res) => {
                             reg_no: req.body.reg_no,
                             reg_date: req.body.reg_date,
                             end_date: req.body.end_date,
-                            is_active: req.body.is_active,
                         });
                         const authModel = new authSchema({
                             user_id: newObjectID,

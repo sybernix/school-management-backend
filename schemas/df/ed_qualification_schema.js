@@ -11,6 +11,9 @@ const schema = new mongoose.Schema({
     },
     sort_order: {
         type: Number
+    },
+    is_active: {
+        type: String
     }
 });
 

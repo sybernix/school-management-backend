@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const configs = require("../config/config.json");
 const constants = require("../utils/constants");
-const utils = require("../utils/extract_token");
+const utils = require("../utils/util_methods");
 const fs = require('fs-extra');       //File System - for file manipulation
 // const json = require('json-simple');
 

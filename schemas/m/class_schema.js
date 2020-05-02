@@ -7,6 +7,9 @@ const schema = new mongoose.Schema({
     },
     class_section_id: {
         type: String
+    },
+    is_active: {
+        type: Boolean
     }
 });
 

@@ -8,6 +8,9 @@ const schema = new mongoose.Schema({
     },
     speciality: {
         type: String
+    },
+    is_active: {
+        type: String
     }
 });
 

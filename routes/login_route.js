@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const configs = require("../config/config.json");
 const constants = require("../utils/constants");
-const utils = require("../utils/extract_token");
+const utils = require("../utils/util_methods");
 const mongoose = require("mongoose");
 
 const router = express.Router();

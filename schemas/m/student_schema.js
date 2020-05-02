@@ -11,9 +11,6 @@ const schema = ContactSchema.add({
   },
   end_date: {
     type: Date
-  },
-  is_active: {
-    type: String
   }
 });
 

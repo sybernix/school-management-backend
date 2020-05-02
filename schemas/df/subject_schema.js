@@ -4,6 +4,12 @@ const constants = require("../../utils/constants");
 const schema = new mongoose.Schema({
     subject: {
         type: String
+    },
+    class_section_id: {
+        type: String
+    },
+    is_active: {
+        type: Boolean
     }
 });
 
