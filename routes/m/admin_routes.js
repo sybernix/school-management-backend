@@ -120,33 +120,19 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            adminSchema.findById(req.params._id, (err, admin) => {
-                if (!admin) {
-                    res.status(404).send("data is not found");
-                } else {
-                    admin.mail = req.body.email;
-                    admin.password = req.body.password;
-                    admin.email = req.body.email;
-                    admin.passport = req.body.passport,
-                    admin.title_id = req.body.title_id,
-                    admin.first_name = req.body.first_name,
-                    admin.middle_name = req.body.middle_name,
-                    admin.last_name = req.body.last_name;
-                    admin.sex = req.body.sex;
-                    admin.dob = req.body.dob;
-                    admin.phone = req.body.phone;
-                    admin.access_level_id = req.body.access_level_id;
-                    admin.is_active = req.body.is_active;
-                    admin
-                        .save()
-                        .then(admin => {
-                            res.json("admin updated");
-                        })
-                        .catch(err => {
-                            res.status(400).send("Update not successful");
-                        });
-                }
-            });
+            adminSchema.update({id: req.params.id}, req.body)
+                .then(result => {
+                    res.status(200).json({
+                        message: "Updated successfully",
+                        createdParent: result
+                    });
+                })
+                .catch(err => {
+                    res.status(400).json({
+                        message: "Updating failed",
+                        error: err
+                    });
+                });
         }
     });
 });

@@ -113,26 +113,19 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            parentSchema.findById(req.params.id, (err, parent) => {
-                if (!parent) {
-                    res.status(404).send("data is not found");
-                } else {
-                    const  hash = bcrypt.hashSync(req.body.password, 8);
-                    parent.name = req.body.name;
-                    parent.parentID = req.body.parentID;
-                    parent.email = req.body.email;
-                    parent.passwordHash = hash;
-
-                    parent
-                        .save()
-                        .then(parent => {
-                            res.json("Parent updated");
-                        })
-                        .catch(err => {
-                            res.status(400).send("Parent update not successful");
-                        });
-                }
-            });
+            parentSchema.update({id: req.params.id}, req.body)
+                .then(result => {
+                    res.status(200).json({
+                        message: "Updated successfully",
+                        createdParent: result
+                    });
+                })
+                .catch(err => {
+                    res.status(400).json({
+                        message: "Updating failed",
+                        error: err
+                    });
+                });
         }
     });
 });

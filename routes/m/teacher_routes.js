@@ -116,27 +116,19 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
         if(err) {
             res.sendStatus(403);
         } else {
-            teacherSchema.find(req.params.id, (err, teacher) => {
-                if (!teacher) {
-                    res.status(404).send("Data is not found");
-                } else {
-                    teacher.name = req.body.name;
-                    teacher.mail = req.body.mail;
-                    teacher.contactNumber = req.body.number;
-                    teacher.dept = req.body.dept;
-                    teacher.title = req.body.title;
-                    teacher.password = req.body.password;
-
-                    teacher
-                        .save()
-                        .then(teacher => {
-                            res.json("Teacher updated");
-                        })
-                        .catch(err => {
-                            res.status(400).send("Updated not successful");
-                        });
-                }
-            });
+            teacherSchema.update({id: req.params.id}, req.body)
+                .then(result => {
+                    res.status(200).json({
+                        message: "Updated successfully",
+                        createdParent: result
+                    });
+                })
+                .catch(err => {
+                    res.status(400).json({
+                        message: "Updating failed",
+                        error: err
+                    });
+                });
         }
     });
 });
