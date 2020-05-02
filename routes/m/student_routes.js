@@ -65,9 +65,10 @@ router.post("/add", utils.extractToken, (req, res) => {
                             message: "Student already exists"
                         });
                     } else {
+                        const  hash = bcrypt.hashSync(req.body.password, 8);
+                        const newObjectID = mongoose.Types.ObjectId();
                         const studentModel = new studentSchema({
-                            _id: mongoose.Types.ObjectId(),
-                            id: req.body.id,
+                            _id: newObjectID,
                             user_type: constants.USER_TYPE_ADMIN,
                             nic: req.body.nic,
                             email: req.body.email,
@@ -85,10 +86,10 @@ router.post("/add", utils.extractToken, (req, res) => {
                             end_date: req.body.end_date,
                             is_active: req.body.is_active,
                         });
-                        const  hash = bcrypt.hashSync(req.body.password, 8);
                         const authModel = new authSchema({
-                            _id: mongoose.Types.ObjectId(),
-                            id: req.body.id,
+                            user_id: newObjectID,
+                            nic: req.body.nic,
+                            phone: req.body.phone,
                             userType: constants.USER_TYPE_STUDENT,
                             passwordHash: hash
                         });

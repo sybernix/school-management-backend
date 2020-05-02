@@ -57,9 +57,9 @@ router.post("/add", utils.extractToken, (req, res) => {
             res.sendStatus(403);
         } else {
             const  hash = bcrypt.hashSync(req.body.password, 8);
+            const newObjectID = mongoose.Types.ObjectId();
             let parentModel = new parentSchema({
-                _id: mongoose.Types.ObjectId(),
-                id: req.body.id,
+                _id: newObjectID,
                 user_type: constants.USER_TYPE_ADMIN,
                 nic: req.body.nic,
                 email: req.body.email,
@@ -77,8 +77,9 @@ router.post("/add", utils.extractToken, (req, res) => {
                 is_active: req.body.is_active,
             });
             const authModel = new authSchema({
-                _id: mongoose.Types.ObjectId(),
-                id: req.body.id,
+                user_id: newObjectID,
+                nic: req.body.nic,
+                phone: req.body.phone,
                 userType: constants.USER_TYPE_PARENT,
                 passwordHash: hash
             });
