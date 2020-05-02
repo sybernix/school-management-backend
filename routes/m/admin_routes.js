@@ -131,12 +131,12 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
                     admin.title_id = req.body.title_id,
                     admin.first_name = req.body.first_name,
                     admin.middle_name = req.body.middle_name,
-                    admin.last_name = req.body.last_name,
-                    admin.sex = req.body.sex,
-                    admin.dob = req.body.dob,
-                    admin.phone = req.body.phone,
-                    admin.access_level_id = req.body.access_level_id,
-                    admin.is_active = req.body.is_active,
+                    admin.last_name = req.body.last_name;
+                    admin.sex = req.body.sex;
+                    admin.dob = req.body.dob;
+                    admin.phone = req.body.phone;
+                    admin.access_level_id = req.body.access_level_id;
+                    admin.is_active = req.body.is_active;
                     admin
                         .save()
                         .then(admin => {
