@@ -1,10 +1,9 @@
 const express = require("express");
 const studentSchema = require("../../schemas/m/student_schema");
 const authSchema = require("../../schemas/auth_schema");
+const tokenSchema = require("../../schemas/token_schema");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const configs = require("../../config/config.json");
 const utils = require("../../utils/util_methods");
 const constants = require("../../utils/constants");
 
@@ -12,10 +11,14 @@ const router = express.Router();
 
 //Get all student details
 router.post("/retrieve", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-        if (err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             studentSchema.find(function (err, student) {
                 if (err) {
                     console.log(err);
@@ -23,15 +26,18 @@ router.post("/retrieve", utils.extractToken, (req, res) => {
                     res.json(student);
                 }
             });
-        }
-    });
+        });
 });
 
 router.post("/retrieve/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-        if (err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             let id = req.params.id;
             studentSchema.find({id: id})
                 .exec()
@@ -45,16 +51,19 @@ router.post("/retrieve/:id", utils.extractToken, (req, res) => {
                         res.json(studentList[0]);
                     }
                 })
-        }
-    });
+        });
 });
 
 //Add new student to db
 router.post("/add", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-        if (err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             studentSchema.find({
                 studentID: req.body.studentID
             })
@@ -115,16 +124,19 @@ router.post("/add", utils.extractToken, (req, res) => {
                             });
                     }
                 });
-        }
-    });
+        });
 });
 
 //Update the student details
 router.post("/update/:id", utils.extractToken, (req, res)  => {
-    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-        if (err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             studentSchema.update({id: req.params.id}, req.body)
                 .then(result => {
                     res.status(200).json({
@@ -138,24 +150,26 @@ router.post("/update/:id", utils.extractToken, (req, res)  => {
                         error: err
                     });
                 });
-        }
-    });
+        });
 });
 
 // Delete the student
 router.delete("/delete/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-        if (err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             studentSchema.findOneAndDelete({id: req.params.id}, function (
                 err
             ) {
                 if (err) res.json(err);
                 else res.json("Successfully removed");
             });
-        }
-    });
+        });
 });
 
 module.exports = router;

@@ -3,6 +3,7 @@ const router = express.Router();
 const teacherSchema = require("../../schemas/m/teacher_schema");
 const authSchema = require("../../schemas/auth_schema");
 const meetingSchema = require("../../schemas/meeting_schema");
+const tokenSchema = require("../../schemas/token_schema");
 const utils = require("../../utils/util_methods");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
@@ -12,10 +13,14 @@ const constants = require("../../utils/constants");
 
 //Get all teachers
 router.post("/retrieve",  utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             teacherSchema.find((err, teacher) => {
                 if (err) {
                     console.log(err);
@@ -23,16 +28,19 @@ router.post("/retrieve",  utils.extractToken, (req, res) => {
                     res.json(teacher);
                 }
             });
-        }
-    });
+        });
 });
 
 //Get teacher By ID
 router.post("/retrieve/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             let id = req.params.id;
             teacherSchema.find({id: id})
                 .exec()
@@ -46,16 +54,19 @@ router.post("/retrieve/:id", utils.extractToken, (req, res) => {
                         res.json(teacherList[0]);
                     }
                 })
-        }
-    });
+        });
 });
 
 //add new teacher
 router.post("/add", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             const  hash = bcrypt.hashSync(req.body.password, 8);
             const newObjectID = mongoose.Types.ObjectId();
             let teacherModel = new teacherSchema({
@@ -105,16 +116,19 @@ router.post("/add", utils.extractToken, (req, res) => {
                         error: err
                     });
                 });
-        }
-    });
+        });
 });
 
 //Update teacher
 router.post("/update/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             teacherSchema.update({id: req.params.id}, req.body)
                 .then(result => {
                     res.status(200).json({
@@ -128,16 +142,19 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
                         error: err
                     });
                 });
-        }
-    });
+        });
 });
 
 //teacher Delete
 router.delete("/delete/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             teacherSchema.findOneAndDelete(
                 {id: req.params.id},
                 (err, teacher) => {
@@ -148,16 +165,19 @@ router.delete("/delete/:id", utils.extractToken, (req, res) => {
                     }
                 }
             );
-        }
-    });
+        });
 });
 
 // teacher schedules a parent meeting
 router.post("/scheduleMeeting", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             const meetingModel = new meetingSchema({
                 _id: mongoose.Types.ObjectId(),
                 teacherID: req.body.teacherID,
@@ -177,8 +197,7 @@ router.post("/scheduleMeeting", utils.extractToken, (req, res) => {
                     error: err
                 });
             });
-        }
-    });
+        });
 });
 
 module.exports = router;

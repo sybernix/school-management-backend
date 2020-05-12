@@ -3,19 +3,22 @@ const router = express.Router();
 const parentSchema = require("../../schemas/m/parent_schema");
 const authSchema = require("../../schemas/auth_schema");
 const meetingSchema = require("../../schemas/meeting_schema");
-const jwt = require("jsonwebtoken");
+const tokenSchema = require("../../schemas/token_schema");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const utils = require("../../utils/util_methods");
-const configs = require("../../config/config.json");
 const constants = require("../../utils/constants");
 
 //Get all parents
 router.post("/retrieve",  utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_PARENT, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             parentSchema.find((err, parents) => {
                 if (err) {
                     console.log(err);
@@ -23,16 +26,19 @@ router.post("/retrieve",  utils.extractToken, (req, res) => {
                     res.json(parents);
                 }
             });
-        }
-    });
+        });
 });
 
 //Get parent By ID
 router.post("/retrieve/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_PARENT, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             let id = req.params.id;
             parentSchema.find({id: id})
                 .exec()
@@ -46,16 +52,19 @@ router.post("/retrieve/:id", utils.extractToken, (req, res) => {
                         res.json(parentList[0]);
                     }
                 })
-        }
-    });
+        });
 });
 
 //add new parent
 router.post("/add", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             const  hash = bcrypt.hashSync(req.body.password, 8);
             const newObjectID = mongoose.Types.ObjectId();
             let parentModel = new parentSchema({
@@ -102,16 +111,19 @@ router.post("/add", utils.extractToken, (req, res) => {
                         error: err
                     });
                 });
-        }
-    });
+        });
 });
 
 //Update parent
 router.post("/update/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_PARENT, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             parentSchema.update({id: req.params.id}, req.body)
                 .then(result => {
                     res.status(200).json({
@@ -125,16 +137,19 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
                         error: err
                     });
                 });
-        }
-    });
+        });
 });
 
 //parent Delete
 router.post("/delete/:id", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_PARENT, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             parentSchema.findOneAndDelete(
                 {id: req.params.id},
                 (err, parent) => {
@@ -145,16 +160,19 @@ router.post("/delete/:id", utils.extractToken, (req, res) => {
                     }
                 }
             );
-        }
-    });
+        });
 });
 
 // Get any parent-teacher meeting scheduled
 router.get("/meeting", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_PARENT, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             meetingSchema.find({
                 parentID: req.body.parentID
             })
@@ -162,8 +180,7 @@ router.get("/meeting", utils.extractToken, (req, res) => {
                 .then(meetings => {
                     res.status(200).body(meetings);
                 });
-        }
-    });
+        });
 });
 
 module.exports = router;
