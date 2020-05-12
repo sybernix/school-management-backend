@@ -3,8 +3,7 @@ const constants = require("../../utils/constants");
 
 const schema = new mongoose.Schema({
     user_id: {
-        type: String,
-        required: true
+        type: String
     },
     level: {
         type: String
