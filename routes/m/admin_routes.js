@@ -3,9 +3,7 @@ const adminSchema = require("../../schemas/m/admin_schema");
 const authSchema = require("../../schemas/auth_schema");
 const tokenSchema = require("../../schemas/token_schema");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const configs = require("../../config/config.json");
 const utils = require("../../utils/util_methods");
 const constants = require("../../utils/constants");
 
@@ -13,42 +11,34 @@ const router = express.Router();
 
 // Retrieve all admins
 router.post("/retrieve/", utils.extractToken, (req, res) => {
-    // jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-    //     if(err) {
-    //         res.sendStatus(403);
-    //     } else {
-            adminSchema.find((err, admin) => {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
+            adminSchema.find((err, adminList) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    res.json({
-                        message: admin,
-                        authData
-                    });
+                    res.json({adminList});
                 }
             });
-    //     }
-    // });
+        });
 });
 
 // Retrieve admin  by ID
 router.post("/retrieve/:id", utils.extractToken, (req, res) => {
-    // tokenSchema.find({token: req.token})
-    //     .exec()
-    //     .then(resultList => {
-    //         if (resultList.length < 1) {
-    //             return res.status(401).json({
-    //                 message: "Invalid Token"
-    //             });
-    //         }
-    //         if (resultList) {
-    //
-    //         }
-    //     });
-    // jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-    //     if(err) {
-    //         res.sendStatus(403);
-    //     } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             let id = req.params.id;
             adminSchema.find({_id: id})
                 .exec()
@@ -62,8 +52,7 @@ router.post("/retrieve/:id", utils.extractToken, (req, res) => {
                         res.json(adminList[0]);
                     }
                 })
-    //     }
-    // });
+        });
 });
 
 //Add new admin
@@ -127,10 +116,14 @@ router.post("/add", (req, res) => {
 
 //update
 router.post("/update/:id", utils.extractToken, (req, res) => {
-    // jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-    //     if(err) {
-    //         res.sendStatus(403);
-    //     } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             adminSchema.update({id: req.params.id}, req.body)
                 .then(result => {
                     res.status(200).json({
@@ -144,15 +137,18 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
                         error: err
                     });
                 });
-    //     }
-    // });
+        });
 });
 
 router.post("/delete/:id", utils.extractToken, (req, res) => {
-    // jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
-    //     if(err) {
-    //         res.sendStatus(403);
-    //     } else {
+    tokenSchema.find({token: req.token})
+        .exec()
+        .then(resultList => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token"
+                });
+            }
             adminSchema.findOneAndDelete({_id: req.params.id}, (err, admin) => {
                 if (err) {
                     res.json(err);
@@ -172,8 +168,7 @@ router.post("/delete/:id", utils.extractToken, (req, res) => {
                     });
                 }
             });
-    //     }
-    // });
+        });
 });
 
 module.exports = router;
