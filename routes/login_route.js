@@ -37,10 +37,11 @@ router.post("/", (req, res) => {
                     token: token
                 });
                 tokenSchema.findOneAndDelete({user_id: userList[0].user_id}, (err, admin) => {
-                    if (err) {
-                        res.json(err);
-                    }
+                    // if (err) {
+                    //     res.json(err);
+                    // }
                 });
+                console.log("Arrived until token write")
                 tokenModel.save().catch(err => { // todo check for previous  tokens for the same userID and delete. implement async to expire saved tokens
                     console.log("Error in saving token during login: " + err.message);
                 });
