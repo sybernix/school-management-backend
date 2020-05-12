@@ -1,15 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const edQualificationSchema = require("../../schemas/df/ed_qualification_schema");
-const jwt = require("jsonwebtoken");
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const utils = require("../../utils/util_methods");
-const configs = require("../../config/config.json");
-const constants = require("../../utils/constants");
+const databaseSchema = require("../../schemas/df/ed_qualification_schema");
 
 router.post("/retrieve", (req, res) => {
-    edQualificationSchema.find()
+    databaseSchema.find()
         .skip(req.body.skip)
         .limit(req.body.limit)
         .then(results => {
@@ -19,7 +13,7 @@ router.post("/retrieve", (req, res) => {
 
 router.post("/retrieve/:id", (req, res) => {
     let id = req.params.id;
-    edQualificationSchema.find({id: id})
+    databaseSchema.find({id: id})
         .exec()
         .then(resultList => {
             if (resultList.length < 1) {
@@ -34,13 +28,8 @@ router.post("/retrieve/:id", (req, res) => {
 });
 
 router.post("/add", (req, res) => {
-    let edQualificationModel = new edQualificationSchema({
-        _id: mongoose.Types.ObjectId(),
-        id: req.body.id,
-        qualification: req.body.qualification,
-        sort_order: req.body.sort_order
-    });
-    edQualificationModel
+    let databaseModel = new databaseSchema(req.body);
+    databaseModel
         .save()
         .then(result => {
             res.status(200).json({
@@ -57,11 +46,11 @@ router.post("/add", (req, res) => {
 });
 
 router.post("/update/:id", (req, res) => {
-    edQualificationSchema.update({id: req.params.id}, req.body)
+    databaseSchema.update({id: req.params.id}, req.body)
         .then(result => {
             res.status(200).json({
                 message: "Updated successfully",
-                createdParent: result
+                created: result
             });
         })
         .catch(err => {
@@ -73,7 +62,7 @@ router.post("/update/:id", (req, res) => {
 });
 
 router.post("/delete/:id", (req, res) => {
-    edQualificationSchema.findOneAndDelete(
+    databaseSchema.findOneAndDelete(
         {id: req.params.id},
         (err, result) => {
             if (err) {

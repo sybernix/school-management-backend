@@ -21,7 +21,6 @@ app.use("/edQualification", edQualificationRoutes);
 app.use("/edSpeciality", edSpecialityRoutes);
 app.use("/extraActivityPosition", extraActivityPositionRoutes);
 app.use("/extraActivityType", extraActivityTypeRoutes);
-app.use("/extraActivityType", extraActivityTypeRoutes);
 app.use("/grade", gradeRoutes);
 app.use("/institute", instituteRoutes);
 app.use("/maritalStatus", maritalStatusRoutes);
