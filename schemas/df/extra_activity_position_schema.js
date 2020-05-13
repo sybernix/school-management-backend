@@ -2,10 +2,7 @@ const mongoose = require("mongoose");
 const constants = require("../../utils/constants");
 
 const schema = new mongoose.Schema({
-    user_id: {
-        type: String,
-        required: true
-    },
+
     position: {
         type: String
     }
