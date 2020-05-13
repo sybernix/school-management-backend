@@ -129,7 +129,7 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
                     message: "Invalid Token"
                 });
             }
-            teacherSchema.update({id: req.params.id}, req.body)
+            teacherSchema.update({_id: req.params.id}, req.body)
                 .then(result => {
                     res.status(200).json({
                         message: "Updated successfully",
@@ -156,7 +156,7 @@ router.delete("/delete/:id", utils.extractToken, (req, res) => {
                 });
             }
             teacherSchema.findOneAndDelete(
-                {id: req.params.id},
+                {_id: req.params.id},
                 (err, teacher) => {
                     if (err) {
                         res.json(err);

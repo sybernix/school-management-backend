@@ -124,7 +124,7 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
                     message: "Invalid Token"
                 });
             }
-            adminSchema.update({id: req.params.id}, req.body)
+            adminSchema.update({_id: req.params.id}, req.body)
                 .then(result => {
                     res.status(200).json({
                         message: "Updated successfully",

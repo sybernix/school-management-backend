@@ -48,7 +48,7 @@ function generateRoutes () {
     });
 
     router.post("/update/:id", (req, res) => {
-        databaseSchema.update({id: req.params.id}, req.body)
+        databaseSchema.update({_id: req.params.id}, req.body)
             .then(result => {
                 res.status(200).json({
                     message: "Updated successfully",
@@ -65,7 +65,7 @@ function generateRoutes () {
 
     router.post("/delete/:id", (req, res) => {
         databaseSchema.findOneAndDelete(
-            {id: req.params.id},
+            {_id: req.params.id},
             (err, result) => {
                 if (err) {
                     res.json(err);

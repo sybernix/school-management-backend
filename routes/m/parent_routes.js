@@ -124,7 +124,7 @@ router.post("/update/:id", utils.extractToken, (req, res) => {
                     message: "Invalid Token"
                 });
             }
-            parentSchema.update({id: req.params.id}, req.body)
+            parentSchema.update({_id: req.params.id}, req.body)
                 .then(result => {
                     res.status(200).json({
                         message: "Updated successfully",
@@ -151,7 +151,7 @@ router.post("/delete/:id", utils.extractToken, (req, res) => {
                 });
             }
             parentSchema.findOneAndDelete(
-                {id: req.params.id},
+                {_id: req.params.id},
                 (err, parent) => {
                     if (err) {
                         res.json(err);
