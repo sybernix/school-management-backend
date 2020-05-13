@@ -39,7 +39,7 @@ router.post("/retrieve/:id", utils.extractToken, (req, res) => {
                 });
             }
             let id = req.params.id;
-            studentSchema.find({id: id})
+            studentSchema.find({_id: id})
                 .exec()
                 .then(studentList => {
                     if (studentList.length < 1) {

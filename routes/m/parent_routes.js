@@ -40,7 +40,7 @@ router.post("/retrieve/:id", utils.extractToken, (req, res) => {
                 });
             }
             let id = req.params.id;
-            parentSchema.find({id: id})
+            parentSchema.find({_id: id})
                 .exec()
                 .then(parentList => {
                     if (parentList.length < 1) {

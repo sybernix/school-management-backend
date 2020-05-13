@@ -41,7 +41,7 @@ router.post("/", (req, res) => {
                     //     res.json(err);
                     // }
                 });
-                console.log("Arrived until token write")
+                console.log("Arrived until token write");
                 tokenModel.save().catch(err => { // todo check for previous  tokens for the same userID and delete. implement async to expire saved tokens
                     console.log("Error in saving token during login: " + err.message);
                 });

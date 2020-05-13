@@ -42,7 +42,7 @@ router.post("/retrieve/:id", utils.extractToken, (req, res) => {
                 });
             }
             let id = req.params.id;
-            teacherSchema.find({id: id})
+            teacherSchema.find({_id: id})
                 .exec()
                 .then(teacherList => {
                     if (teacherList.length < 1) {

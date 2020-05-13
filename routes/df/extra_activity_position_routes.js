@@ -13,12 +13,12 @@ router.post("/retrieve", (req, res) => {
 
 router.post("/retrieve/:id", (req, res) => {
     let id = req.params.id;
-    databaseSchema.find({id: id})
+    databaseSchema.find({_id: id})
         .exec()
         .then(resultList => {
             if (resultList.length < 1) {
                 return res.status(401).json({
-                    message: "Authorization Failed!"
+                    message: "ID not found!"
                 });
             }
             if (resultList) {
