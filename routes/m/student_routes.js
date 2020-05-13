@@ -44,7 +44,7 @@ router.post("/retrieve/:id", utils.extractToken, (req, res) => {
                 .then(studentList => {
                     if (studentList.length < 1) {
                         return res.status(401).json({
-                            message: "Authorization Failed!"
+                            message: "ID not found!"
                         });
                     }
                     if (studentList) {

@@ -45,7 +45,7 @@ router.post("/retrieve/:id", utils.extractToken, (req, res) => {
                 .then(adminList => {
                     if (adminList.length < 1) {
                         return res.status(401).json({
-                            message: "Authorization Failed!"
+                            message: "ID not found!"
                         });
                     }
                     if (adminList) {

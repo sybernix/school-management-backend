@@ -18,7 +18,7 @@ router.post("/retrieve/:id", (req, res) => {
         .then(resultList => {
             if (resultList.length < 1) {
                 return res.status(401).json({
-                    message: "Authorization Failed!"
+                    message: "ID not found!"
                 });
             }
             if (resultList) {
