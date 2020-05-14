@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const databaseSchema = require("../../schemas/df/grade_schema");
+const databaseSchema = require("../../schemas/m/subject_schema");
 
 router.post("/retrieve", (req, res) => {
   databaseSchema

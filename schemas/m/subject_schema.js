@@ -2,16 +2,10 @@ const mongoose = require("mongoose");
 const constants = require("../../utils/constants");
 
 const schema = new mongoose.Schema({
-  min_marks: {
-    type: Number,
-  },
-  max_marks: {
-    type: Number,
-  },
-  grade: {
+  subject: {
     type: String,
   },
-  subject_id: {
+  class_section_id: {
     type: String,
   },
   is_active: {
@@ -20,7 +14,7 @@ const schema = new mongoose.Schema({
 });
 
 const compiledSchema = mongoose.model(
-  constants.DF_GRADE_COLLECTION_NAME,
+  constants.M_SUBJECT_COLLECTION_NAME,
   schema
 );
 module.exports = compiledSchema;
