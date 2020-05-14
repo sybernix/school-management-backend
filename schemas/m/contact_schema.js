@@ -35,6 +35,9 @@ const contactSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
+  user_type_id: {
+    type: String,
+  },
   access_level_id: {
     type: String,
   },
