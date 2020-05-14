@@ -121,7 +121,7 @@ describe("test suit: Add user, chat", () => {
 
                 // if response takes longer than 5 seconds throw error
                 setTimeout(() => {
-                    reject(new Error("Failed to get reponse, connection timed out..."));
+                    reject(new Error("Failed to get response, connection timed out..."));
                 }, 5000);
             });
 

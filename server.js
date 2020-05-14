@@ -49,7 +49,5 @@ app.use("/rel", relRoutes);
 
 // Sockets
 socketServer.on(socketEvents.CONNECT, async (socket) => {
-    require('./sockets/joinedUser')(io, socket);
     require('./sockets/chatMessage')(io, socket);
-    require('./sockets/disconnect')(io, socket);
 });
