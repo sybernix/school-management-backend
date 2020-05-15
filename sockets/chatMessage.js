@@ -6,6 +6,7 @@ module.exports = (io, socket) => {
     var clients = [];
 
     socket.on(socketEvents.CHAT_MESSAGE, async (messageFromClientToServer) => {
+        console.log("Online Users: ", clients);
         if (clients.indexOf(messageFromClientToServer.receiver) > -1) {
             socket.emit(messageFromClientToServer.receiver, messageFromClientToServer)
         }
