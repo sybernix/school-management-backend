@@ -16,12 +16,10 @@ const schema = new mongoose.Schema({
         type: String,
     },
     password_hash: {
-        type: String,
-        required: true
+        type: String
     },
     user_type: {
-        type: String,
-        required: true
+        type: String
     }
 });
 
