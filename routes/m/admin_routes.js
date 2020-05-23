@@ -74,6 +74,7 @@ router.post("/add", (req, res) => {
         const adminModel = new adminSchema({
           _id: newObjectID,
           user_type: constants.USER_TYPE_ADMIN,
+          user_type_id: req.body.user_type_id,
           nic: req.body.nic,
           email: req.body.email,
           passport: req.body.passport,
@@ -111,6 +112,7 @@ router.post("/add", (req, res) => {
           .catch((err) => {
             console.log(err.message);
             res.status(500).json({
+              message: "Adding new admin failed",
               error: err,
             });
           });
