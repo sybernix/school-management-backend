@@ -8,7 +8,7 @@ const utils = require("../utils/util_methods");
 const router = express.Router();
 
 //Add attendance for a student for a day
-router.post("/attendance/add", utils.extractToken, (req, res) => {
+router.post("/f", utils.extractToken, (req, res) => {
     jwt.verify(req.token, configs.JWT_KEY_ADMIN, (err, authData) => {
         if(err) {
             res.sendStatus(403);

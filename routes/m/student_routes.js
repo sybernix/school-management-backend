@@ -78,7 +78,7 @@ router.post("/add", utils.extractToken, (req, res) => {
                         const newObjectID = mongoose.Types.ObjectId();
                         const studentModel = new studentSchema({
                             _id: newObjectID,
-                            user_type: constants.USER_TYPE_ADMIN,
+                            user_type: constants.USER_TYPE_STUDENT,
                             nic: req.body.nic,
                             email: req.body.email,
                             passport: req.body.passport,
@@ -98,8 +98,8 @@ router.post("/add", utils.extractToken, (req, res) => {
                             user_id: newObjectID,
                             nic: req.body.nic,
                             phone: req.body.phone,
-                            userType: constants.USER_TYPE_STUDENT,
-                            passwordHash: hash
+                            user_type: constants.USER_TYPE_STUDENT,
+                            password_hash: hash
                         });
                         authModel.save().catch(err => {
                             console.log(err.message);

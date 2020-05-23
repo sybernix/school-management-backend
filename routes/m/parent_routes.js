@@ -66,10 +66,11 @@ router.post("/add", utils.extractToken, (req, res) => {
                 });
             }
             const  hash = bcrypt.hashSync(req.body.password, 8);
+            console.log("%%%%%%%%%%%%" + hash);
             const newObjectID = mongoose.Types.ObjectId();
             let parentModel = new parentSchema({
                 _id: newObjectID,
-                user_type: constants.USER_TYPE_ADMIN,
+                user_type: constants.USER_TYPE_PARENT,
                 nic: req.body.nic,
                 email: req.body.email,
                 passport: req.body.passport,
@@ -88,8 +89,8 @@ router.post("/add", utils.extractToken, (req, res) => {
                 user_id: newObjectID,
                 nic: req.body.nic,
                 phone: req.body.phone,
-                userType: constants.USER_TYPE_PARENT,
-                passwordHash: hash
+                user_type: constants.USER_TYPE_PARENT,
+                password_hash: hash
             });
             authModel.save().catch(err => {
                 console.log(err.message);

@@ -93,8 +93,8 @@ router.post("/add", utils.extractToken, (req, res) => {
                 user_id: newObjectID,
                 nic: req.body.nic,
                 phone: req.body.phone,
-                userType: constants.USER_TYPE_TEACHER,
-                passwordHash: hash
+                user_type: constants.USER_TYPE_TEACHER,
+                password_hash: hash
             });
             authModel.save().catch(err => {
                 console.log(err.message);
