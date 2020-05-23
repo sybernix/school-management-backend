@@ -48,7 +48,7 @@ router.post("/upload", utils.extractToken, (req, res) => {
         });
 });
 
-router.get("/download/:file(*)", utils.extractToken, (req, res) => {
+router.get("/download", utils.extractToken, (req, res) => {
     tokenSchema
         .find({ token: req.token })
         .exec()
@@ -58,8 +58,11 @@ router.get("/download/:file(*)", utils.extractToken, (req, res) => {
                     message: "Invalid Token",
                 });
             }
-            const file = req.params.file;
-            res.download(constants.HOMEWORK_DIRECTORY_PATH + file);
+            const class_id = req.headers['class_id'];
+            const subject_id = req.headers['subject_id'];
+            const file_id = req.headers['file_id'];
+            const download_path = constants.HOMEWORK_DIRECTORY_PATH + class_id + "/" + subject_id + "/" + file_id;
+            res.download(download_path);
         });
 });
 
