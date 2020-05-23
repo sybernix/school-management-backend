@@ -5,10 +5,8 @@ const authSchema = require("../../schemas/auth_schema");
 const meetingSchema = require("../../schemas/meeting_schema");
 const tokenSchema = require("../../schemas/token_schema");
 const utils = require("../../utils/util_methods");
-const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const configs = require("../../config/config.json");
 const constants = require("../../utils/constants");
 
 //Get all teachers
