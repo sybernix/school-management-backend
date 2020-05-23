@@ -60,6 +60,35 @@ router.post("/retrieve/:id", utils.extractToken, (req, res) => {
     });
 });
 
+// Retrieve admin  by ID
+router.post("/retrieveList", utils.extractToken, (req, res) => {
+    tokenSchema
+        .find({ token: req.token })
+        .exec()
+        .then((resultList) => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token",
+                });
+            }
+            console.log(req.body.list);
+            // let id = req.params.id;
+            teacherSchema
+                .find({ _id : { $in : req.body.list } })
+                .exec()
+                .then((resultList) => {
+                    if (resultList.length < 1) {
+                        return res.status(401).json({
+                            message: "ID not found!",
+                        });
+                    }
+                    if (resultList) {
+                        res.json(resultList);
+                    }
+                });
+        });
+});
+
 //add new teacher
 router.post("/add", utils.extractToken, (req, res) => {
   teacherSchema.find(
