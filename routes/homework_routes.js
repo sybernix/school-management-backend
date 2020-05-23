@@ -3,20 +3,25 @@ const jwt = require("jsonwebtoken");
 const configs = require("../config/config.json");
 const constants = require("../utils/constants");
 const utils = require("../utils/util_methods");
-const fs = require('fs-extra');       //File System - for file manipulation
-// const json = require('json-simple');
+const fs = require('fs-extra');
+const tokenSchema = require("../schemas/token_schema");
 
 const router = express.Router();
 
 //Upload homework route
 router.post("/upload", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema
+        .find({ token: req.token })
+        .exec()
+        .then((resultList) => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token",
+                });
+            }
             let fileStream;
-            req.pipe(req.busboy); //todo create section id and class id, subject id subdirectories
-            req.busboy.on('file', function (fieldName, file, fileName) { // todo give a generated name and send back in response/ root of the file
+            req.pipe(req.busboy);
+            req.busboy.on('file', function (fieldName, file, fileName) {
                 console.log("Uploading: " + fileName);
                 //Path where homework will be uploaded
                 fileStream = fs.createWriteStream(constants.HOMEWORK_DIRECTORY_PATH + fileName);
@@ -28,26 +33,34 @@ router.post("/upload", utils.extractToken, (req, res) => {
                     });
                 });
             });
-        }
-    });
+        });
 });
 
 router.get("/download/:file(*)", utils.extractToken, (req, res) => {
-    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+    tokenSchema
+        .find({ token: req.token })
+        .exec()
+        .then((resultList) => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token",
+                });
+            }
             const file = req.params.file;
             res.download(constants.HOMEWORK_DIRECTORY_PATH + file);
-        }
-    });
+        });
 });
 
-router.get("/getList", utils.extractToken, (req, res) => { //todo classwise getlist. active or expired homework. store details in a homework table with the file id mapping
-    jwt.verify(req.token, configs.JWT_KEY_TEACHER, (err, authData) => {
-        if(err) {
-            res.sendStatus(403);
-        } else {
+router.get("/getList", utils.extractToken, (req, res) => {
+    tokenSchema
+        .find({ token: req.token })
+        .exec()
+        .then((resultList) => {
+            if (resultList.length < 1) {
+                return res.status(401).json({
+                    message: "Invalid Token",
+                });
+            }
             var fileJSON = {};
             var i =1;
             fs.readdir(constants.HOMEWORK_DIRECTORY_PATH, (err, files) => {
@@ -57,8 +70,7 @@ router.get("/getList", utils.extractToken, (req, res) => { //todo classwise getl
                 });
                 return res.status(200).json(fileJSON);
             });
-        }
-    });
+        });
 });
 
 module.exports = router;
