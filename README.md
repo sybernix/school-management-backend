@@ -46,67 +46,16 @@ The following is the list of routes following the above architecture
 
 ## Project Report
 
-<p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 1; ALERTS: 30.</p>
-<ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
-
-<p style="color: red; font-weight: bold">Links to alert messages:</p><a href="#gdcalert1">alert1</a>
-<a href="#gdcalert2">alert2</a>
-<a href="#gdcalert3">alert3</a>
-<a href="#gdcalert4">alert4</a>
-<a href="#gdcalert5">alert5</a>
-<a href="#gdcalert6">alert6</a>
-<a href="#gdcalert7">alert7</a>
-<a href="#gdcalert8">alert8</a>
-<a href="#gdcalert9">alert9</a>
-<a href="#gdcalert10">alert10</a>
-<a href="#gdcalert11">alert11</a>
-<a href="#gdcalert12">alert12</a>
-<a href="#gdcalert13">alert13</a>
-<a href="#gdcalert14">alert14</a>
-<a href="#gdcalert15">alert15</a>
-<a href="#gdcalert16">alert16</a>
-<a href="#gdcalert17">alert17</a>
-<a href="#gdcalert18">alert18</a>
-<a href="#gdcalert19">alert19</a>
-<a href="#gdcalert20">alert20</a>
-<a href="#gdcalert21">alert21</a>
-<a href="#gdcalert22">alert22</a>
-<a href="#gdcalert23">alert23</a>
-<a href="#gdcalert24">alert24</a>
-<a href="#gdcalert25">alert25</a>
-<a href="#gdcalert26">alert26</a>
-<a href="#gdcalert27">alert27</a>
-<a href="#gdcalert28">alert28</a>
-<a href="#gdcalert29">alert29</a>
-<a href="#gdcalert30">alert30</a>
-
-<p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
-
-
-
-
-1. **_Introduction_**
-    1. **_Project Background _**
+### Introduction
+#### Project Background
 
 . The education sector is a fast-growing industry in Sri Lanka. Due to the rapid development of the private school system, there is huge competition among schools and parents (Department of Census & Statistics, 2019).
 
-
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image1.png "image_tooltip")
-
+![alt_text](docs/images/image1.png "image_tooltip")
 
 Schools are expected to provide many sporting activities and subjects to their students. Due to the higher workload, schools and teachers forget to deliver the required information within a limited period. There is a direct impact on children's education due to this delay. Most of the children like to play or do anything other than homework. If parents or teachers didn’t give any homework, many children would not do any work related to education.
 
-
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image2.jpg "image_tooltip")
-
+![alt_text](docs/images/image2.png "image_tooltip")
 
 Less work will lead them to lower performances. If parents identify the reasons, they can find solutions. Parent-teacher meetings, home-work, past papers and term tests can be used to identify and correct the weakness of students. Fast and efficient communication and resource sharing between teachers and parents can be used to identify and correct the weaknesses of the children. School attendance is also very important to generate higher performances (attendanceworks.org, 2018).
 
@@ -205,20 +154,20 @@ System Developer</p>
 
 
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to docs/images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/image3.png "image_tooltip")
+![alt_text](docs/images/image3.png "image_tooltip")
 
 
 As a team, we expect to reduce the communication gap between teachers and parents. Shilpa (Ys,am) is a **_Progressive Web Application_** developed using **_MERN Stack_** which is to create a user-friendly personalized environment for schools, to maintain their communication between teachers, parents, and students. 
 
 
 
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to docs/images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/image4.png "image_tooltip")
+![alt_text](docs/images/image4.png "image_tooltip")
 
 
 We aim to develop the efficiency of teachers and school management for better results. Development objectives can be categorized into five areas;
@@ -476,10 +425,10 @@ We aim to develop the efficiency of teachers and school management for better re
    <td>
 
 
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to docs/images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-<img src="images/image5.png" width="" alt="alt_text" title="image_tooltip">
+<img src="docs/images/image5.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td><em>Here shows the Gantt chart used in the life cycle of software development of the project.</em>
@@ -975,13 +924,7 @@ We refer to a few other systems to identify the process. We aim to identify the 
 
         9. **_ParentSquare _**
 
-
-
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image6.png "image_tooltip")
-
+![alt_text](docs/images/image6.png "image_tooltip")
 
 **_Features:_**
 
@@ -1066,12 +1009,7 @@ We refer to a few other systems to identify the process. We aim to identify the 
 
         10. **_  TASS.web_**
 
-
-
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image7.png "image_tooltip")
+![alt_text](docs/images/image7.png "image_tooltip")
 
 
 **_Features:_**
@@ -1194,13 +1132,7 @@ Extracurricular
   </tr>
 </table>
 
-
-
-
-<p id="gdcalert8" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image8.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert9">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image8.jpg "image_tooltip")
+![alt_text](docs/images/image8.png "image_tooltip")
 
 
 Apart from the users mentioned above, there are administrative users. Who have all the rights to maintain the system.
@@ -1209,12 +1141,7 @@ Apart from the users mentioned above, there are administrative users. Who have a
 
     15. **_User Class and Characteristics_**
 
-
-
-<p id="gdcalert9" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image9.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert10">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image9.png "image_tooltip")
+![alt_text](docs/images/image9.png "image_tooltip")
 
 
 
@@ -1242,12 +1169,7 @@ Apart from the users mentioned above, there are administrative users. Who have a
 5. Informing the parent's meetings, calendar reminders
 6. Downloads
 
-
-
-<p id="gdcalert10" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image10.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert11">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image10.png "image_tooltip")
+![alt_text](docs/images/image10.png "image_tooltip")
 
 
 
@@ -1258,61 +1180,39 @@ Apart from the users mentioned above, there are administrative users. Who have a
   <tr>
    <td>
 
-
-<p id="gdcalert11" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image11.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert12">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-<img src="images/image11.png" width="" alt="alt_text" title="image_tooltip">
+<img src="docs/images/image11.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
 
-<p id="gdcalert12" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image12.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert13">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-<img src="images/image12.png" width="" alt="alt_text" title="image_tooltip">
+<img src="docs/images/image12.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
 
-<p id="gdcalert13" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image13.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert14">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-<img src="images/image13.jpg" width="" alt="alt_text" title="image_tooltip">
+<img src="docs/images/image13.jpg" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
 
-<p id="gdcalert14" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image14.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert15">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-<img src="images/image14.jpg" width="" alt="alt_text" title="image_tooltip">
+<img src="docs/images/image14.jpg" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
   <tr>
    <td>
 
-<p id="gdcalert15" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image15.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert16">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-<img src="images/image15.png" width="" alt="alt_text" title="image_tooltip">
+<img src="docs/images/image15.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
 
-<p id="gdcalert16" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image16.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert17">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-<img src="images/image16.png" width="" alt="alt_text" title="image_tooltip">
+<img src="docs/images/image16.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
 
-<p id="gdcalert17" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image17.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert18">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-<img src="images/image17.png" width="" alt="alt_text" title="image_tooltip">
+<img src="docs/images/image17.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
@@ -1333,15 +1233,7 @@ The operating environment for this school application is used are;
 6. Push Notifications - **_Firebase_**
     17. **_Database distribution_**
 
-
-
-<p id="gdcalert18" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline drawings not supported directly from Docs. You may want to copy the inline drawing to a standalone drawing and export by reference. See <a href="https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference">Google Drawings by reference</a> for details. The img URL below is a placeholder. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert19">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![drawing](https://docs.google.com/drawings/d/12345/export/png)                                                                                                      
-
-
-
     18. **_Client / Server System_**
 1. Distributed with client/server side.
 2. All data resides on the server-side
@@ -1367,15 +1259,7 @@ Three-tier architecture is used to compose the layers of logical computing,  as 
 
 It was used for end application from the database and selected according to school needs, specific parts of the application without affecting other features. These were developed as layers it showed in below image.
 
-
-
-<p id="gdcalert19" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image18.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert20">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image18.png "image_tooltip")
-
-
-
+![alt_text](docs/images/image18.png "image_tooltip")
 
     22. **_Agile Methodology_**
 
@@ -1410,77 +1294,39 @@ As discussed earlier, a 3-tire architecture was applied in development. Model an
 
 The model was designed as Mongoose schemas which can be stored in MongoDB. The backend and frontend communicate using REST API with HTTP requests. The frontend was developed in ReactJS and use Axios to connect with the backend. The UI was developed with Material-UI & Bootstrap. 
 
-
-
-<p id="gdcalert20" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image19.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert21">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image19.png "image_tooltip")
+![alt_text](docs/images/image19.png "image_tooltip")
 
 
 Once a user is logged in a key is sent to the frontend, this will be used for all the transactions. And along with the username password, the system is sending the service key using for the push notifications to the server to map the users for the notifications. This is used with the Firebase for the notifications. 
 
-
-
-<p id="gdcalert21" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image20.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert22">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image20.png "image_tooltip")
+![alt_text](docs/images/image20.png "image_tooltip")
 
 
 Sample of a sent token is shown below;
 
-
-
-<p id="gdcalert22" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image21.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert23">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image21.png "image_tooltip")
+![alt_text](docs/images/image21.png "image_tooltip")
 
 
 Users of the system are derived as Administrators, Teachers, Parents, Students. Each of them has different credentials of the system. Administrators have all the authentication. 
 
-
-
-<p id="gdcalert23" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image22.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert24">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image22.png "image_tooltip")
+![alt_text](docs/images/image22.png "image_tooltip")
 
 
 Administrators can maintain the core details of the organization. The option for the privileges is limited.
 
-
-
-<p id="gdcalert24" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image23.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert25">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image23.png "image_tooltip")
+![alt_text](docs/images/image23.png "image_tooltip")
 
 
 	Once a notification needs to be sent to a specific group, an administrator or an authorized teacher and push the notifications to the firebase server. And the users will get them instantly. A sample notification is shown below;
 
-
-
-<p id="gdcalert25" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image24.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert26">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image24.png "image_tooltip")
+![alt_text](docs/images/image24.png "image_tooltip")
 
 
 System users can also use the internal messaging service to send and receive messages. When a user logged in and chat using socket.io a port is reserving for s particular message thread. System users can be assigned to theses threads by the administrator.
 
-
-
-<p id="gdcalert26" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image25.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert27">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image25.png "image_tooltip")
-
+![alt_text](docs/images/image25.png "image_tooltip")
 
 GitHub was used for version controlling and collaborating among team members.
-
-
 
 5. **_System QA Testing _**
 
@@ -1488,13 +1334,7 @@ GitHub was used for version controlling and collaborating among team members.
 
 Testing is combined as manual testing and automated testing for the front end. According to our school application, I used manual testing for the front end by creating the test cases in excel sheets which allows us to cover all functional & nonfunctional scenarios in our system. Back end was tested using MongoDB, Node.js and Postman while testing the back-end the first time it was successful and again when testing other parts overall back-end testing got stuck I restarted and tried to get results but errors continuously occurred therefore that unable to give the results because of time constraints. For front end presentation I used the excel sheet to update the process of application whether the application passes or fails with actual and expected results, test cases are created along with the development. As per our team development, we followed the agile methodology in which it can repeat the process in the development stage and from time to time new features are implemented. To test the function, I used some process & procedures which the specific function got pass without any failure. While testing front end errors and bugs are identified and reported to our developer then all bugs errors are corrected by developers. Once bugs are fixed again, execute the failing test case to verify whether the specific function is passed.
 
-
-
-<p id="gdcalert27" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image26.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert28">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image26.png "image_tooltip")
-
+![alt_text](docs/images/image26.png "image_tooltip")
 
 **QA Testing methods, process, procedures**
 
@@ -1502,13 +1342,7 @@ As a QA the testing more importantly concerned to give a good quality of product
 
 **1.** 	**QA Testing Methods Analyzed**
 
-
-
-<p id="gdcalert28" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image27.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert29">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image27.png "image_tooltip")
-
+![alt_text](docs/images/image27.png "image_tooltip")
 
 **2.** 	**Test Design -** Manual Testing with excel test cases
 
@@ -1516,34 +1350,10 @@ As a QA the testing more importantly concerned to give a good quality of product
 
  The below shows the procedures and process how application tested as per to agile testing strategy
 
-** **
-
-<p id="gdcalert29" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image28.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert30">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image28.png "image_tooltip")
-** **
-
-** **
-
-** **
-
-** **
-
-** **
-
-**  **
+![alt_text](docs/images/image28.png "image_tooltip")
 
 **4.**     **Retest Error test strategy **
 
 Tracking the error in UI if errors are tracked and identified in application reporting to developer to fix the bugs and give back to retest the specific functions to check get pass.
 
- 
-
- 
-
-<p id="gdcalert30" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image29.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert31">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image29.png "image_tooltip")
-
+![alt_text](docs/images/image29.png "image_tooltip")
