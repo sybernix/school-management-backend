@@ -63,7 +63,6 @@ The team was named as HexaTech as a motivation factor. All team members are poss
 
 Members of the team are:
 
-
 <table>
   <tr>
    <td>
@@ -77,7 +76,6 @@ Members of the team are:
    </td>
    <td><p style="text-align: right">
 Project Manager</p>
-
    </td>
   </tr>
   <tr>
@@ -147,34 +145,19 @@ System Developer</p>
   </tr>
 </table>
 
-
-
-
-    2. **_Aims and objectives _**
-
-
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to docs/images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
+### Aims and objectives
 
 ![alt_text](docs/images/image3.png "image_tooltip")
 
 
 As a team, we expect to reduce the communication gap between teachers and parents. Shilpa (Ys,am) is a **_Progressive Web Application_** developed using **_MERN Stack_** which is to create a user-friendly personalized environment for schools, to maintain their communication between teachers, parents, and students. 
 
-
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to docs/images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](docs/images/image4.png "image_tooltip")
 
 
 We aim to develop the efficiency of teachers and school management for better results. Development objectives can be categorized into five areas;
 
-
-
-        1. **_App messaging:_**
+#### App messaging:
 
 <table>
   <tr>
@@ -227,10 +210,7 @@ We aim to develop the efficiency of teachers and school management for better re
   </tr>
 </table>
 
-
-
-
-        2. **_Notifications:_**
+##### Notifications:
 
 <table>
   <tr>
@@ -283,10 +263,7 @@ We aim to develop the efficiency of teachers and school management for better re
   </tr>
 </table>
 
-
-
-
-        3. **_Time tables:_**
+#### Time tables:
 
 <table>
   <tr>
@@ -321,10 +298,7 @@ We aim to develop the efficiency of teachers and school management for better re
   </tr>
 </table>
 
-
-
-
-        4. **_Downloads:_**
+#### Downloads:
 
 <table>
   <tr>
@@ -359,10 +333,7 @@ We aim to develop the efficiency of teachers and school management for better re
   </tr>
 </table>
 
-
-
-
-        5. **_File update:_**
+#### File update:
 
 <table>
   <tr>
@@ -415,21 +386,12 @@ We aim to develop the efficiency of teachers and school management for better re
   </tr>
 </table>
 
-
-
-
-    3. **_Project Planning_**
+#### Project Planning
 
 <table>
   <tr>
    <td>
-
-
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to docs/images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 <img src="docs/images/image5.png" width="" alt="alt_text" title="image_tooltip">
-
    </td>
    <td><em>Here shows the Gantt chart used in the life cycle of software development of the project.</em>
 <ul>
@@ -446,10 +408,7 @@ We aim to develop the efficiency of teachers and school management for better re
   </tr>
 </table>
 
-
-
-
-    4. **_Task Allocation_**
+### ask Allocation
 
 Task allocation is done according to the selected role of the members. There are three members allocated for programming and development related tasks. Other three members are assigned for quality assurance, business analysis and project management. Task allocation sheet is an effective way to identify members assigned for each task.
 
@@ -691,15 +650,11 @@ Task allocation is done according to the selected role of the members. There are
   </tr>
 </table>
 
-
-
-
-    5. **_Risk management_**
+### Risk management
 
 Risk management is an important part of the successful completion of the project. Software risk management requires a greater depth of knowledge than other risk management processes.
 
-**_Identified Risks _**
-
+#### Identified Risks
 
 <table>
   <tr>
@@ -768,72 +723,52 @@ Risk management is an important part of the successful completion of the project
   </tr>
 </table>
 
-
-                                      
-
-
-
-1. **_System Analysis_**
+#### System Analysis
 
 System analysis is used to identify requirements and convert them into a software reality. First required information should be collected. By analysing gathered requirements, the framework of the software can be designed.
 
-
-
-    6. **_Fact gathering techniques_**
+### Fact gathering techniques
 
 _We used the following techniques to gather the required information._
-
-
 
 1. **_Interviews_** - Top-down approach used frequently
 2. **_Observation_** - school work process observed 
 3. **_Document Analysis_** - analysis student reports, school letters and documents   published on the notice board
-    7. **_Analysis of gathered facts_**
+    
+#### Analysis of gathered facts
 
 According to the gathered facts, most of the schools expect unique applications rather than a common application. They need to overcome the weakness of the Whatsapp app. Their budget is also limited. Schools expect to reduce the workload of the teachers up to some extent. They mainly expect attendance, absence tracking, homework distribution, attendance to extracurricular activities, payment reminders and individual directed communication using the mobile application. Better security of the application and over-the-phone production support also among the expectations of the school management.
 
+### Software Requirement Specification
 
-
-    8. **_Software Requirement Specification_**
-
-**_Introduction: _**The purpose of this document is to improve communication systems in school.									
+#### Introduction:
+The purpose of this document is to improve communication systems in school.									
 
 **_Document convention_: **Database, distributed database and the entity relationships
 
-
-
-    9. **_Feasibility Study_**
-        6. **_Economic feasibility_**
+#### Feasibility Study
+##### Economic feasibility
 1. SHILPA reduced a lot of manual work in school.
 2. Using SHILPA app school's work efficiency will be improved.
 3. Student’s sensitive information (eg. medical updates) can be updated safely and no unauthorized access.
 
 **_Therefore Shilps app is economically feasible._**
 
- 
-
-
-
-        7. **_Technical feasibility_**
+##### Technical feasibility
 1. MongoDB is used as a database which is easy to install and setup and easy to scale. 
 2. The app is developed under the ReactJS environment where it provides real and significant mobile applications and it supports both Android and iOS mobile devices. It will save developers time because developers do not need to develop two applications for Android and iOS.
 
 **_Therefore Shilpa app can be developed in a reasonable time._**
 
-
-
-        8. **_Operational feasibility _**
+##### Operational feasibility
 
 The Shilpa app develops to enhance communication and relationship between schools and families. Since the app can run on both Android and iOS mobile devices, anyone can log in to the app at any time anywhere. School computer laptops or tablets can be used for backend purposes. Since the server is hosted on the cloud, no need to keep the server administrator to look after the server and take backups. 
 
 **_Therefore  Shilpa app is operationally easy to handle._**
 
-
-
-    10. **_Intended audience & suggestions_**
+##### Intended audience & suggestions
 
 The system is restricted within the school premises with admin, students, parents and teachers.  This was implemented under the requirements gathered from;
-
 
 <table>
   <tr>
@@ -894,10 +829,7 @@ The system is restricted within the school premises with admin, students, parent
   </tr>
 </table>
 
-
-
-
-    11. **_Project Scope_**
+##### Project Scope
 1. Access to students, parents, teachers, and admins to use the new application
 2. Direct messaging between teachers and parents
 3. Storing student details in the database
@@ -905,29 +837,23 @@ The system is restricted within the school premises with admin, students, parent
 5. Fee status tracking and reminders
 6. Parent-teacher meeting scheduling
 7. Homework distribution
-    12. **_Out of Scope_**
+
+##### Out of Scope
 1. Online fee payment through gateway
 2. Timetable for subjects, extracurricular activities
 3. Advanced level stream recommendation
 4. School transport GPS tracking
 5. School calendar view
 
-
-
-
-
-    13. **_Other Equivalent Systems_**
+##### Other Equivalent Systems
 
 We refer to a few other systems to identify the process. We aim to identify the process to build our system with the higher compatible ability to the market. here are a few systems with their functions.
 
-
-
-        9. **_ParentSquare _**
+###### ParentSquare
 
 ![alt_text](docs/images/image6.png "image_tooltip")
 
 **_Features:_**
-
 
 <table>
   <tr>
